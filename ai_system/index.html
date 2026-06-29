@@ -175,10 +175,11 @@
 
   <script>
     const premiumHubUrl = 'https://script.google.com/macros/s/AKfycbz4moHHAAJ51F4f1CnAK6CbadsWN5Pmqy24ifeFODXAkpM-aBKipNSYXiZ52TtRaeFwWg/exec';
+    const embeddedPageUrl = '/ai_system/';
     const frame = document.getElementById('premiumFrame');
     const fallback = document.getElementById('fallback');
-    document.getElementById('openExternal').href = premiumHubUrl;
-    document.getElementById('fallbackOpen').href = premiumHubUrl;
+    document.getElementById('openExternal').href = embeddedPageUrl;
+    document.getElementById('fallbackOpen').href = embeddedPageUrl;
     frame.src = premiumHubUrl;
     let loaded = false;
     frame.addEventListener('load', () => {
