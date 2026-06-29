@@ -9,6 +9,11 @@
       title: '프리미엄 통합페이지',
       desc: 'AI 시스템 및 프리미엄 업무 허브',
       href: '/ai_system/'
+    },
+    {
+      title: '사업부 실적보드',
+      desc: '프리미엄사업부 2026년 실적 현황',
+      href: '/performance/'
     }
   ];
 
