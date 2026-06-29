@@ -1,0 +1,702 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>김상현 이사 | 프라임에셋 188본부</title>
+  <meta name="description" content="프라임에셋 188본부 김상현 이사의 공식 허브. 설계사 성장환경, 수수료 구조, 영업지원 플랫폼, 프리미엄사업부 시스템을 확인하세요.">
+  <meta property="og:title" content="김상현 이사 | 프라임에셋 188본부">
+  <meta property="og:description" content="프라임에셋 188본부 공식 허브">
+  <meta property="og:image" content="assets/ksh-profile.jpg">
+  <meta name="theme-color" content="#10141b">
+  <style>
+    :root {
+      --ink: #f5f7fb;
+      --muted: #b4bdca;
+      --dim: #7f8896;
+      --gold: #d5b56b;
+      --gold-deep: #9b7334;
+      --steel: #d9dee6;
+      --line: rgba(227, 233, 242, .16);
+      --panel: rgba(17, 21, 29, .72);
+      --panel-soft: rgba(255, 255, 255, .055);
+      --shadow: 0 24px 80px rgba(0, 0, 0, .36);
+      --radius: 8px;
+      color-scheme: dark;
+      font-family: "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      background: #0d1016;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        linear-gradient(180deg, rgba(12, 15, 20, .28), #0d1016 36rem),
+        linear-gradient(90deg, rgba(11, 14, 19, .97) 0%, rgba(12, 15, 21, .83) 42%, rgba(12, 15, 20, .38) 100%),
+        linear-gradient(180deg, rgba(8, 11, 16, .05), rgba(8, 11, 16, .64)),
+        url("assets/ksh-profile.jpg") right 9% top 44px / min(50vw, 720px) auto no-repeat fixed,
+        #0d1016;
+      letter-spacing: 0;
+    }
+
+    body::before {
+      content: "";
+      display: none;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      background:
+        linear-gradient(90deg, rgba(213, 181, 107, .10) 0 1px, transparent 1px 100%),
+        linear-gradient(180deg, rgba(217, 222, 230, .06) 0 1px, transparent 1px 100%);
+      background-size: 72px 72px;
+      mask-image: linear-gradient(180deg, rgba(0, 0, 0, .65), transparent 78%);
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .shell {
+      width: min(1180px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(20px) saturate(1.2);
+      background: rgba(10, 13, 18, .76);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav {
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+      font-weight: 800;
+    }
+
+    .mark {
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(213, 181, 107, .52);
+      background: linear-gradient(180deg, rgba(213, 181, 107, .18), rgba(255, 255, 255, .04));
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, .22), 0 12px 28px rgba(0, 0, 0, .22);
+      color: var(--gold);
+      border-radius: 7px;
+      flex: 0 0 auto;
+    }
+
+    .brand span:last-child {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .navlinks {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .navlinks a,
+    .btn {
+      min-height: 42px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 0 15px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: rgba(255, 255, 255, .045);
+      color: #e8ebef;
+      font-size: 14px;
+      font-weight: 720;
+      transition: transform .22s ease, border-color .22s ease, background .22s ease, color .22s ease;
+    }
+
+    .navlinks a:hover,
+    .btn:hover {
+      transform: translateY(-1px);
+      border-color: rgba(213, 181, 107, .42);
+      background: rgba(213, 181, 107, .09);
+      color: #fff;
+    }
+
+    .btn.primary {
+      border-color: rgba(213, 181, 107, .66);
+      color: #101216;
+      background: linear-gradient(180deg, #ead8a8, #d2ad5c 54%, #b68a3f);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, .56), 0 14px 34px rgba(213, 181, 107, .18);
+    }
+
+    .hero {
+      min-height: min(840px, calc(88svh - 40px));
+      display: grid;
+      align-items: center;
+      padding: 56px 0 44px;
+    }
+
+    .hero-grid {
+      display: block;
+    }
+
+    .eyebrow {
+      color: var(--gold);
+      font-size: 13px;
+      font-weight: 820;
+      text-transform: uppercase;
+      letter-spacing: 0;
+      margin: 0 0 20px;
+    }
+
+    h1 {
+      max-width: 820px;
+      margin: 0;
+      font-size: clamp(44px, 6vw, 86px);
+      line-height: .98;
+      letter-spacing: 0;
+      font-weight: 900;
+    }
+
+    .lead {
+      max-width: 680px;
+      margin: 26px 0 0;
+      color: #d7dde8;
+      font-size: clamp(17px, 2vw, 21px);
+      line-height: 1.72;
+      font-weight: 520;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 34px;
+    }
+
+    .proof-row {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 34px;
+      max-width: 760px;
+    }
+
+    .hero-note {
+      margin-top: 30px;
+      max-width: 760px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      color: #dfe5ee;
+      font-size: 13px;
+      font-weight: 720;
+    }
+
+    .hero-note span {
+      min-height: 34px;
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid rgba(255, 255, 255, .14);
+      background: rgba(255, 255, 255, .045);
+      border-radius: 7px;
+      padding: 0 12px;
+      backdrop-filter: blur(14px);
+    }
+
+    .proof {
+      border-top: 1px solid rgba(213, 181, 107, .42);
+      padding-top: 13px;
+    }
+
+    .proof strong {
+      display: block;
+      font-size: clamp(24px, 3vw, 36px);
+      line-height: 1;
+      color: #fff;
+    }
+
+    .proof span {
+      display: block;
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    section {
+      padding: 58px 0;
+      border-top: 1px solid rgba(255, 255, 255, .08);
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 24px;
+      margin-bottom: 24px;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: clamp(28px, 3.4vw, 44px);
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+
+    .section-head p {
+      max-width: 500px;
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.62;
+      font-size: 15px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .card {
+      min-height: 180px;
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, rgba(255, 255, 255, .082), rgba(255, 255, 255, .038));
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, .12);
+      transition: transform .24s ease, border-color .24s ease, background .24s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(213, 181, 107, .38);
+      background: linear-gradient(180deg, rgba(255, 255, 255, .105), rgba(255, 255, 255, .045));
+    }
+
+    .card small {
+      color: var(--gold);
+      font-weight: 820;
+      font-size: 12px;
+    }
+
+    .card h3 {
+      margin: 14px 0 10px;
+      font-size: 21px;
+      line-height: 1.24;
+      letter-spacing: 0;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.65;
+      font-size: 14px;
+    }
+
+    .wide {
+      display: grid;
+      grid-template-columns: minmax(0, .82fr) minmax(0, 1.18fr);
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .board-shot {
+      min-height: 360px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background:
+        linear-gradient(180deg, rgba(11, 14, 19, .16), rgba(11, 14, 19, .54)),
+        url("assets/performance-board.png") center top / cover no-repeat;
+      box-shadow: var(--shadow);
+    }
+
+    .panel {
+      padding: 26px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--panel);
+      box-shadow: var(--shadow), inset 0 1px 0 rgba(255, 255, 255, .10);
+      backdrop-filter: blur(18px) saturate(1.2);
+    }
+
+    .metric-list {
+      display: grid;
+      gap: 12px;
+      margin-top: 26px;
+    }
+
+    .metric {
+      display: grid;
+      grid-template-columns: 112px 1fr;
+      gap: 16px;
+      padding: 15px 0;
+      border-top: 1px solid rgba(255, 255, 255, .095);
+    }
+
+    .metric strong {
+      color: #fff;
+      font-size: 24px;
+      line-height: 1.1;
+    }
+
+    .metric span {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.56;
+    }
+
+    .links {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .link-card {
+      min-height: 142px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, .052);
+      transition: transform .22s ease, border-color .22s ease, background .22s ease;
+    }
+
+    .link-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(213, 181, 107, .42);
+      background: rgba(213, 181, 107, .075);
+    }
+
+    .link-card strong {
+      font-size: 17px;
+      line-height: 1.3;
+    }
+
+    .link-card span {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    .cta-band {
+      margin-bottom: 64px;
+      padding: 34px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
+      border: 1px solid rgba(213, 181, 107, .38);
+      border-radius: var(--radius);
+      background:
+        linear-gradient(110deg, rgba(213, 181, 107, .16), rgba(255, 255, 255, .055) 45%, rgba(92, 113, 145, .16)),
+        rgba(255, 255, 255, .04);
+      box-shadow: var(--shadow);
+    }
+
+    .cta-band h2 {
+      font-size: clamp(26px, 3vw, 38px);
+    }
+
+    .cta-band p {
+      margin: 10px 0 0;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    footer {
+      padding: 28px 0 44px;
+      color: var(--dim);
+      border-top: 1px solid rgba(255, 255, 255, .08);
+      font-size: 13px;
+    }
+
+    @media (max-width: 960px) {
+      body {
+        background:
+          linear-gradient(180deg, rgba(11, 14, 19, .72), #0d1016 42%),
+          url("assets/ksh-profile.jpg") right top / 82vw auto no-repeat fixed,
+          linear-gradient(135deg, #0a0d12, #111823 52%, #0f1218);
+      }
+
+      .navlinks a:not(.keep) { display: none; }
+      .wide {
+        grid-template-columns: 1fr;
+      }
+      .grid,
+      .links {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .section-head {
+        display: block;
+      }
+      .section-head p {
+        margin-top: 12px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .shell {
+        width: min(100% - 24px, 1180px);
+      }
+      .nav {
+        height: 58px;
+      }
+      .brand span:last-child {
+        max-width: 184px;
+      }
+      .navlinks {
+        display: none;
+      }
+      .hero {
+        min-height: auto;
+        padding: 62px 0 38px;
+      }
+      h1 {
+        font-size: 40px;
+        line-height: 1.05;
+      }
+      .proof-row,
+      .grid,
+      .links {
+        grid-template-columns: 1fr;
+      }
+      .proof-row {
+        gap: 18px;
+      }
+      .card,
+      .panel,
+      .cta-band {
+        padding: 20px;
+      }
+      .metric {
+        grid-template-columns: 1fr;
+        gap: 6px;
+      }
+      .board-shot {
+        min-height: 260px;
+      }
+      .cta-band {
+        display: block;
+      }
+      .cta-band .hero-actions {
+        margin-top: 22px;
+      }
+      .btn {
+        width: 100%;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <nav class="shell nav" aria-label="주요 메뉴">
+      <a class="brand" href="#top" aria-label="프라임에셋 188본부 홈">
+        <span class="mark">188</span>
+        <span>프라임에셋 188본부</span>
+      </a>
+      <div class="navlinks">
+        <a href="#system">시스템</a>
+        <a href="#performance">실적보드</a>
+        <a href="#links">도구</a>
+        <a class="keep" href="https://www.primeasset.info" target="_blank" rel="noopener">프리미엄인포</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="shell hero-grid">
+        <div>
+          <p class="eyebrow">PrimeAsset 188 Headquarters</p>
+          <h1>김상현 이사<br>프라임에셋<br>188본부</h1>
+          <p class="lead">정착지원금보다 중요한 것은 오래 벌 수 있는 구조입니다. 수수료표, 영업규정, 시책, 자료, 교육, 플랫폼을 숨기지 않고 비교할 수 있게 만드는 설계사 중심 허브입니다.</p>
+          <div class="hero-actions">
+            <a class="btn primary" href="#links">시스템 바로가기</a>
+            <a class="btn" href="#performance">사업부 실적 보기</a>
+          </div>
+          <div class="proof-row" aria-label="핵심 지표">
+            <div class="proof">
+              <strong>18</strong>
+              <span>프리미엄사업부 본부 네트워크</span>
+            </div>
+            <div class="proof">
+              <strong>30</strong>
+              <span>생명보험·손해보험 제휴 운용</span>
+            </div>
+            <div class="proof">
+              <strong>21.4억</strong>
+              <span>2026년 1~6월 사업부 실적 기준</span>
+            </div>
+          </div>
+          <div class="hero-note" aria-label="운영 기준">
+            <span>현장 영업 출신 본부장</span>
+            <span>자료·규정·시스템 중심 운영</span>
+            <span>수당표 기준 비교 미팅</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="system">
+      <div class="shell">
+        <div class="section-head">
+          <h2>설계사가 비교할 수 있어야<br>좋은 조직입니다</h2>
+          <p>188본부의 기준은 말이 아니라 자료입니다. 수당, 규정, 교육, 상담자료, 보상자료, 영업 플랫폼을 실제 업무 흐름에 맞게 연결합니다.</p>
+        </div>
+        <div class="grid">
+          <article class="card">
+            <small>01 / COMMISSION</small>
+            <h3>수당 구조 공개</h3>
+            <p>수수료표, 수정률, 환산율, 시책 기준을 분리해 검토하고 무조건 지급 시책은 수당 안내에 포함합니다.</p>
+          </article>
+          <article class="card">
+            <small>02 / RULE</small>
+            <h3>영업규정 답변 체계</h3>
+            <p>승격, 직급, 적용기준, 환수 여부처럼 계산식과 다른 질문은 별도 규정 데이터로 관리합니다.</p>
+          </article>
+          <article class="card">
+            <small>03 / PLATFORM</small>
+            <h3>온라인 영업환경</h3>
+            <p>보험노트, 자료검색기, 상품·소식지 분석기, 수당계산기를 실무자가 반복해서 쓰는 도구로 정리합니다.</p>
+          </article>
+          <article class="card">
+            <small>04 / EDUCATION</small>
+            <h3>스탠다드 캠퍼스</h3>
+            <p>신입 설계사가 처음부터 같은 기준으로 상담, 비교, 보상, 고객관리를 익히도록 교육 흐름을 설계합니다.</p>
+          </article>
+          <article class="card">
+            <small>05 / BRAND</small>
+            <h3>하이엔드 브랜딩</h3>
+            <p>조용한 럭셔리, 정돈된 자료, 숫자 중심 콘텐츠로 설계사의 신뢰 자산을 함께 키웁니다.</p>
+          </article>
+          <article class="card">
+            <small>06 / MEETING</small>
+            <h3>조건 비교 미팅</h3>
+            <p>현재 조건과 188본부 구조를 표로 비교합니다. 막연한 설득보다 실제 수당표와 운영자료를 보여드립니다.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="performance">
+      <div class="shell wide">
+        <div class="panel">
+          <p class="eyebrow">Premium Division Board</p>
+          <h2>프리미엄사업부 실적보드</h2>
+          <p class="lead">7월초 새 데이터가 들어오면 이 허브의 대표 콘텐츠로 연결합니다. 지금은 2026년 1~6월 기준 화면 구조를 먼저 배치했습니다.</p>
+          <div class="metric-list">
+            <div class="metric">
+              <strong>21.4억</strong>
+              <span>2026년 상반기 사업부 실적 규모. 엑셀 단위는 천원 기준으로 재검수 완료.</span>
+            </div>
+            <div class="metric">
+              <strong>18개</strong>
+              <span>본부별 흐름을 비교하되 특정 본부 순위 강조보다 사업부 전체 규모를 중심으로 표현합니다.</span>
+            </div>
+            <div class="metric">
+              <strong>30개</strong>
+              <span>보험사 네트워크를 기반으로 상품 선택권과 영업 대응 폭을 보여줍니다.</span>
+            </div>
+          </div>
+        </div>
+        <a class="board-shot" href="https://script.google.com/macros/s/AKfycbxjuozPcdGt3mFGq8og6OiL4QKfxYXO_KGWgTZys098lrrSCTRsX-M2mWABY0deaVHp/exec" target="_blank" rel="noopener" aria-label="프리미엄사업부 실적보드 열기"></a>
+      </div>
+    </section>
+
+    <section id="links">
+      <div class="shell">
+        <div class="section-head">
+          <h2>업무 도구 허브</h2>
+          <p>처음 공개 버전은 링크형 허브로 가볍게 시작하고, 이후 데이터와 역할이 확정되면 섹션을 정식 페이지로 확장합니다.</p>
+        </div>
+        <div class="links">
+          <a class="link-card" href="https://www.primeasset.info" target="_blank" rel="noopener">
+            <strong>프리미엄인포</strong>
+            <span>기존 공식 페이지</span>
+          </a>
+          <a class="link-card" href="https://bohumnote.com" target="_blank" rel="noopener">
+            <strong>보험노트</strong>
+            <span>설계사 프로필·보험정보 플랫폼</span>
+          </a>
+          <a class="link-card" href="https://script.google.com/macros/s/AKfycbz4ZR5EbyrzaIkOfhUR0Hqe0eTRokTf8Sa6ax9Q0paQlRPtJfmxG7AwC2RXIpUNq1XfYg/exec" target="_blank" rel="noopener">
+            <strong>수당계산기</strong>
+            <span>수수료·수정률·환산율 기준</span>
+          </a>
+          <a class="link-card" href="https://script.google.com/macros/s/AKfycbxjuozPcdGt3mFGq8og6OiL4QKfxYXO_KGWgTZys098lrrSCTRsX-M2mWABY0deaVHp/exec" target="_blank" rel="noopener">
+            <strong>사업부 실적보드</strong>
+            <span>2026년 상반기 기준</span>
+          </a>
+          <a class="link-card" href="https://script.google.com/macros/s/AKfycbx2R0eWsh6J9MyUPZahLHJj1bDiSdh1Ei147OOVJ85fCVZv1R-RQCeYIYgrkLiy7eh_/exec" target="_blank" rel="noopener">
+            <strong>자료검색기</strong>
+            <span>저장소 자료 검색</span>
+          </a>
+          <a class="link-card" href="https://script.google.com/macros/s/AKfycbwxsEPxs_uq5H4gH43Ie_FH0mrKAtdkrnzP-30b52GKTBMXVzARfgggs6_klkyadIVl/exec" target="_blank" rel="noopener">
+            <strong>상품분석기</strong>
+            <span>상품·비교자료 분석</span>
+          </a>
+          <a class="link-card" href="https://script.google.com/macros/s/AKfycbxG-5S3ANCLCTgP3fuNRzqYgljPCsmzrYWa3I6ddxBsZH3nhPUwXYh9a9PrLkIaNZVk/exec" target="_blank" rel="noopener">
+            <strong>소식지 분석기</strong>
+            <span>월간 이슈·시책 정리</span>
+          </a>
+          <a class="link-card" href="https://script.google.com/macros/s/AKfycbzqX3lETPADpPAG6syoAsEG1cSceMcUUqmeEhYj3ukkbFfHPEnbdvq8W448ttC0vcFefw/exec" target="_blank" rel="noopener">
+            <strong>188 시스템 안내</strong>
+            <span>입점·운영 안내</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <div class="shell">
+      <div class="cta-band">
+        <div>
+          <h2>지금 조건을 비교해보세요</h2>
+          <p>수당표, 시책, 영업규정, 자료지원, 플랫폼까지 실제 운영 기준으로 확인합니다.</p>
+        </div>
+        <div class="hero-actions">
+          <a class="btn primary" href="https://www.primeasset.info" target="_blank" rel="noopener">미팅 문의</a>
+          <a class="btn" href="#system">구조 보기</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="shell">© PrimeAsset 188 Headquarters. 김상현 이사 공식 허브.</div>
+  </footer>
+</body>
+</html>
