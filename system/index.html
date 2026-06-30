@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>프리미엄사업부 실적보드 | 188 프라임에셋</title>
-  <meta name="description" content="프리미엄사업부 실적보드를 188 프라임에셋 허브에서 바로 확인합니다.">
+  <title>188본부 시스템안내서 | 188 프라임에셋</title>
+  <meta name="description" content="188본부 시스템안내서를 188 프라임에셋 허브에서 바로 확인합니다.">
   <meta name="theme-color" content="#0d1016">
   <link rel="stylesheet" href="/assets/hub-menu.css">
   <style>
@@ -142,7 +142,7 @@
     }
     @media (max-width: 640px) {
       .topbar { height: 58px; padding: 0 12px; }
-      .brand-text { max-width: 156px; }
+      .brand-text { max-width: 160px; }
       .btn { padding: 0 10px; font-size: 12px; }
       .frame-wrap { height: calc(100% - 58px); }
     }
@@ -152,7 +152,7 @@
   <header class="topbar">
     <a class="brand" href="/" aria-label="188 프라임에셋 허브로 이동">
       <span class="mark">188</span>
-      <span class="brand-text">사업부 실적보드</span>
+      <span class="brand-text">188본부 시스템안내서</span>
     </a>
     <nav class="actions" aria-label="페이지 동작">
       <a class="btn" href="/">허브</a>
@@ -161,10 +161,10 @@
   </header>
 
   <main class="frame-wrap">
-    <iframe id="performanceFrame" title="프리미엄사업부 실적보드" loading="eager"></iframe>
+    <iframe id="systemFrame" title="188본부 시스템안내서" loading="eager"></iframe>
     <div class="fallback" id="fallback" aria-hidden="true">
       <div class="fallback-card">
-        <h1>프리미엄사업부 실적보드</h1>
+        <h1>188본부 시스템안내서</h1>
         <p>브라우저에서 프레임 표시가 지연되면 새 창으로 바로 열 수 있습니다.</p>
         <a class="btn primary" id="fallbackOpen" target="_blank" rel="noopener">새 창으로 열기</a>
       </div>
@@ -172,13 +172,12 @@
   </main>
 
   <script>
-    const performanceBoardUrl = 'https://script.google.com/macros/s/AKfycbxjuozPcdGt3mFGq8og6OiL4QKfxYXO_KGWgTZys098lrrSCTRsX-M2mWABY0deaVHp/exec';
-    const embeddedPageUrl = '/performance/';
-    const frame = document.getElementById('performanceFrame');
+    const systemGuideUrl = 'https://script.google.com/macros/s/AKfycbzqX3lETPADpPAG6syoAsEG1cSceMcUUqmeEhYj3ukkbFfHPEnbdvq8W448ttC0vcFefw/exec';
+    const frame = document.getElementById('systemFrame');
     const fallback = document.getElementById('fallback');
-    document.getElementById('openExternal').href = embeddedPageUrl;
-    document.getElementById('fallbackOpen').href = embeddedPageUrl;
-    frame.src = performanceBoardUrl;
+    document.getElementById('openExternal').href = systemGuideUrl;
+    document.getElementById('fallbackOpen').href = systemGuideUrl;
+    frame.src = systemGuideUrl;
     let loaded = false;
     frame.addEventListener('load', () => {
       loaded = true;
