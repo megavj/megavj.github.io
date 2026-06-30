@@ -10,7 +10,8 @@
   <link rel="stylesheet" href="/assets/hub-menu.css">
   <style>
     /* === 페이지 전용 (토큰은 design-tokens.css) — 블랙골드 Liquid Glass ===
-       가독성 최우선: 유리는 네비/카드/입력영역에만, 채팅 대화창(스크롤 영역)은 솔리드 가독면. */
+       두 블록(시스템안내서 + 위촉상담 AI)을 하나의 통합 글래스 콘솔로 묶는다.
+       가독성 최우선: 채팅 대화창(스크롤 영역)은 솔리드 가독면 유지(rule8). */
     :root {
       --ink: var(--text);
       --muted: var(--text-dim);
@@ -106,10 +107,61 @@
       box-shadow: inset 0 1px 0 rgba(255, 255, 255, .56), 0 12px 28px rgba(200, 169, 106, .20);
     }
     .btn.primary:hover { border-color: #f0e1ba; }
-    .guide-wrap {
+
+    /* === 통합 글래스 콘솔 (시스템안내서 + 위촉상담 AI 하나로) === */
+    main {
+      padding: 18px 16px 40px;
+    }
+    .console {
+      width: min(940px, 100%);
+      margin: 0 auto;
+      border: 1px solid var(--glass-edge);
+      border-radius: var(--radius);
+      background: var(--glass-bg);
+      -webkit-backdrop-filter: var(--glass-blur);
+      backdrop-filter: var(--glass-blur);
+      box-shadow: var(--glass-shadow);
+      overflow: hidden;
+      animation: rise .42s var(--ease-spring) both;
+    }
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: none; }
+    }
+
+    /* 상단 세그먼트 점프(앵커) — 모바일에서 두 구역 빠르게 이동 */
+    .seg-jump {
+      display: flex;
+      gap: 8px;
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--glass-edge);
+      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,0));
+    }
+    .seg {
+      flex: 1 1 0;
+      min-height: 40px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 0 14px;
+      border: 1px solid var(--glass-edge);
+      border-radius: var(--radius-pill);
+      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02));
+      color: var(--silver);
+      font-size: 13px;
+      font-weight: 700;
+      white-space: nowrap;
+      transition: transform var(--dur) var(--ease-spring), border-color var(--dur), color var(--dur);
+    }
+    .seg:hover { transform: translateY(-1px); border-color: var(--gold); color: #fff; }
+    .seg:active { transform: scale(.97); }
+
+    /* 안내서 구역 — 콘솔 안에 플러시로 박힘(독립 카드 아님) */
+    .guide-region {
       position: relative;
-      padding: 16px 16px 0;
-      background: transparent;
+      padding: 14px;
+      scroll-margin-top: 70px;
     }
     iframe {
       width: 100%;
@@ -117,16 +169,16 @@
       min-height: 420px;
       display: block;
       border: 1px solid var(--glass-edge);
-      border-radius: var(--radius);
+      border-radius: 14px;
       background: #f7f3ea;
-      box-shadow: var(--glass-shadow);
+      box-shadow: 0 8px 26px rgba(0,0,0,.32);
     }
     .fallback {
       position: absolute;
-      inset: 0;
+      inset: 14px;
       display: grid;
       place-items: center;
-      padding: 24px;
+      padding: 10px;
       pointer-events: none;
     }
     .fallback-card {
@@ -153,30 +205,49 @@
       font-size: 14px;
       word-break: keep-all;
     }
-    .chat-band {
-      padding: 16px 16px 40px;
-      background: transparent;
+
+    /* 골드 디바이더 + 섹션 라벨 — 두 구역을 끊지 않고 자연스럽게 잇는다 */
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 4px 18px 6px;
     }
-    /* 유리 테두리 셸 — 내부 대화면은 솔리드로 가독성 확보 */
-    .chat-shell {
-      width: min(940px, 100%);
-      margin: 0 auto;
-      border: 1px solid var(--glass-edge);
-      border-radius: var(--radius);
-      background: var(--glass-bg);
-      -webkit-backdrop-filter: var(--glass-blur);
-      backdrop-filter: var(--glass-blur);
-      box-shadow: var(--glass-shadow);
-      overflow: hidden;
+    .divider::before,
+    .divider::after {
+      content: "";
+      flex: 1 1 auto;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(200,169,106,.5), transparent);
+    }
+    .divider-label {
+      flex: 0 0 auto;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 6px 16px;
+      border: 1px solid rgba(200,169,106,.42);
+      border-radius: var(--radius-pill);
+      background: linear-gradient(180deg, rgba(200,169,106,.16), rgba(200,169,106,.05));
+      color: #f0e2c2;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .01em;
+      white-space: nowrap;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.10);
+    }
+
+    /* 상담 구역 — 같은 콘솔 안의 연속 구역(외곽 카드 테두리 없음) */
+    .chat-region {
+      padding: 0 14px 14px;
+      scroll-margin-top: 70px;
     }
     .chat-head {
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 12px;
-      padding: 16px 16px 14px;
-      border-bottom: 1px solid var(--glass-edge);
-      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,0));
+      padding: 4px 4px 12px;
     }
     .chat-title {
       margin: 0;
@@ -191,6 +262,20 @@
       font-size: 12px;
       white-space: nowrap;
     }
+    .chat-notice {
+      border: 1px solid rgba(200, 169, 106, .42);
+      border-radius: 12px;
+      padding: 11px 16px;
+      margin-bottom: 12px;
+      background: linear-gradient(180deg, rgba(200, 169, 106, .16), rgba(200, 169, 106, .06));
+      color: #f0e2c2;
+      font-size: 14px;
+      line-height: 1.45;
+      font-weight: 700;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, .08);
+      word-break: keep-all;
+    }
+    /* 대화창은 솔리드 고대비(가독성 최우선, rule8) */
     .chat-log {
       min-height: 220px;
       max-height: 520px;
@@ -200,7 +285,9 @@
       flex-direction: column;
       gap: 12px;
       scroll-behavior: smooth;
-      background: rgba(8, 10, 14, .55);
+      border: 1px solid var(--glass-edge);
+      border-radius: 14px;
+      background: rgba(8, 10, 14, .72);
     }
     .msg {
       width: min(760px, 100%);
@@ -240,18 +327,6 @@
     .ai .bubble li {
       margin: 5px 0;
     }
-    .chat-notice {
-      border: 1px solid rgba(200, 169, 106, .42);
-      border-radius: 0;
-      padding: 11px 16px;
-      background: linear-gradient(180deg, rgba(200, 169, 106, .16), rgba(200, 169, 106, .06));
-      color: #f0e2c2;
-      font-size: 14px;
-      line-height: 1.45;
-      font-weight: 700;
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, .08);
-      word-break: keep-all;
-    }
     .meta {
       color: var(--text-dim);
       font-size: 12px;
@@ -262,9 +337,7 @@
       display: grid;
       grid-template-columns: 1fr auto;
       gap: 10px;
-      padding: 14px 16px 16px;
-      border-top: 1px solid var(--glass-edge);
-      background: linear-gradient(180deg, rgba(255,255,255,0), rgba(255,255,255,.03));
+      padding: 12px 0 2px;
     }
     .chat-input {
       width: 100%;
@@ -295,16 +368,21 @@
       .topbar { padding: 10px 12px; }
       .brand-text { max-width: 150px; }
       .btn { padding: 0 14px; font-size: 12px; }
+      main { padding: 12px 10px 30px; }
+      .seg-jump { padding: 10px 10px; }
+      .seg { font-size: 12px; padding: 0 8px; }
+      .guide-region { padding: 10px; }
       iframe { height: 390px; min-height: 390px; }
-      .chat-band { padding: 10px 10px 30px; }
-      .chat-head { align-items: flex-start; flex-direction: column; }
+      .divider { padding: 2px 12px 4px; }
+      .chat-region { padding: 0 10px 12px; }
+      .chat-head { align-items: flex-start; flex-direction: column; gap: 6px; }
       .chat-title { font-size: 16px; }
       .chat-form { grid-template-columns: 1fr; }
       .send { width: 100%; }
       .bubble { font-size: 14px; }
     }
     @media (prefers-reduced-transparency: reduce) {
-      .topbar, .btn, .fallback-card, .chat-shell {
+      .topbar, .btn, .fallback-card, .console {
         -webkit-backdrop-filter: none;
         backdrop-filter: none;
         background: var(--bg-2);
@@ -327,19 +405,28 @@
   </header>
 
   <main>
-    <section class="guide-wrap" aria-label="시스템안내서">
-      <iframe id="systemFrame" title="188본부 시스템안내서" loading="eager"></iframe>
-      <div class="fallback" id="fallback" aria-hidden="true">
-        <div class="fallback-card">
-          <h1>188본부 시스템안내서</h1>
-          <p>브라우저에서 프레임 표시가 지연되면 새 창으로 바로 열 수 있습니다.</p>
-          <a class="btn primary" id="fallbackOpen" target="_blank" rel="noopener">새 창으로 열기</a>
+    <section class="console" aria-label="188본부 시스템안내서와 위촉진행 AI 상담">
+      <nav class="seg-jump" aria-label="구역 이동">
+        <a class="seg" href="#guide">📋 시스템안내서</a>
+        <a class="seg" href="#consult">💬 위촉상담 AI</a>
+      </nav>
+
+      <div class="guide-region" id="guide" aria-label="시스템안내서">
+        <iframe id="systemFrame" title="188본부 시스템안내서" loading="eager"></iframe>
+        <div class="fallback" id="fallback" aria-hidden="true">
+          <div class="fallback-card">
+            <h1>188본부 시스템안내서</h1>
+            <p>브라우저에서 프레임 표시가 지연되면 새 창으로 바로 열 수 있습니다.</p>
+            <a class="btn primary" id="fallbackOpen" target="_blank" rel="noopener">새 창으로 열기</a>
+          </div>
         </div>
       </div>
-    </section>
 
-    <section class="chat-band" aria-label="위촉진행 AI 챗봇">
-      <div class="chat-shell">
+      <div class="divider" role="separator" aria-hidden="true">
+        <span class="divider-label">💬 위촉상담 AI</span>
+      </div>
+
+      <div class="chat-region" id="consult" aria-label="위촉진행 AI 챗봇">
         <div class="chat-head">
           <h2 class="chat-title">위촉진행 AI입니다. 궁금한 점을 물어보세요</h2>
           <div class="chat-state" id="chatState">자료 기반 답변</div>
