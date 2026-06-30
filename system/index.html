@@ -465,11 +465,7 @@
     }
 
     async function ask(question) {
-      try {
-        return await askByPost(question);
-      } catch (err) {
-        return askByJsonp(question);
-      }
+      return askByJsonp(question);
     }
 
     function isSensitiveQuestion(question) {
