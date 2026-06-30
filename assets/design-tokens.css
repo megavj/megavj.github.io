@@ -1,0 +1,62 @@
+/* === Liquid Glass × 블랙골드 디자인 토큰 ===
+   design-rules.md 의 표준 토큰. 모든 프라임에셋 웹앱/GAS/페이지에서 그대로 사용.
+   김상현 이사 지시 2026-07-01. */
+:root {
+  --bg: #0a0c10;            /* 딥 블랙 베이스 */
+  --bg-2: #12161d;
+  --gold: #c8a96a;          /* 절제된 골드 포인트 */
+  --gold-soft: rgba(200,169,106,.14);
+  --text: #f2f3f5;
+  --text-dim: rgba(242,243,245,.62);
+
+  /* 유리 머티리얼 */
+  --glass-bg: rgba(255,255,255,.06);
+  --glass-edge: rgba(255,255,255,.16);   /* 빛 테두리 */
+  --glass-blur: blur(28px) saturate(180%);
+  --glass-shadow:
+    0 1px 0 rgba(255,255,255,.10) inset,
+    0 12px 40px rgba(0,0,0,.45);
+
+  --radius: 22px;
+  --radius-pill: 9999px;
+  --ease-spring: cubic-bezier(.34,1.56,.64,1);
+  --dur: .28s;
+}
+
+/* 유리 카드/패널 */
+.glass {
+  background: var(--glass-bg);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-edge);
+  border-radius: var(--radius);
+  box-shadow: var(--glass-shadow);
+  transition: transform var(--dur) var(--ease-spring),
+              box-shadow var(--dur) var(--ease-spring);
+}
+.glass:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 1px 0 rgba(255,255,255,.14) inset,
+              0 20px 56px rgba(0,0,0,.55),
+              0 0 0 1px var(--gold-soft);
+}
+
+/* 캡슐 버튼 + 빛 번짐 */
+.btn {
+  border-radius: var(--radius-pill);
+  padding: 12px 22px;
+  color: var(--text);
+  background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.03));
+  border: 1px solid var(--glass-edge);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
+  transition: transform var(--dur) var(--ease-spring), border-color var(--dur);
+}
+.btn:hover { border-color: var(--gold); transform: translateY(-2px); }
+.btn:active { transform: scale(.96); }
+
+/* 접근성: 모션/투명도 줄이기 자동 대응 */
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+@media (prefers-reduced-transparency: reduce) {
+  .glass,.btn { backdrop-filter: none; background: var(--bg-2); }
+}
