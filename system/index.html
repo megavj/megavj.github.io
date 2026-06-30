@@ -101,14 +101,13 @@
     }
     .guide-wrap {
       position: relative;
-      min-height: calc(100vh - 56px);
       background: #0b0d12;
       border-bottom: 1px solid rgba(255, 255, 255, .1);
     }
     iframe {
       width: 100%;
-      height: calc(100vh - 56px);
-      min-height: 620px;
+      height: clamp(420px, 48vh, 520px);
+      min-height: 420px;
       display: block;
       border: 0;
       background: #0b0d12;
@@ -144,7 +143,7 @@
       word-break: keep-all;
     }
     .chat-band {
-      padding: 34px 16px 42px;
+      padding: 10px 16px 38px;
       background:
         linear-gradient(180deg, rgba(255, 255, 255, .025), rgba(255, 255, 255, 0)),
         rgba(10, 12, 17, .72);
@@ -202,7 +201,6 @@
       padding: 12px 13px;
       line-height: 1.65;
       font-size: 15px;
-      white-space: pre-wrap;
       word-break: keep-all;
       overflow-wrap: anywhere;
     }
@@ -215,6 +213,32 @@
       border: 1px solid rgba(255, 255, 255, .12);
       background: rgba(255, 255, 255, .055);
       color: #eef2f7;
+    }
+    .ai .bubble p {
+      margin: 0 0 10px;
+    }
+    .ai .bubble p:last-child {
+      margin-bottom: 0;
+    }
+    .ai .bubble ul {
+      margin: 8px 0 0;
+      padding-left: 20px;
+    }
+    .ai .bubble li {
+      margin: 5px 0;
+    }
+    .chat-notice {
+      grid-column: 1 / -1;
+      border: 1px solid rgba(56, 189, 248, .42);
+      border-radius: 8px;
+      padding: 10px 12px;
+      background: linear-gradient(180deg, rgba(125, 211, 252, .18), rgba(14, 165, 233, .1));
+      color: #dff6ff;
+      font-size: 14px;
+      line-height: 1.45;
+      font-weight: 820;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, .08);
+      word-break: keep-all;
     }
     .meta {
       color: rgba(232, 235, 239, .62);
@@ -257,8 +281,8 @@
       .topbar { padding: 10px 12px; }
       .brand-text { max-width: 150px; }
       .btn { padding: 0 10px; font-size: 12px; }
-      iframe { height: calc(100vh - 58px); min-height: 560px; }
-      .chat-band { padding: 22px 10px 30px; }
+      iframe { height: 390px; min-height: 390px; }
+      .chat-band { padding: 8px 10px 30px; }
       .chat-head { align-items: flex-start; flex-direction: column; }
       .chat-title { font-size: 16px; }
       .chat-form { grid-template-columns: 1fr; }
@@ -304,6 +328,7 @@
           </div>
         </div>
         <form class="chat-form" id="chatForm">
+          <div class="chat-notice">정확한 내용은 유치인과 꼭 이야기를 나눠야 합니다 ^^ 188본부에 오신 걸 환영합니다~!</div>
           <input class="chat-input" id="chatInput" name="question" autocomplete="off" maxlength="600" placeholder="예: 위촉은 어떤 순서로 진행되나요?">
           <button class="btn primary send" id="sendBtn" type="submit">전송</button>
         </form>
@@ -346,11 +371,55 @@
       meta.textContent = label;
       const bubble = document.createElement('div');
       bubble.className = 'bubble';
-      bubble.textContent = text;
+      if (role === 'ai') {
+        bubble.innerHTML = formatAnswerHtml(text);
+      } else {
+        bubble.textContent = text;
+      }
       msg.append(meta, bubble);
       log.appendChild(msg);
       log.scrollTop = log.scrollHeight;
       return msg;
+    }
+
+    function escapeHtml(text) {
+      return String(text || '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    function formatAnswerHtml(text) {
+      let clean = String(text || '')
+        .replace(/\*\*(.*?)\*\*/g, '$1')
+        .replace(/__(.*?)__/g, '$1')
+        .replace(/^\s{0,3}#{1,6}\s*/gm, '')
+        .replace(/^\s*[-*]\s+/gm, '• ')
+        .trim();
+      if (!clean) return '답변을 생성하지 못했습니다. 다시 질문해주세요.';
+
+      const lines = clean.split(/\n+/).map(line => line.trim()).filter(Boolean);
+      const html = [];
+      let list = [];
+      const flushList = () => {
+        if (!list.length) return;
+        html.push('<ul>' + list.map(item => '<li>' + escapeHtml(item) + '</li>').join('') + '</ul>');
+        list = [];
+      };
+
+      lines.forEach(line => {
+        const item = line.match(/^(?:•|\d+[.)])\s*(.+)$/);
+        if (item) {
+          list.push(item[1]);
+          return;
+        }
+        flushList();
+        html.push('<p>' + escapeHtml(line) + '</p>');
+      });
+      flushList();
+      return html.join('');
     }
 
     function setBusy(on) {
@@ -422,9 +491,9 @@
       const pending = addMessage('ai', '확인 중입니다.', '위촉진행 AI');
       try {
         const data = await ask(question);
-        pending.querySelector('.bubble').textContent = data && data.answer ? data.answer : '답변을 생성하지 못했습니다. 다시 질문해주세요.';
+        pending.querySelector('.bubble').innerHTML = formatAnswerHtml(data && data.answer ? data.answer : '답변을 생성하지 못했습니다. 다시 질문해주세요.');
       } catch (err) {
-        pending.querySelector('.bubble').textContent = '일시적으로 답변을 불러오지 못했습니다. 잠시 후 다시 시도해주세요.';
+        pending.querySelector('.bubble').innerHTML = formatAnswerHtml('일시적으로 답변을 불러오지 못했습니다. 잠시 후 다시 시도해주세요.');
       } finally {
         setBusy(false);
         input.focus();
