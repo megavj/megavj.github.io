@@ -21,6 +21,16 @@
       href: '/system/'
     },
     {
+      title: '프리미엄 상품통합분석기',
+      desc: '상품·비교자료와 월간 이슈·시책 통합 분석',
+      href: 'https://script.google.com/macros/s/AKfycbwxsEPxs_uq5H4gH43Ie_FH0mrKAtdkrnzP-30b52GKTBMXVzARfgggs6_klkyadIVl/exec'
+    },
+    {
+      title: '수당계산기',
+      desc: '수수료·수정률·환산율 기준',
+      href: 'https://script.google.com/macros/s/AKfycbz4ZR5EbyrzaIkOfhUR0Hqe0eTRokTf8Sa6ax9Q0paQlRPtJfmxG7AwC2RXIpUNq1XfYg/exec'
+    },
+    {
       title: '프리미엄 최신보험뉴스',
       desc: '보험뉴스와 최신 이슈 확인',
       href: '/news/'
