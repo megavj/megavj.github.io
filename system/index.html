@@ -4,41 +4,47 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>188본부 시스템안내서 | 188 프라임에셋</title>
-  <meta name="description" content="188본부 시스템안내서를 188 프라임에셋 허브에서 바로 확인합니다.">
+  <meta name="description" content="188본부 시스템안내서와 위촉진행 AI 챗봇을 확인하는 페이지입니다.">
   <meta name="theme-color" content="#0d1016">
   <link rel="stylesheet" href="/assets/hub-menu.css">
   <style>
     :root {
       --bg: #0d1016;
+      --panel: rgba(16, 19, 26, .82);
+      --panel-strong: rgba(22, 25, 33, .94);
       --ink: #f5f7fb;
       --muted: #aeb7c4;
-      --line: rgba(255,255,255,.14);
+      --line: rgba(255, 255, 255, .14);
       --gold: #d5b56b;
-      --panel: rgba(12,15,21,.78);
+      --gold-2: #ead7a4;
+      --silver: #e8ebef;
       font-family: "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
       color-scheme: dark;
     }
     * { box-sizing: border-box; }
-    html, body { height: 100%; }
+    html { min-height: 100%; background: var(--bg); }
     body {
+      min-height: 100%;
       margin: 0;
       color: var(--ink);
       background:
-        linear-gradient(135deg, rgba(213,181,107,.12), transparent 34%),
-        linear-gradient(225deg, rgba(78,114,168,.18), transparent 38%),
-        var(--bg);
-      overflow: hidden;
+        linear-gradient(135deg, rgba(213, 181, 107, .11), transparent 34%),
+        linear-gradient(225deg, rgba(96, 118, 150, .16), transparent 40%),
+        #0d1016;
     }
     a { color: inherit; text-decoration: none; }
     .topbar {
-      height: 54px;
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      min-height: 56px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 12px;
-      padding: 0 18px;
+      padding: 10px 18px;
       border-bottom: 1px solid var(--line);
-      background: var(--panel);
+      background: rgba(13, 16, 22, .82);
       backdrop-filter: blur(20px) saturate(1.25);
     }
     .brand {
@@ -47,19 +53,18 @@
       gap: 10px;
       min-width: 0;
       font-weight: 820;
-      letter-spacing: 0;
     }
     .mark {
       width: 30px;
       height: 30px;
       display: grid;
       place-items: center;
-      border: 1px solid rgba(213,181,107,.56);
+      border: 1px solid rgba(213, 181, 107, .56);
       border-radius: 7px;
       color: var(--gold);
       font-size: 12px;
       font-weight: 900;
-      background: rgba(213,181,107,.08);
+      background: rgba(213, 181, 107, .08);
       flex: 0 0 auto;
     }
     .brand-text {
@@ -81,24 +86,29 @@
       padding: 0 12px;
       border: 1px solid var(--line);
       border-radius: 7px;
-      background: rgba(255,255,255,.055);
+      background: rgba(255, 255, 255, .055);
       color: #e9edf4;
       font-size: 13px;
       font-weight: 740;
+      cursor: pointer;
+      transition: transform .2s ease, border-color .2s ease, background .2s ease;
     }
+    .btn:hover { transform: translateY(-1px); border-color: rgba(213, 181, 107, .42); }
     .btn.primary {
-      border-color: rgba(213,181,107,.58);
+      border-color: rgba(213, 181, 107, .58);
       color: #11141a;
       background: linear-gradient(180deg, #eddcae, #d5b56b 54%, #ad8440);
     }
-    .frame-wrap {
-      height: calc(100% - 54px);
+    .guide-wrap {
       position: relative;
+      min-height: calc(100vh - 56px);
       background: #0b0d12;
+      border-bottom: 1px solid rgba(255, 255, 255, .1);
     }
     iframe {
       width: 100%;
-      height: 100%;
+      height: calc(100vh - 56px);
+      min-height: 620px;
       display: block;
       border: 0;
       background: #0b0d12;
@@ -115,8 +125,8 @@
       width: min(460px, 100%);
       border: 1px solid var(--line);
       border-radius: 8px;
-      background: rgba(13,16,22,.86);
-      box-shadow: 0 24px 80px rgba(0,0,0,.36);
+      background: rgba(13, 16, 22, .88);
+      box-shadow: 0 24px 80px rgba(0, 0, 0, .36);
       padding: 22px;
       text-align: center;
       opacity: 0;
@@ -124,15 +134,8 @@
       transition: opacity .25s ease, transform .25s ease;
       pointer-events: auto;
     }
-    .fallback.show .fallback-card {
-      opacity: 1;
-      transform: none;
-    }
-    .fallback h1 {
-      margin: 0;
-      font-size: 20px;
-      letter-spacing: 0;
-    }
+    .fallback.show .fallback-card { opacity: 1; transform: none; }
+    .fallback h1 { margin: 0; font-size: 20px; }
     .fallback p {
       margin: 10px 0 18px;
       color: var(--muted);
@@ -140,11 +143,127 @@
       font-size: 14px;
       word-break: keep-all;
     }
+    .chat-band {
+      padding: 34px 16px 42px;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, .025), rgba(255, 255, 255, 0)),
+        rgba(10, 12, 17, .72);
+    }
+    .chat-shell {
+      width: min(940px, 100%);
+      margin: 0 auto;
+      border: 1px solid rgba(255, 255, 255, .15);
+      border-radius: 10px;
+      background: linear-gradient(180deg, rgba(28, 31, 40, .92), rgba(15, 18, 25, .96));
+      box-shadow: 0 18px 60px rgba(0, 0, 0, .28), inset 0 1px 0 rgba(255, 255, 255, .06);
+      overflow: hidden;
+    }
+    .chat-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 16px 16px 14px;
+      border-bottom: 1px solid rgba(255, 255, 255, .1);
+      background: rgba(255, 255, 255, .025);
+    }
+    .chat-title {
+      margin: 0;
+      font-size: 18px;
+      line-height: 1.35;
+      color: var(--silver);
+      font-weight: 830;
+      word-break: keep-all;
+    }
+    .chat-state {
+      color: var(--gold-2);
+      font-size: 12px;
+      white-space: nowrap;
+    }
+    .chat-log {
+      min-height: 220px;
+      max-height: 520px;
+      overflow: auto;
+      padding: 18px 16px 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      scroll-behavior: smooth;
+    }
+    .msg {
+      width: min(760px, 100%);
+      display: grid;
+      gap: 6px;
+    }
+    .msg.user { align-self: flex-end; }
+    .msg.ai { align-self: flex-start; }
+    .bubble {
+      border-radius: 8px;
+      padding: 12px 13px;
+      line-height: 1.65;
+      font-size: 15px;
+      white-space: pre-wrap;
+      word-break: keep-all;
+      overflow-wrap: anywhere;
+    }
+    .user .bubble {
+      background: linear-gradient(180deg, #ead7a4, #caa357);
+      color: #10131a;
+      font-weight: 740;
+    }
+    .ai .bubble {
+      border: 1px solid rgba(255, 255, 255, .12);
+      background: rgba(255, 255, 255, .055);
+      color: #eef2f7;
+    }
+    .meta {
+      color: rgba(232, 235, 239, .62);
+      font-size: 12px;
+      padding: 0 2px;
+    }
+    .user .meta { text-align: right; }
+    .chat-form {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+      padding: 14px 16px 16px;
+      border-top: 1px solid rgba(255, 255, 255, .1);
+      background: rgba(8, 10, 15, .42);
+    }
+    .chat-input {
+      width: 100%;
+      min-height: 46px;
+      border: 1px solid rgba(255, 255, 255, .14);
+      border-radius: 8px;
+      padding: 0 13px;
+      background: rgba(255, 255, 255, .07);
+      color: var(--ink);
+      font: inherit;
+      outline: none;
+    }
+    .chat-input:focus {
+      border-color: rgba(213, 181, 107, .72);
+      box-shadow: 0 0 0 3px rgba(213, 181, 107, .12);
+    }
+    .send {
+      min-width: 86px;
+      min-height: 46px;
+    }
+    .send:disabled, .chat-input:disabled {
+      opacity: .6;
+      cursor: progress;
+    }
     @media (max-width: 640px) {
-      .topbar { height: 58px; padding: 0 12px; }
-      .brand-text { max-width: 160px; }
+      .topbar { padding: 10px 12px; }
+      .brand-text { max-width: 150px; }
       .btn { padding: 0 10px; font-size: 12px; }
-      .frame-wrap { height: calc(100% - 58px); }
+      iframe { height: calc(100vh - 58px); min-height: 560px; }
+      .chat-band { padding: 22px 10px 30px; }
+      .chat-head { align-items: flex-start; flex-direction: column; }
+      .chat-title { font-size: 16px; }
+      .chat-form { grid-template-columns: 1fr; }
+      .send { width: 100%; }
+      .bubble { font-size: 14px; }
     }
   </style>
 </head>
@@ -160,19 +279,41 @@
     </nav>
   </header>
 
-  <main class="frame-wrap">
-    <iframe id="systemFrame" title="188본부 시스템안내서" loading="eager"></iframe>
-    <div class="fallback" id="fallback" aria-hidden="true">
-      <div class="fallback-card">
-        <h1>188본부 시스템안내서</h1>
-        <p>브라우저에서 프레임 표시가 지연되면 새 창으로 바로 열 수 있습니다.</p>
-        <a class="btn primary" id="fallbackOpen" target="_blank" rel="noopener">새 창으로 열기</a>
+  <main>
+    <section class="guide-wrap" aria-label="시스템안내서">
+      <iframe id="systemFrame" title="188본부 시스템안내서" loading="eager"></iframe>
+      <div class="fallback" id="fallback" aria-hidden="true">
+        <div class="fallback-card">
+          <h1>188본부 시스템안내서</h1>
+          <p>브라우저에서 프레임 표시가 지연되면 새 창으로 바로 열 수 있습니다.</p>
+          <a class="btn primary" id="fallbackOpen" target="_blank" rel="noopener">새 창으로 열기</a>
+        </div>
       </div>
-    </div>
+    </section>
+
+    <section class="chat-band" aria-label="위촉진행 AI 챗봇">
+      <div class="chat-shell">
+        <div class="chat-head">
+          <h2 class="chat-title">위촉진행 AI입니다. 궁금한 점을 물어보세요</h2>
+          <div class="chat-state" id="chatState">자료 기반 답변</div>
+        </div>
+        <div class="chat-log" id="chatLog" aria-live="polite">
+          <div class="msg ai">
+            <div class="meta">위촉진행 AI</div>
+            <div class="bubble">위촉 절차, 준비서류, 188본부 안내, 시스템 용도를 물어보세요. 접속 비밀번호나 내부 제작 방식은 안내하지 않습니다.</div>
+          </div>
+        </div>
+        <form class="chat-form" id="chatForm">
+          <input class="chat-input" id="chatInput" name="question" autocomplete="off" maxlength="600" placeholder="예: 위촉은 어떤 순서로 진행되나요?">
+          <button class="btn primary send" id="sendBtn" type="submit">전송</button>
+        </form>
+      </div>
+    </section>
   </main>
 
   <script>
     const systemGuideUrl = 'https://script.google.com/macros/s/AKfycbzqX3lETPADpPAG6syoAsEG1cSceMcUUqmeEhYj3ukkbFfHPEnbdvq8W448ttC0vcFefw/exec';
+    const chatApiUrl = 'https://script.google.com/macros/s/AKfycbwxsEPxs_uq5H4gH43Ie_FH0mrKAtdkrnzP-30b52GKTBMXVzARfgggs6_klkyadIVl/exec';
     const frame = document.getElementById('systemFrame');
     const fallback = document.getElementById('fallback');
     document.getElementById('openExternal').href = systemGuideUrl;
@@ -190,6 +331,105 @@
         fallback.setAttribute('aria-hidden', 'false');
       }
     }, 4500);
+
+    const form = document.getElementById('chatForm');
+    const input = document.getElementById('chatInput');
+    const log = document.getElementById('chatLog');
+    const state = document.getElementById('chatState');
+    const sendBtn = document.getElementById('sendBtn');
+
+    function addMessage(role, text, label) {
+      const msg = document.createElement('div');
+      msg.className = 'msg ' + role;
+      const meta = document.createElement('div');
+      meta.className = 'meta';
+      meta.textContent = label;
+      const bubble = document.createElement('div');
+      bubble.className = 'bubble';
+      bubble.textContent = text;
+      msg.append(meta, bubble);
+      log.appendChild(msg);
+      log.scrollTop = log.scrollHeight;
+      return msg;
+    }
+
+    function setBusy(on) {
+      input.disabled = on;
+      sendBtn.disabled = on;
+      state.textContent = on ? '답변 작성 중' : '자료 기반 답변';
+    }
+
+    async function askByPost(question) {
+      const res = await fetch(chatApiUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify({ chat188: 1, question })
+      });
+      if (!res.ok) throw new Error('post failed');
+      return res.json();
+    }
+
+    function askByJsonp(question) {
+      return new Promise((resolve, reject) => {
+        const cb = 'chat188Cb_' + Date.now() + '_' + Math.random().toString(36).slice(2);
+        const script = document.createElement('script');
+        const timer = window.setTimeout(() => {
+          cleanup();
+          reject(new Error('timeout'));
+        }, 45000);
+        function cleanup() {
+          window.clearTimeout(timer);
+          delete window[cb];
+          script.remove();
+        }
+        window[cb] = data => {
+          cleanup();
+          resolve(data);
+        };
+        script.onerror = () => {
+          cleanup();
+          reject(new Error('jsonp failed'));
+        };
+        script.src = chatApiUrl + '?chat188=1&callback=' + encodeURIComponent(cb) + '&q=' + encodeURIComponent(question);
+        document.head.appendChild(script);
+      });
+    }
+
+    async function ask(question) {
+      try {
+        return await askByPost(question);
+      } catch (err) {
+        return askByJsonp(question);
+      }
+    }
+
+    function isSensitiveQuestion(question) {
+      return /(비번|비밀번호|패스워드|password|접근코드|접속코드|관리자|어드민|admin|9262|만들|제작|개발|구현|코드|소스|배포|GAS|Apps Script|API\s*키|프롬프트|내부\s*구조|서버)/i.test(question);
+    }
+
+    form.addEventListener('submit', async event => {
+      event.preventDefault();
+      const question = input.value.trim();
+      if (!question) return;
+      addMessage('user', question, '질문');
+      input.value = '';
+      if (isSensitiveQuestion(question)) {
+        addMessage('ai', '보안상 안내할 수 없으며, 담당 관리자에게 문의해주세요.', '위촉진행 AI');
+        input.focus();
+        return;
+      }
+      setBusy(true);
+      const pending = addMessage('ai', '확인 중입니다.', '위촉진행 AI');
+      try {
+        const data = await ask(question);
+        pending.querySelector('.bubble').textContent = data && data.answer ? data.answer : '답변을 생성하지 못했습니다. 다시 질문해주세요.';
+      } catch (err) {
+        pending.querySelector('.bubble').textContent = '일시적으로 답변을 불러오지 못했습니다. 잠시 후 다시 시도해주세요.';
+      } finally {
+        setBusy(false);
+        input.focus();
+      }
+    });
   </script>
   <script src="/assets/hub-menu.js?v=20260630-hubtools" defer></script>
 </body>
