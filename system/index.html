@@ -157,25 +157,27 @@
     .seg:hover { transform: translateY(-1px); border-color: var(--gold); color: #fff; }
     .seg:active { transform: scale(.97); }
 
-    /* 안내서 구역 — 콘솔 안에 플러시로 박힘(독립 카드 아님) */
+    /* 안내서 구역 — 프레임 경계 없이 콘솔과 완전히 이어짐(플러시, 무테두리) */
     .guide-region {
       position: relative;
-      padding: 14px;
+      padding: 0;
       scroll-margin-top: 70px;
     }
+    /* iframe: 테두리·라운드·그림자·밝은배경 전부 제거 → 페이지에 박힌 프레임이 아니라
+       안내서가 콘솔의 연속 구역처럼 보이게. 본체(.gas_188sys)는 기본 theme-dark(블랙골드)라 톤 일치. */
     iframe {
       width: 100%;
-      height: clamp(420px, 48vh, 520px);
-      min-height: 420px;
+      height: min(82vh, 1040px);
+      min-height: 600px;
       display: block;
-      border: 1px solid var(--glass-edge);
-      border-radius: 14px;
-      background: #f7f3ea;
-      box-shadow: 0 8px 26px rgba(0,0,0,.32);
+      border: 0;
+      border-radius: 0;
+      background: var(--bg);
+      box-shadow: none;
     }
     .fallback {
       position: absolute;
-      inset: 14px;
+      inset: 16px;
       display: grid;
       place-items: center;
       padding: 10px;
@@ -371,8 +373,8 @@
       main { padding: 12px 10px 30px; }
       .seg-jump { padding: 10px 10px; }
       .seg { font-size: 12px; padding: 0 8px; }
-      .guide-region { padding: 10px; }
-      iframe { height: 390px; min-height: 390px; }
+      .guide-region { padding: 0; }
+      iframe { height: 82vh; min-height: 560px; }
       .divider { padding: 2px 12px 4px; }
       .chat-region { padding: 0 10px 12px; }
       .chat-head { align-items: flex-start; flex-direction: column; gap: 6px; }
