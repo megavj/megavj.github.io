@@ -283,7 +283,7 @@
     /* 대화창: 솔리드 고대비 배경으로 가독성은 유지하되(rule8), 외곽 테두리는 제거해
        '갇힌 박스' 느낌을 없앤다(무테두리 + 은은한 라운드 솔리드 가독면). */
     .chat-log {
-      min-height: 240px;
+      min-height: 200px;
       max-height: 780px;
       overflow: auto;
       padding: 16px;
@@ -482,7 +482,9 @@
       if (!d || typeof d !== 'object' || d.__sysGuide !== 1) return;
       if (!/google/i.test(e.origin || '')) return;   // GAS 콘텐츠 origin(googleusercontent/script.google.com)만 신뢰
       const h = parseInt(d.height, 10);
-      if (h > 0) frame.style.height = Math.max(h, 200) + 'px';
+      // +4px 버퍼: 내부 콘텐츠 높이 반올림 오차로 iframe이 자체 세로 스크롤바(이중 스크롤바)를
+      // 띄우는 것을 방지. 4px은 어두운 배경이라 시각적 여백으로 보이지 않음.
+      if (h > 0) frame.style.height = Math.max(h + 4, 200) + 'px';
     });
 
     const form = document.getElementById('chatForm');
