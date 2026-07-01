@@ -28,6 +28,9 @@
     body {
       min-height: 100%;
       margin: 0;
+      /* 공용 hub-menu 오프캔버스 드로어가 화면 우측 밖에 배치돼 가로 스크롤을 만드는 것 차단.
+         clip은 스크롤 컨테이너를 만들지 않아 sticky 네비/사이드바에 영향 없음. */
+      overflow-x: clip;
       color: var(--text);
       background:
         radial-gradient(1100px 520px at 50% -10%, rgba(200,169,106,.08), transparent 60%),
