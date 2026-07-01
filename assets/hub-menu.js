@@ -54,12 +54,6 @@
       external: true
     },
     {
-      title: '외부공유용 소식지분석기',
-      desc: '외부 공유용 소식지 분석 도구',
-      href: 'https://script.google.com/macros/s/AKfycbxG-5S3ANCLCTgP3fuNRzqYgljPCsmzrYWa3I6ddxBsZH3nhPUwXYh9a9PrLkIaNZVk/exec',
-      external: true
-    },
-    {
       title: '프리미엄 전산답변기',
       desc: '프리미엄 전산·IT 자동 답변 도구',
       href: 'https://script.google.com/macros/s/AKfycbwxsEPxs_uq5H4gH43Ie_FH0mrKAtdkrnzP-30b52GKTBMXVzARfgggs6_klkyadIVl/exec?itHelp=1',
