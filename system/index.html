@@ -167,13 +167,14 @@
        안내서가 콘솔의 연속 구역처럼 보이게. 본체(.gas_188sys)는 기본 theme-dark(블랙골드)라 톤 일치. */
     iframe {
       width: 100%;
-      height: min(82vh, 1040px);
-      min-height: 600px;
+      height: 720px;            /* 초기값 — 본체가 postMessage로 통지하는 실제 콘텐츠 높이에 맞춰 JS가 조정 */
+      min-height: 320px;
       display: block;
       border: 0;
       border-radius: 0;
       background: var(--bg);
       box-shadow: none;
+      transition: height .2s ease;
     }
     .fallback {
       position: absolute;
@@ -279,8 +280,8 @@
     }
     /* 대화창은 솔리드 고대비(가독성 최우선, rule8) */
     .chat-log {
-      min-height: 220px;
-      max-height: 520px;
+      min-height: 300px;
+      max-height: 780px;
       overflow: auto;
       padding: 16px;
       display: flex;
@@ -374,9 +375,10 @@
       .seg-jump { padding: 10px 10px; }
       .seg { font-size: 12px; padding: 0 8px; }
       .guide-region { padding: 0; }
-      iframe { height: 82vh; min-height: 560px; }
+      iframe { min-height: 300px; }  /* 높이는 postMessage로 콘텐츠에 맞춤 */
       .divider { padding: 2px 12px 4px; }
       .chat-region { padding: 0 10px 12px; }
+      .chat-log { max-height: min(780px, 72vh); }  /* 모바일: 화면 높이 초과 방지 */
       .chat-head { align-items: flex-start; flex-direction: column; gap: 6px; }
       .chat-title { font-size: 16px; }
       .chat-form { grid-template-columns: 1fr; }
@@ -468,6 +470,16 @@
         fallback.setAttribute('aria-hidden', 'false');
       }
     }, 4500);
+
+    // 본체(iframe)가 통지하는 실제 문서 높이에 맞춰 iframe 높이 조정
+    // → 게이트 아래 큰 빈 여백 제거, 입장 후 콘텐츠 높이로 자연스럽게 확장.
+    window.addEventListener('message', (e) => {
+      const d = e.data;
+      if (!d || typeof d !== 'object' || d.__sysGuide !== 1) return;
+      if (!/google/i.test(e.origin || '')) return;   // GAS 콘텐츠 origin(googleusercontent/script.google.com)만 신뢰
+      const h = parseInt(d.height, 10);
+      if (h > 0) frame.style.height = Math.max(h, 200) + 'px';
+    });
 
     const form = document.getElementById('chatForm');
     const input = document.getElementById('chatInput');
