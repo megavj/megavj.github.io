@@ -303,14 +303,20 @@
     const systemGuideUrl = 'https://script.google.com/macros/s/AKfycbzqX3lETPADpPAG6syoAsEG1cSceMcUUqmeEhYj3ukkbFfHPEnbdvq8W448ttC0vcFefw/exec';
     const chatApiUrl = 'https://script.google.com/macros/s/AKfycbwxsEPxs_uq5H4gH43Ie_FH0mrKAtdkrnzP-30b52GKTBMXVzARfgggs6_klkyadIVl/exec';
 
-    /* ── 좌측 퀵메뉴 프리셋(원클릭 → 챗봇 즉시 질문) ── */
+    /* ── 좌측 퀵메뉴 프리셋 6개(원클릭) ──
+       key 는 본체(.gas_188sys)의 QUICKANS_BUTTONS 키와 반드시 동기화.
+       관리자가 해당 key 고정답변을 채우면 그 버튼은 AI호출 없이 고정답변을 즉시 출력,
+       비어있으면 q 를 chat188 AI로 질의(기존 sendQuestion 경로). */
     const PRESETS = [
-      { icon: '📝', label: '위촉 절차',     q: '위촉은 어떤 순서로 진행되나요?' },
-      { icon: '📄', label: '준비서류',      q: '위촉에 필요한 준비서류는 무엇인가요?' },
-      { icon: '🔁', label: '기존회사 해촉', q: '기존 회사 해촉은 어떻게 하나요?' },
-      { icon: '🛡️', label: '보증보험',      q: '보증보험은 어떻게 가입하나요?' },
-      { icon: '📚', label: '교육자료',      q: '교육자료는 어디서 확인하나요?' }
+      { key: '위촉절차',   icon: '📝', label: '위촉 절차',      q: '위촉은 어떤 순서로 진행되나요?' },
+      { key: '준비서류',   icon: '📄', label: '준비서류',       q: '위촉에 필요한 준비서류는 무엇인가요?' },
+      { key: '해촉',       icon: '🔁', label: '해촉(내용증명)', q: '기존 회사 해촉(내용증명)은 어떻게 하나요?' },
+      { key: '보증보험',   icon: '🛡️', label: '보증보험',       q: '보증보험은 어떻게 가입하나요?' },
+      { key: '영업시스템', icon: '📈', label: '영업시스템',     q: '188본부 영업시스템은 어떻게 활용하나요?' },
+      { key: '시스템문의', icon: '🛠️', label: '시스템문의',     q: '시스템 관련 문의는 어디로 하면 되나요?' }
     ];
+    /* 관리자 고정답변 맵 { key: 답변텍스트 }. 로드 시 본체에서 JSONP로 받아옴(비면 전부 AI). */
+    let QUICK_ANSWERS = {};
 
     /* ── 탭 전환 ── */
     const frame = document.getElementById('systemFrame');
@@ -456,7 +462,7 @@
 
     form.addEventListener('submit', e => { e.preventDefault(); sendQuestion(input.value); });
 
-    /* ── 좌측 퀵메뉴 렌더 + 원클릭 질문 주입 ── */
+    /* ── 좌측 퀵메뉴 렌더 + 원클릭(고정답변 우선, 없으면 AI) ── */
     const qmenu = document.getElementById('qmenu');
     PRESETS.forEach((p, i) => {
       const b = document.createElement('button');
@@ -465,10 +471,32 @@
       b.addEventListener('click', () => {
         document.querySelectorAll('.qbtn').forEach(x => x.setAttribute('aria-pressed', 'false'));
         b.setAttribute('aria-pressed', 'true');
-        sendQuestion(p.q);
+        const fixed = QUICK_ANSWERS[p.key];
+        if (fixed && String(fixed).trim()) {
+          // 관리자 고정답변 있음 → AI 호출 없이 즉시 출력
+          addMessage('user', p.q);
+          addMessage('ai', fixed);
+          input.focus();
+        } else {
+          // 고정답변 없음 → 기존 chat188 AI 경로
+          sendQuestion(p.q);
+        }
       });
       qmenu.appendChild(b);
     });
+
+    /* ── 본체(.gas_188sys)에서 관리자 고정답변 맵을 JSONP로 로드(다른 오리진 → CORS 회피) ──
+       실패해도 무해: 맵이 비면 모든 버튼이 AI답변으로 동작. */
+    (function loadQuickAnswers() {
+      const cb = 'quickAnsCb_' + Date.now() + '_' + Math.random().toString(36).slice(2);
+      const script = document.createElement('script');
+      const timer = window.setTimeout(() => { cleanup(); }, 8000);
+      function cleanup() { window.clearTimeout(timer); delete window[cb]; script.remove(); }
+      window[cb] = data => { cleanup(); if (data && data.ok && data.answers) QUICK_ANSWERS = data.answers; };
+      script.onerror = () => { cleanup(); };
+      script.src = systemGuideUrl + '?quickans=1&callback=' + encodeURIComponent(cb);
+      document.head.appendChild(script);
+    })();
   </script>
   <script src="/assets/hub-menu.js?v=20260630-hubtools" defer></script>
 </body>
