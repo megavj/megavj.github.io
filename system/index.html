@@ -110,7 +110,7 @@
 
     /* === 통합 글래스 콘솔 (시스템안내서 + 위촉상담 AI 하나로) === */
     main {
-      padding: 14px 8px 36px;
+      padding: 14px 8px 24px;
     }
     /* 외곽 테두리 제거 — 딱딱한 프레임이 화면을 좁아 보이게 해서 삭제.
        유리 톤(은은한 배경)은 유지하되 border/box-shadow 없이 콘텐츠를 넓게. */
@@ -169,7 +169,7 @@
        안내서가 콘솔의 연속 구역처럼 보이게. 본체(.gas_188sys)는 기본 theme-dark(블랙골드)라 톤 일치. */
     iframe {
       width: 100%;
-      height: 720px;            /* 초기값 — 본체가 postMessage로 통지하는 실제 콘텐츠 높이에 맞춰 JS가 조정 */
+      height: 560px;            /* 초기값(게이트 상태 기준으로 소폭 축소) — 본체가 postMessage로 통지하는 실제 콘텐츠 높이에 맞춰 JS가 조정 */
       min-height: 320px;
       display: block;
       border: 0;
@@ -280,9 +280,10 @@
       box-shadow: inset 0 1px 0 rgba(255, 255, 255, .08);
       word-break: keep-all;
     }
-    /* 대화창은 솔리드 고대비(가독성 최우선, rule8) */
+    /* 대화창: 솔리드 고대비 배경으로 가독성은 유지하되(rule8), 외곽 테두리는 제거해
+       '갇힌 박스' 느낌을 없앤다(무테두리 + 은은한 라운드 솔리드 가독면). */
     .chat-log {
-      min-height: 300px;
+      min-height: 240px;
       max-height: 780px;
       overflow: auto;
       padding: 16px;
@@ -290,7 +291,7 @@
       flex-direction: column;
       gap: 12px;
       scroll-behavior: smooth;
-      border: 1px solid var(--glass-edge);
+      border: 0;
       border-radius: 14px;
       background: rgba(8, 10, 14, .72);
     }
@@ -338,11 +339,12 @@
       padding: 0 2px;
     }
     .user .meta { text-align: right; }
+    /* 입력창을 대화영역 '위'에 배치(답변은 아래로 주르륵 쌓임). 아래 대화창과 간격 확보. */
     .chat-form {
       display: grid;
       grid-template-columns: 1fr auto;
       gap: 10px;
-      padding: 12px 0 2px;
+      padding: 4px 0 12px;
     }
     .chat-input {
       width: 100%;
@@ -438,16 +440,16 @@
           <div class="chat-state" id="chatState"></div>
         </div>
         <div class="chat-notice">정확한 내용은 유치인과 꼭 이야기를 나눠야 합니다 ^^ 188본부에 오신 걸 환영합니다~!</div>
+        <form class="chat-form" id="chatForm">
+          <input class="chat-input" id="chatInput" name="question" autocomplete="off" maxlength="600" placeholder="예: 위촉은 어떤 순서로 진행되나요?">
+          <button class="btn primary send" id="sendBtn" type="submit">전송</button>
+        </form>
         <div class="chat-log" id="chatLog" aria-live="polite">
           <div class="msg ai">
             <div class="meta">위촉진행 AI</div>
             <div class="bubble">위촉 절차, 준비서류, 188본부 안내, 시스템 용도를 물어보세요.</div>
           </div>
         </div>
-        <form class="chat-form" id="chatForm">
-          <input class="chat-input" id="chatInput" name="question" autocomplete="off" maxlength="600" placeholder="예: 위촉은 어떤 순서로 진행되나요?">
-          <button class="btn primary send" id="sendBtn" type="submit">전송</button>
-        </form>
       </div>
     </section>
   </main>
