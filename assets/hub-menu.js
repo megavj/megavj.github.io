@@ -34,6 +34,36 @@
       title: '프리미엄 최신보험뉴스',
       desc: '보험뉴스와 최신 이슈 확인',
       href: '/news/'
+    },
+    {
+      title: '프리미엄사업부 공식페이지',
+      desc: '프라임에셋 프리미엄사업부 공식 홈페이지',
+      href: 'https://www.primeasset.info',
+      external: true
+    },
+    {
+      title: '보험노트 홈페이지',
+      desc: '보험노트 공식 홈페이지',
+      href: 'https://bohumnote.com',
+      external: true
+    },
+    {
+      title: '프리미엄 자료검색기',
+      desc: '프리미엄 자료·문서 통합 검색',
+      href: 'https://script.google.com/macros/s/AKfycbx2R0eWsh6J9MyUPZahLHJj1bDiSdh1Ei147OOVJ85fCVZv1R-RQCeYIYgrkLiy7eh_/exec',
+      external: true
+    },
+    {
+      title: '외부공유용 소식지분석기',
+      desc: '외부 공유용 소식지 분석 도구',
+      href: 'https://script.google.com/macros/s/AKfycbxG-5S3ANCLCTgP3fuNRzqYgljPCsmzrYWa3I6ddxBsZH3nhPUwXYh9a9PrLkIaNZVk/exec',
+      external: true
+    },
+    {
+      title: '프리미엄 전산답변기',
+      desc: '프리미엄 전산·IT 자동 답변 도구',
+      href: 'https://script.google.com/macros/s/AKfycbwxsEPxs_uq5H4gH43Ie_FH0mrKAtdkrnzP-30b52GKTBMXVzARfgggs6_klkyadIVl/exec?itHelp=1',
+      external: true
     }
   ];
 
@@ -86,7 +116,10 @@
       const link = document.createElement('a');
       link.className = 'hub-menu-link';
       link.href = page.href;
-      if (normalizePath(page.href) === current) {
+      if (page.external) {
+        link.target = '_blank';
+        link.rel = 'noopener';
+      } else if (normalizePath(page.href) === current) {
         link.setAttribute('aria-current', 'page');
       }
       link.innerHTML = '<strong>' + page.title + '</strong><span>' + page.desc + '</span>';
