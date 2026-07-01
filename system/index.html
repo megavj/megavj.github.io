@@ -73,42 +73,84 @@
     .tab:hover { color: var(--silver); }
     .tab[aria-selected="true"] { color: #fff; border-bottom-color: var(--gold); }
     .tab .ti { font-size: 14px; }
+    /* 관리자 탭은 액션성(로그인 오버레이 유발) — 좌측에 얇은 구분선으로 분리 */
+    .tab-admin { margin-left: 4px; padding-left: 15px; border-left: 1px solid var(--line); }
 
     /* ── 히어로 ── */
-    .hero { max-width: 1080px; margin: 0 auto; padding: 30px clamp(14px,4vw,30px) 14px; }
+    .hero { max-width: 1080px; margin: 0 auto; padding: 30px clamp(14px,4vw,30px) 12px; }
     .hero h1 {
       margin: 0; font-size: clamp(24px,4.4vw,40px); line-height: 1.12;
       font-weight: 900; letter-spacing: -.02em; color: #fff;
     }
     .hero p { margin: 10px 0 0; color: var(--muted); font-size: 14px; max-width: 640px; word-break: keep-all; }
 
+    /* ── 입점코드 입력 바 (히어로 아래 · 항상 노출 · AI상담 위) ──
+       서버 게이트(getGuide)는 본체 iframe에서 검증. 이 바는 코드를 iframe으로 넘겨
+       한 곳에서만 게이트가 뜨게(이중 게이트 방지) 하고, 성공/실패는 postMessage로 반영. */
+    .gatebar-wrap { max-width: 1080px; margin: 0 auto; padding: 2px clamp(14px,4vw,30px) 8px; }
+    .gatebar {
+      display: grid; grid-template-columns: auto minmax(0,1fr) auto; gap: 10px; align-items: center;
+      border: 1px solid var(--line); border-radius: var(--r-card);
+      background: var(--glass-bg);
+      -webkit-backdrop-filter: var(--glass-blur); backdrop-filter: var(--glass-blur);
+      padding: 10px 12px;
+    }
+    .gatebar-label {
+      display: flex; align-items: center; gap: 7px; white-space: nowrap;
+      font-size: 12px; font-weight: 800; letter-spacing: .02em; color: var(--gold);
+    }
+    .gatebar-label .gi { font-size: 14px; }
+    .gatebar-input {
+      min-width: 0; width: 100%; min-height: 44px;
+      border: 1px solid var(--line); border-radius: var(--r-card);
+      padding: 0 14px; background: rgba(8,10,14,.6); color: var(--text);
+      font: inherit; font-weight: 700; letter-spacing: .18em; outline: none;
+      transition: border-color var(--dur), box-shadow var(--dur);
+    }
+    .gatebar-input::placeholder { color: rgba(242,243,245,.4); letter-spacing: normal; font-weight: 400; }
+    .gatebar-input:focus { border-color: rgba(200,169,106,.7); box-shadow: 0 0 0 3px rgba(200,169,106,.14); }
+    .gatebar-btn {
+      min-height: 44px; padding: 0 22px; white-space: nowrap; cursor: pointer;
+      border: 1px solid rgba(200,169,106,.7); border-radius: var(--r-card);
+      color: #14110a; font-weight: 900; font-size: 14px;
+      background: linear-gradient(180deg,#ecdaae,#d2ad5c 54%,#b68a3f);
+      transition: transform var(--dur) var(--ease-spring), border-color var(--dur), background var(--dur), color var(--dur);
+    }
+    .gatebar-btn:hover { transform: translateY(-1px); border-color: #f0e1ba; }
+    .gatebar-btn:active { transform: scale(.97); }
+    .gatebar-btn:disabled { opacity: .7; cursor: progress; }
+    .gatebar-btn.ok {
+      background: rgba(110,231,183,.14); border-color: rgba(110,231,183,.42); color: #6ee7b7;
+    }
+    .gatebar-err { margin: 8px 2px 0; color: #fb7185; font-size: 12px; word-break: keep-all; }
+    .gatebar-err:empty { display: none; }
+
     main { max-width: 1080px; margin: 0 auto; padding: 6px clamp(14px,4vw,30px) 30px; }
     .panel { display: none; animation: rise .34s var(--ease-spring) both; }
     .panel.active { display: block; }
     @keyframes rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
 
-    /* ── 시스템 안내서 탭 (본체 iframe: 입점코드 게이트 + 안내서) ── */
+    /* ── 시스템 안내서 탭 (본체 iframe: 입점 후 안내서) ── */
     .frame-wrap {
       position: relative;
       border: 1px solid var(--line); border-radius: var(--r-card);
       background: var(--bg); overflow: hidden;
     }
-    iframe {
+    iframe.systemFrame {
       width: 100%; height: 200px; min-height: 140px; display: block;
       border: 0; background: var(--bg); transition: height .2s ease;
     }
-    .fallback {
-      position: absolute; inset: 14px; display: grid; place-items: center; pointer-events: none;
+    iframe.systemFrame.hidden { display: none; }
+    .frame-hint {
+      display: grid; place-items: center; gap: 6px;
+      padding: 40px 18px; text-align: center; color: var(--muted); font-size: 13px; line-height: 1.6;
     }
-    .fallback-card {
-      width: min(440px,100%); border: 1px solid var(--line); border-radius: var(--r-card);
-      background: rgba(18,22,29,.94); padding: 22px; text-align: center;
-      opacity: 0; transform: translateY(8px); pointer-events: auto;
-      transition: opacity .25s ease, transform .25s var(--ease-spring);
+    .frame-hint .fh-i {
+      width: 34px; height: 34px; display: grid; place-items: center; margin-bottom: 4px;
+      border: 1px solid rgba(200,169,106,.5); border-radius: 9px; color: var(--gold); font-size: 15px;
+      background: linear-gradient(180deg, rgba(200,169,106,.16), rgba(255,255,255,.03));
     }
-    .fallback.show .fallback-card { opacity: 1; transform: none; }
-    .fallback h2 { margin: 0; font-size: 17px; }
-    .fallback p { margin: 8px 0 16px; color: var(--muted); font-size: 13px; line-height: 1.6; word-break: keep-all; }
+    .frame-hint.hidden { display: none; }
 
     /* ── 위촉상담 AI 탭 (좌: 퀵메뉴 / 우: 채팅) ── */
     .consult { display: grid; grid-template-columns: 216px minmax(0,1fr); gap: 14px; align-items: start; }
@@ -209,6 +251,41 @@
     .send:disabled, .chat-input:disabled { opacity: .6; cursor: progress; }
     .send svg { width: 18px; height: 18px; }
 
+    /* ── 관리자 인라인 오버레이(같은 페이지 모달) ──
+       관리자 버튼 → 이 오버레이가 뜨고 본체 iframe(?admin=1)이 서버검증 로그인/패널을 인라인 렌더.
+       새 창·입점코드 경유 없음. 비번 입력은 iframe 안 google.script.run(POST)으로만 서버검증(노출 0). */
+    .admin-overlay {
+      position: fixed; inset: 0; z-index: 60; display: grid; place-items: center;
+      padding: clamp(10px,3vw,28px);
+      background: rgba(5,7,10,.72);
+      -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+      animation: fade .2s ease both;
+    }
+    .admin-overlay[hidden] { display: none; }
+    @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+    .admin-modal {
+      width: min(760px,100%); max-height: 92vh; display: flex; flex-direction: column;
+      border: 1px solid var(--line); border-radius: 12px; overflow: hidden;
+      background: var(--bg-2, #12161d); box-shadow: 0 30px 80px rgba(0,0,0,.6);
+      animation: rise .3s var(--ease-spring) both;
+    }
+    .admin-modal-head {
+      display: flex; align-items: center; justify-content: space-between; gap: 10px;
+      padding: 12px 16px; border-bottom: 1px solid var(--line);
+      font-size: 13px; font-weight: 800; letter-spacing: .04em; color: var(--gold);
+      background: rgba(10,12,16,.6);
+    }
+    .admin-modal-head .am-title { display: flex; align-items: center; gap: 8px; }
+    .admin-close {
+      border: 1px solid var(--line); background: transparent; color: var(--text-dim);
+      border-radius: 999px; padding: 6px 13px; font-size: 12px; font-weight: 700; cursor: pointer;
+      transition: color var(--dur), border-color var(--dur);
+    }
+    .admin-close:hover { color: #fff; border-color: rgba(200,169,106,.5); }
+    .admin-modal iframe {
+      width: 100%; flex: 1; min-height: 440px; border: 0; background: var(--bg); display: block;
+    }
+
     @media (max-width: 760px) {
       .consult { grid-template-columns: 1fr; }
       .side { position: static; padding: 10px; }
@@ -218,11 +295,14 @@
     @media (max-width: 520px) {
       .brand-text { max-width: 96px; }
       .tab { padding: 0 9px; font-size: 12px; }
+      .tab-admin { padding-left: 11px; }
       .tab .tlabel { display: none; }
       .hero { padding-top: 22px; }
+      .gatebar { grid-template-columns: 1fr; gap: 8px; }
+      .gatebar-label { justify-content: flex-start; }
     }
     @media (prefers-reduced-transparency: reduce) {
-      .nav, .side, .chat { -webkit-backdrop-filter: none; backdrop-filter: none; background: var(--bg-2); }
+      .nav, .side, .chat, .gatebar { -webkit-backdrop-filter: none; backdrop-filter: none; background: var(--bg-2); }
       .chat-log { background: #0b0e13; }
     }
   </style>
@@ -240,7 +320,7 @@
       <button class="tab" id="tab-consult" role="tab" aria-controls="panel-consult" aria-selected="true" onclick="switchTab('consult')">
         <span class="ti">💬</span><span class="tlabel">위촉상담 AI</span>
       </button>
-      <button class="tab" id="tab-admin" role="tab" aria-controls="panel-guide" aria-selected="false" onclick="switchTab('admin')">
+      <button class="tab tab-admin" id="tab-admin" type="button" aria-haspopup="dialog" onclick="openAdmin()">
         <span class="ti">👤</span><span class="tlabel">관리자</span>
       </button>
     </nav>
@@ -251,18 +331,26 @@
     <p>새로운 시작을 위한 모든 정보를 간편하게 확인하세요.</p>
   </section>
 
+  <!-- 입점코드 입력 바 : 히어로 아래 · 항상 노출 · AI상담 위. 서버 게이트로 안내서를 연다. -->
+  <section class="gatebar-wrap" aria-label="입점코드 입력">
+    <form class="gatebar" id="gateForm" autocomplete="off">
+      <div class="gatebar-label"><span class="gi">🔑</span><span>입점코드 입력</span></div>
+      <input class="gatebar-input" id="gateInput" name="code" type="password" inputmode="numeric"
+             maxlength="20" placeholder="188본부 입점코드를 입력하세요" autocomplete="off" aria-label="입점코드">
+      <button class="gatebar-btn" id="gateBtn" type="submit">입장</button>
+    </form>
+    <p class="gatebar-err" id="gateErr" role="alert"></p>
+  </section>
+
   <main>
-    <!-- 시스템 안내서 (+ 관리자) : 본체 iframe — 입점코드 서버검증 게이트 + 안내서 + 관리자 -->
+    <!-- 시스템 안내서 : 본체 iframe(입점 성공 후 안내서 콘텐츠) -->
     <section class="panel" id="panel-guide" role="tabpanel" aria-labelledby="tab-guide">
       <div class="frame-wrap">
-        <iframe id="systemFrame" title="188본부 시스템 안내서" loading="eager"></iframe>
-        <div class="fallback" id="fallback" aria-hidden="true">
-          <div class="fallback-card">
-            <h2>188본부 시스템 안내서</h2>
-            <p>프레임 표시가 지연되면 새 창으로 바로 열 수 있습니다.</p>
-            <a class="qbtn" id="fallbackOpen" target="_blank" rel="noopener" style="justify-content:center;">새 창으로 열기</a>
-          </div>
+        <div class="frame-hint" id="frameHint">
+          <span class="fh-i">🔒</span>
+          <span>위 <b>입점코드</b>를 입력하고 <b>[입장]</b>하면<br>시스템 안내서가 이곳에 열립니다.</span>
         </div>
+        <iframe class="systemFrame hidden" id="systemFrame" title="188본부 시스템 안내서" loading="eager"></iframe>
       </div>
     </section>
 
@@ -299,6 +387,17 @@
     </section>
   </main>
 
+  <!-- 관리자 인라인 오버레이(같은 페이지 모달) — 새 창·입점코드 경유 없음 -->
+  <div class="admin-overlay" id="adminOverlay" role="dialog" aria-modal="true" aria-label="관리자" hidden>
+    <div class="admin-modal">
+      <div class="admin-modal-head">
+        <span class="am-title"><span>👤</span><span>관리자</span></span>
+        <button class="admin-close" type="button" onclick="closeAdmin()">✕ 닫기</button>
+      </div>
+      <iframe id="adminFrame" title="관리자 모드" loading="eager"></iframe>
+    </div>
+  </div>
+
   <script>
     const systemGuideUrl = 'https://script.google.com/macros/s/AKfycbzqX3lETPADpPAG6syoAsEG1cSceMcUUqmeEhYj3ukkbFfHPEnbdvq8W448ttC0vcFefw/exec';
     const chatApiUrl = 'https://script.google.com/macros/s/AKfycbwxsEPxs_uq5H4gH43Ie_FH0mrKAtdkrnzP-30b52GKTBMXVzARfgggs6_klkyadIVl/exec';
@@ -320,45 +419,91 @@
 
     /* ── 탭 전환 ── */
     const frame = document.getElementById('systemFrame');
-    let frameLoaded = false;
-    let frameMode = null;   // null | 'guide' | 'admin'
-    function loadFrame(mode) {
-      if (frameMode === mode && frame.src) return;   // 같은 모드면 재로드 안 함
-      frameMode = mode;
-      frameLoaded = false;
-      frame.style.height = '200px';
-      // GAS 샌드박스는 부모→자식 postMessage가 막혀, 관리자 진입은 URL 파라미터로 서버에 전달.
-      frame.src = systemGuideUrl + '?embed=1' + (mode === 'admin' ? '&admin=1' : '');
-    }
+    const frameHint = document.getElementById('frameHint');
+    const gateForm = document.getElementById('gateForm');
+    const gateInput = document.getElementById('gateInput');
+    const gateBtn = document.getElementById('gateBtn');
+    const gateErr = document.getElementById('gateErr');
+    let gatePassed = false;
+
     function switchTab(name) {
       const isConsult = name === 'consult';
       document.getElementById('panel-consult').classList.toggle('active', isConsult);
       document.getElementById('panel-guide').classList.toggle('active', !isConsult);
       document.getElementById('tab-consult').setAttribute('aria-selected', isConsult ? 'true' : 'false');
       document.getElementById('tab-guide').setAttribute('aria-selected', name === 'guide' ? 'true' : 'false');
-      document.getElementById('tab-admin').setAttribute('aria-selected', name === 'admin' ? 'true' : 'false');
-      if (name === 'guide') loadFrame('guide');
-      else if (name === 'admin') loadFrame('admin');
     }
 
-    const fallback = document.getElementById('fallback');
-    document.getElementById('fallbackOpen').href = systemGuideUrl;
-    frame.addEventListener('load', () => {
-      frameLoaded = true;
-      fallback.classList.remove('show');
-      fallback.setAttribute('aria-hidden', 'true');
+    /* ── 입점코드 게이트 ──
+       코드를 본체 iframe(?embed=1&code=)으로 넘겨 서버(getGuide)가 재검증한다.
+       성공(gate:ok) → 안내서가 iframe에 렌더되고 '시스템 안내서' 탭으로 전환.
+       실패(gate:fail) → iframe은 숨긴 채 이 바에만 오류 표시(게이트 이중노출 방지). */
+    gateForm.addEventListener('submit', e => {
+      e.preventDefault();
+      const code = gateInput.value.trim();
+      gateErr.textContent = '';
+      if (!code) { gateErr.textContent = '입점코드를 입력하세요.'; return; }
+      gateBtn.disabled = true;
+      gateBtn.textContent = '확인 중';
+      gateBtn.classList.remove('ok');
+      // 매 시도마다 iframe을 새로 로드(실패 후 재시도 시에도 서버 재검증되도록 캐시 무효화)
+      frame.classList.add('hidden');
+      frame.style.height = '200px';
+      frame.src = systemGuideUrl + '?embed=1&code=' + encodeURIComponent(code) + '&t=' + Date.now();
     });
-    window.setTimeout(() => {
-      if (frame.src && !frameLoaded) { fallback.classList.add('show'); fallback.setAttribute('aria-hidden', 'false'); }
-    }, 4500);
 
-    // 본체가 통지하는 실제 콘텐츠 높이에 맞춰 iframe 높이 조정(게이트 아래 빈 여백 제거)
+    function onGateOk() {
+      gatePassed = true;
+      gateBtn.disabled = false;
+      gateBtn.textContent = '입장 완료 ✓';
+      gateBtn.classList.add('ok');
+      gateErr.textContent = '';
+      frameHint.classList.add('hidden');
+      frame.classList.remove('hidden');
+      switchTab('guide');
+    }
+    function onGateFail() {
+      gateBtn.disabled = false;
+      gateBtn.textContent = '입장';
+      gateBtn.classList.remove('ok');
+      gatePassed = false;
+      frame.classList.add('hidden');           // 실패 시 iframe 게이트가 보이지 않도록 숨김 유지
+      frameHint.classList.remove('hidden');
+      gateErr.textContent = '입점코드가 맞지 않습니다. 188본부 내부 인원만 확인 가능합니다.';
+    }
+
+    /* ── 관리자 인라인 오버레이(같은 페이지) ──
+       ?admin=1 로 본체 iframe이 관리자 로그인/패널만 렌더. 비번 서버검증은 iframe 안
+       google.script.run(POST)으로만 수행 → 비번이 URL/로그에 노출되지 않음(노출 0). */
+    const adminOverlay = document.getElementById('adminOverlay');
+    const adminFrame = document.getElementById('adminFrame');
+    function openAdmin() {
+      if (!adminFrame.src) adminFrame.src = systemGuideUrl + '?embed=1&admin=1';
+      adminOverlay.hidden = false;
+      document.body.style.overflow = 'hidden';
+    }
+    function closeAdmin() {
+      adminOverlay.hidden = true;
+      document.body.style.overflow = '';
+    }
+    adminOverlay.addEventListener('click', e => { if (e.target === adminOverlay) closeAdmin(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape' && !adminOverlay.hidden) closeAdmin(); });
+
+    // 본체가 통지하는 실제 콘텐츠 높이·게이트 상태를 수신. (systemFrame / adminFrame 구분해 반영)
     window.addEventListener('message', (e) => {
       const d = e.data;
       if (!d || typeof d !== 'object' || d.__sysGuide !== 1) return;
       if (!/google/i.test(e.origin || '')) return;
+      if (d.gate === 'ok') onGateOk();
+      else if (d.gate === 'fail') onGateFail();
       const h = parseInt(d.height, 10);
-      if (h > 0) frame.style.height = Math.max(h + 4, 140) + 'px';
+      if (h > 0) {
+        if (adminFrame.contentWindow && e.source === adminFrame.contentWindow) {
+          adminFrame.style.height = Math.max(h + 4, 440) + 'px';
+        } else {
+          frame.style.height = Math.max(h + 4, 140) + 'px';
+        }
+      }
     });
 
     /* ── 채팅 로직(기존 chat188 API 그대로 재사용) ── */
