@@ -110,17 +110,19 @@
 
     /* === 통합 글래스 콘솔 (시스템안내서 + 위촉상담 AI 하나로) === */
     main {
-      padding: 18px 16px 40px;
+      padding: 14px 8px 36px;
     }
+    /* 외곽 테두리 제거 — 딱딱한 프레임이 화면을 좁아 보이게 해서 삭제.
+       유리 톤(은은한 배경)은 유지하되 border/box-shadow 없이 콘텐츠를 넓게. */
     .console {
-      width: min(940px, 100%);
+      width: min(1040px, 100%);
       margin: 0 auto;
-      border: 1px solid var(--glass-edge);
+      border: 0;
       border-radius: var(--radius);
       background: var(--glass-bg);
       -webkit-backdrop-filter: var(--glass-blur);
       backdrop-filter: var(--glass-blur);
-      box-shadow: var(--glass-shadow);
+      box-shadow: none;
       overflow: hidden;
       animation: rise .42s var(--ease-spring) both;
     }
@@ -433,13 +435,13 @@
       <div class="chat-region" id="consult" aria-label="위촉진행 AI 챗봇">
         <div class="chat-head">
           <h2 class="chat-title">위촉진행 AI입니다. 궁금한 점을 물어보세요</h2>
-          <div class="chat-state" id="chatState">자료 기반 답변</div>
+          <div class="chat-state" id="chatState"></div>
         </div>
         <div class="chat-notice">정확한 내용은 유치인과 꼭 이야기를 나눠야 합니다 ^^ 188본부에 오신 걸 환영합니다~!</div>
         <div class="chat-log" id="chatLog" aria-live="polite">
           <div class="msg ai">
             <div class="meta">위촉진행 AI</div>
-            <div class="bubble">위촉 절차, 준비서류, 188본부 안내, 시스템 용도를 물어보세요. 접속 비밀번호나 내부 제작 방식은 안내하지 않습니다.</div>
+            <div class="bubble">위촉 절차, 준비서류, 188본부 안내, 시스템 용도를 물어보세요.</div>
           </div>
         </div>
         <form class="chat-form" id="chatForm">
@@ -549,7 +551,7 @@
     function setBusy(on) {
       input.disabled = on;
       sendBtn.disabled = on;
-      state.textContent = on ? '답변 작성 중' : '자료 기반 답변';
+      state.textContent = on ? '답변 작성 중' : '';
     }
 
     async function askByPost(question) {
