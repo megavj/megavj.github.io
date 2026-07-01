@@ -315,12 +315,14 @@
     /* ── 탭 전환 ── */
     const frame = document.getElementById('systemFrame');
     let frameLoaded = false;
-    function ensureFrame() {
-      if (frame.src) return;
-      frame.src = systemGuideUrl + '?embed=1';
-    }
-    function sendFrameCmd(cmd) {
-      try { frame.contentWindow && frame.contentWindow.postMessage({ __sysGuideCmd: cmd }, '*'); } catch (e) {}
+    let frameMode = null;   // null | 'guide' | 'admin'
+    function loadFrame(mode) {
+      if (frameMode === mode && frame.src) return;   // 같은 모드면 재로드 안 함
+      frameMode = mode;
+      frameLoaded = false;
+      frame.style.height = '200px';
+      // GAS 샌드박스는 부모→자식 postMessage가 막혀, 관리자 진입은 URL 파라미터로 서버에 전달.
+      frame.src = systemGuideUrl + '?embed=1' + (mode === 'admin' ? '&admin=1' : '');
     }
     function switchTab(name) {
       const isConsult = name === 'consult';
@@ -329,12 +331,8 @@
       document.getElementById('tab-consult').setAttribute('aria-selected', isConsult ? 'true' : 'false');
       document.getElementById('tab-guide').setAttribute('aria-selected', name === 'guide' ? 'true' : 'false');
       document.getElementById('tab-admin').setAttribute('aria-selected', name === 'admin' ? 'true' : 'false');
-      if (!isConsult) {
-        ensureFrame();
-        // 프레임 로드 후 명령 전달(로드 전이면 load 이벤트에서 재전송)
-        const cmd = name === 'admin' ? 'admin' : 'guide';
-        if (frameLoaded) sendFrameCmd(cmd); else frame.dataset.pendingCmd = cmd;
-      }
+      if (name === 'guide') loadFrame('guide');
+      else if (name === 'admin') loadFrame('admin');
     }
 
     const fallback = document.getElementById('fallback');
@@ -343,7 +341,6 @@
       frameLoaded = true;
       fallback.classList.remove('show');
       fallback.setAttribute('aria-hidden', 'true');
-      if (frame.dataset.pendingCmd) { sendFrameCmd(frame.dataset.pendingCmd); frame.dataset.pendingCmd = ''; }
     });
     window.setTimeout(() => {
       if (frame.src && !frameLoaded) { fallback.classList.add('show'); fallback.setAttribute('aria-hidden', 'false'); }
