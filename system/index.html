@@ -3,20 +3,23 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>188본부 시스템안내서 | 188 프라임에셋</title>
-  <meta name="description" content="188본부 시스템안내서와 위촉진행 AI 챗봇을 확인하는 페이지입니다.">
+  <title>188본부 온보딩 시스템 | 188 프라임에셋</title>
+  <meta name="description" content="188본부 온보딩 시스템 — 시스템 안내서와 위촉상담 AI를 한곳에서 확인하세요.">
   <meta name="theme-color" content="#0a0c10">
   <link rel="stylesheet" href="/assets/design-tokens.css">
   <link rel="stylesheet" href="/assets/hub-menu.css">
   <style>
-    /* === 페이지 전용 (토큰은 design-tokens.css) — 블랙골드 Liquid Glass ===
-       두 블록(시스템안내서 + 위촉상담 AI)을 하나의 통합 글래스 콘솔로 묶는다.
-       가독성 최우선: 채팅 대화창(스크롤 영역)은 솔리드 가독면 유지(rule8). */
+    /* === 188본부 온보딩 시스템 — 블랙골드 Quiet Luxury (design-rules.md 준수) ===
+       컴팩트 저밀도 · hairline 테두리 · radius ≤ 8px 샤프 · pill 버튼 · 큰 갇힌 프레임 지양.
+       골드는 CTA/활성/상태에만. 대화창은 솔리드 고대비(rule8 가독성). */
     :root {
       --ink: var(--text);
       --muted: var(--text-dim);
-      --line: var(--glass-edge);
+      --line: rgba(255,255,255,.10);       /* hairline */
+      --line-2: rgba(255,255,255,.06);
       --silver: #e6e9ef;
+      --r-card: 8px;                        /* 샤프 카드 */
+      --r-bub: 8px;
       color-scheme: dark;
       font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
     }
@@ -27,428 +30,266 @@
       margin: 0;
       color: var(--text);
       background:
-        linear-gradient(135deg, rgba(200,169,106,.10), transparent 34%),
-        linear-gradient(225deg, rgba(92,113,145,.14), transparent 42%),
+        radial-gradient(1100px 520px at 50% -10%, rgba(200,169,106,.08), transparent 60%),
+        linear-gradient(180deg, rgba(92,113,145,.06), transparent 340px),
         var(--bg);
       -webkit-font-smoothing: antialiased;
     }
     a { color: inherit; text-decoration: none; }
-    .topbar {
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      min-height: 56px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      padding: 10px 18px;
-      border-bottom: 1px solid var(--glass-edge);
-      background: rgba(10, 12, 16, .62);
-      -webkit-backdrop-filter: var(--glass-blur);
-      backdrop-filter: var(--glass-blur);
-      box-shadow: 0 1px 0 rgba(255, 255, 255, .06) inset;
+
+    /* ── 상단 네비바 ── */
+    .nav {
+      position: sticky; top: 0; z-index: 30;
+      display: flex; align-items: center; justify-content: space-between; gap: 14px;
+      min-height: 54px; padding: 8px clamp(14px,4vw,30px);
+      border-bottom: 1px solid var(--line);
+      background: rgba(10,12,16,.66);
+      -webkit-backdrop-filter: var(--glass-blur); backdrop-filter: var(--glass-blur);
     }
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      min-width: 0;
-      font-weight: 800;
-    }
+    .brand { display: flex; align-items: center; gap: 9px; min-width: 0; }
     .mark {
-      width: 32px;
-      height: 32px;
-      display: grid;
-      place-items: center;
-      border: 1px solid rgba(200, 169, 106, .55);
-      border-radius: 10px;
-      color: var(--gold);
-      font-size: 12px;
-      font-weight: 900;
-      background: linear-gradient(180deg, rgba(200, 169, 106, .20), rgba(255, 255, 255, .04));
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, .22), 0 10px 24px rgba(0, 0, 0, .26);
-      flex: 0 0 auto;
+      width: 28px; height: 28px; display: grid; place-items: center;
+      border: 1px solid rgba(200,169,106,.5); border-radius: 7px; color: var(--gold);
+      font-size: 11px; font-weight: 900; flex: 0 0 auto;
+      background: linear-gradient(180deg, rgba(200,169,106,.20), rgba(255,255,255,.03));
     }
     .brand-text {
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
+      font-size: 12px; font-weight: 800; letter-spacing: .10em; color: var(--silver);
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
     }
-    .actions {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      flex: 0 0 auto;
+    .tabs { display: flex; align-items: center; gap: 4px; flex: 0 0 auto; }
+    .tab {
+      display: inline-flex; align-items: center; gap: 6px;
+      min-height: 38px; padding: 0 13px;
+      border: 0; background: transparent; color: var(--text-dim);
+      font-size: 13px; font-weight: 700; cursor: pointer; white-space: nowrap;
+      border-bottom: 2px solid transparent; border-radius: 2px;
+      transition: color var(--dur), border-color var(--dur);
     }
-    .btn {
-      min-height: 42px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0 18px;
-      border: 1px solid var(--glass-edge);
-      border-radius: var(--radius-pill);
-      background: linear-gradient(180deg, rgba(255, 255, 255, .10), rgba(255, 255, 255, .03));
-      -webkit-backdrop-filter: var(--glass-blur);
-      backdrop-filter: var(--glass-blur);
-      color: var(--text);
-      font-size: 13px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: transform var(--dur) var(--ease-spring), border-color var(--dur), color var(--dur);
-    }
-    .btn:hover { transform: translateY(-2px); border-color: var(--gold); color: #fff; }
-    .btn:active { transform: scale(.96); }
-    .btn.primary {
-      border-color: rgba(200, 169, 106, .7);
-      color: #14110a;
-      background: linear-gradient(180deg, #ecdaae, #d2ad5c 54%, #b68a3f);
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, .56), 0 12px 28px rgba(200, 169, 106, .20);
-    }
-    .btn.primary:hover { border-color: #f0e1ba; }
+    .tab:hover { color: var(--silver); }
+    .tab[aria-selected="true"] { color: #fff; border-bottom-color: var(--gold); }
+    .tab .ti { font-size: 14px; }
 
-    /* === 통합 글래스 콘솔 (시스템안내서 + 위촉상담 AI 하나로) === */
-    main {
-      padding: 14px 8px 24px;
+    /* ── 히어로 ── */
+    .hero { max-width: 1080px; margin: 0 auto; padding: 30px clamp(14px,4vw,30px) 14px; }
+    .hero h1 {
+      margin: 0; font-size: clamp(24px,4.4vw,40px); line-height: 1.12;
+      font-weight: 900; letter-spacing: -.02em; color: #fff;
     }
-    /* 외곽 테두리 제거 — 딱딱한 프레임이 화면을 좁아 보이게 해서 삭제.
-       유리 톤(은은한 배경)은 유지하되 border/box-shadow 없이 콘텐츠를 넓게. */
-    .console {
-      width: min(1040px, 100%);
-      margin: 0 auto;
-      border: 0;
-      border-radius: var(--radius);
-      background: var(--glass-bg);
-      -webkit-backdrop-filter: var(--glass-blur);
-      backdrop-filter: var(--glass-blur);
-      box-shadow: none;
-      overflow: hidden;
-      animation: rise .42s var(--ease-spring) both;
-    }
-    @keyframes rise {
-      from { opacity: 0; transform: translateY(12px); }
-      to { opacity: 1; transform: none; }
-    }
+    .hero p { margin: 10px 0 0; color: var(--muted); font-size: 14px; max-width: 640px; word-break: keep-all; }
 
-    /* 상단 세그먼트 점프(앵커) — 모바일에서 두 구역 빠르게 이동 */
-    .seg-jump {
-      display: flex;
-      gap: 8px;
-      padding: 12px 14px;
-      border-bottom: 1px solid var(--glass-edge);
-      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,0));
-    }
-    .seg {
-      flex: 1 1 0;
-      min-height: 40px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      padding: 0 14px;
-      border: 1px solid var(--glass-edge);
-      border-radius: var(--radius-pill);
-      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02));
-      color: var(--silver);
-      font-size: 13px;
-      font-weight: 700;
-      white-space: nowrap;
-      transition: transform var(--dur) var(--ease-spring), border-color var(--dur), color var(--dur);
-    }
-    .seg:hover { transform: translateY(-1px); border-color: var(--gold); color: #fff; }
-    .seg:active { transform: scale(.97); }
+    main { max-width: 1080px; margin: 0 auto; padding: 6px clamp(14px,4vw,30px) 30px; }
+    .panel { display: none; animation: rise .34s var(--ease-spring) both; }
+    .panel.active { display: block; }
+    @keyframes rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
 
-    /* 안내서 구역 — 프레임 경계 없이 콘솔과 완전히 이어짐(플러시, 무테두리) */
-    .guide-region {
+    /* ── 시스템 안내서 탭 (본체 iframe: 입점코드 게이트 + 안내서) ── */
+    .frame-wrap {
       position: relative;
-      padding: 0;
-      scroll-margin-top: 70px;
+      border: 1px solid var(--line); border-radius: var(--r-card);
+      background: var(--bg); overflow: hidden;
     }
-    /* iframe: 테두리·라운드·그림자·밝은배경 전부 제거 → 페이지에 박힌 프레임이 아니라
-       안내서가 콘솔의 연속 구역처럼 보이게. 본체(.gas_188sys)는 기본 theme-dark(블랙골드)라 톤 일치. */
     iframe {
-      width: 100%;
-      height: 560px;            /* 초기값(게이트 상태 기준으로 소폭 축소) — 본체가 postMessage로 통지하는 실제 콘텐츠 높이에 맞춰 JS가 조정 */
-      min-height: 320px;
-      display: block;
-      border: 0;
-      border-radius: 0;
-      background: var(--bg);
-      box-shadow: none;
-      transition: height .2s ease;
+      width: 100%; height: 460px; min-height: 300px; display: block;
+      border: 0; background: var(--bg); transition: height .2s ease;
     }
     .fallback {
-      position: absolute;
-      inset: 16px;
-      display: grid;
-      place-items: center;
-      padding: 10px;
-      pointer-events: none;
+      position: absolute; inset: 14px; display: grid; place-items: center; pointer-events: none;
     }
     .fallback-card {
-      width: min(460px, 100%);
-      border: 1px solid var(--glass-edge);
-      border-radius: var(--radius);
-      background: var(--glass-bg);
-      -webkit-backdrop-filter: var(--glass-blur);
-      backdrop-filter: var(--glass-blur);
-      box-shadow: var(--glass-shadow);
-      padding: 24px;
-      text-align: center;
-      opacity: 0;
-      transform: translateY(8px);
+      width: min(440px,100%); border: 1px solid var(--line); border-radius: var(--r-card);
+      background: rgba(18,22,29,.94); padding: 22px; text-align: center;
+      opacity: 0; transform: translateY(8px); pointer-events: auto;
       transition: opacity .25s ease, transform .25s var(--ease-spring);
-      pointer-events: auto;
     }
     .fallback.show .fallback-card { opacity: 1; transform: none; }
-    .fallback h1 { margin: 0; font-size: 20px; }
-    .fallback p {
-      margin: 10px 0 18px;
-      color: var(--muted);
-      line-height: 1.6;
-      font-size: 14px;
-      word-break: keep-all;
+    .fallback h2 { margin: 0; font-size: 17px; }
+    .fallback p { margin: 8px 0 16px; color: var(--muted); font-size: 13px; line-height: 1.6; word-break: keep-all; }
+
+    /* ── 위촉상담 AI 탭 (좌: 퀵메뉴 / 우: 채팅) ── */
+    .consult { display: grid; grid-template-columns: 216px minmax(0,1fr); gap: 14px; align-items: start; }
+
+    .side {
+      border: 1px solid var(--line); border-radius: var(--r-card);
+      background: var(--glass-bg);
+      -webkit-backdrop-filter: var(--glass-blur); backdrop-filter: var(--glass-blur);
+      padding: 12px; position: sticky; top: 66px;
+    }
+    .side-title {
+      display: flex; align-items: center; gap: 7px;
+      font-size: 12px; font-weight: 800; letter-spacing: .02em; color: var(--gold);
+      padding: 2px 4px 10px; border-bottom: 1px solid var(--line-2); margin-bottom: 10px;
+    }
+    .qmenu { display: grid; gap: 6px; }
+    .qbtn {
+      display: flex; align-items: center; gap: 9px; width: 100%;
+      min-height: 42px; padding: 0 12px; text-align: left;
+      border: 1px solid var(--line); border-radius: var(--r-card);
+      background: rgba(255,255,255,.03); color: var(--silver);
+      font-size: 13px; font-weight: 700; cursor: pointer;
+      transition: transform var(--dur) var(--ease-spring), border-color var(--dur), background var(--dur), color var(--dur);
+    }
+    .qbtn .qi { font-size: 15px; flex: 0 0 auto; width: 18px; text-align: center; }
+    .qbtn:hover { transform: translateY(-1px); border-color: rgba(200,169,106,.5); color: #fff; }
+    .qbtn:active { transform: scale(.98); }
+    .qbtn[aria-pressed="true"] {
+      border-color: rgba(200,169,106,.7); color: #14110a;
+      background: linear-gradient(180deg,#ecdaae,#d2ad5c 56%,#b68a3f);
     }
 
-    /* 골드 디바이더 + 섹션 라벨 — 두 구역을 끊지 않고 자연스럽게 잇는다 */
-    .divider {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 4px 18px 6px;
-    }
-    .divider::before,
-    .divider::after {
-      content: "";
-      flex: 1 1 auto;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(200,169,106,.5), transparent);
-    }
-    .divider-label {
-      flex: 0 0 auto;
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      padding: 6px 16px;
-      border: 1px solid rgba(200,169,106,.42);
-      border-radius: var(--radius-pill);
-      background: linear-gradient(180deg, rgba(200,169,106,.16), rgba(200,169,106,.05));
-      color: #f0e2c2;
-      font-size: 13px;
-      font-weight: 800;
-      letter-spacing: .01em;
-      white-space: nowrap;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,.10);
-    }
-
-    /* 상담 구역 — 같은 콘솔 안의 연속 구역(외곽 카드 테두리 없음) */
-    .chat-region {
-      padding: 0 14px 14px;
-      scroll-margin-top: 70px;
-    }
-    .chat-head {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      padding: 4px 4px 12px;
-    }
-    .chat-title {
-      margin: 0;
-      font-size: 18px;
-      line-height: 1.35;
-      color: var(--silver);
-      font-weight: 800;
-      word-break: keep-all;
-    }
-    .chat-state {
-      color: var(--gold);
-      font-size: 12px;
-      white-space: nowrap;
+    .chat {
+      display: flex; flex-direction: column; min-width: 0;
+      border: 1px solid var(--line); border-radius: var(--r-card);
+      background: var(--glass-bg);
+      -webkit-backdrop-filter: var(--glass-blur); backdrop-filter: var(--glass-blur);
+      overflow: hidden;
     }
     .chat-notice {
-      border: 1px solid rgba(200, 169, 106, .42);
-      border-radius: 12px;
-      padding: 11px 16px;
-      margin-bottom: 12px;
-      background: linear-gradient(180deg, rgba(200, 169, 106, .16), rgba(200, 169, 106, .06));
-      color: #f0e2c2;
-      font-size: 14px;
-      line-height: 1.45;
-      font-weight: 700;
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, .08);
-      word-break: keep-all;
+      display: flex; align-items: center; gap: 8px;
+      padding: 9px 14px; border-bottom: 1px solid var(--line-2);
+      background: linear-gradient(180deg, rgba(200,169,106,.10), rgba(200,169,106,.03));
+      color: #ecdcb4; font-size: 12px; font-weight: 600; word-break: keep-all;
     }
-    /* 대화창: 솔리드 고대비 배경으로 가독성은 유지하되(rule8), 외곽 테두리는 제거해
-       '갇힌 박스' 느낌을 없앤다(무테두리 + 은은한 라운드 솔리드 가독면). */
+    .chat-notice .ni {
+      flex: 0 0 auto; width: 16px; height: 16px; display: grid; place-items: center;
+      border: 1px solid rgba(200,169,106,.5); border-radius: 50%; font-size: 10px; color: var(--gold);
+    }
     .chat-log {
-      min-height: 200px;
-      max-height: 780px;
-      overflow: auto;
-      padding: 16px;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      scroll-behavior: smooth;
-      border: 0;
-      border-radius: 14px;
-      background: rgba(8, 10, 14, .72);
+      min-height: 340px; max-height: min(62vh, 620px); overflow: auto;
+      padding: 16px; display: flex; flex-direction: column; gap: 14px;
+      scroll-behavior: smooth; background: rgba(8,10,14,.6);
     }
-    .msg {
-      width: min(760px, 100%);
-      display: grid;
-      gap: 6px;
+    .row { display: flex; gap: 9px; align-items: flex-end; max-width: 100%; }
+    .row.user { flex-direction: row-reverse; align-self: flex-end; }
+    .row.ai { align-self: flex-start; }
+    .avatar {
+      flex: 0 0 auto; width: 28px; height: 28px; display: grid; place-items: center;
+      border: 1px solid rgba(200,169,106,.5); border-radius: 7px; color: var(--gold);
+      font-size: 10px; font-weight: 900;
+      background: linear-gradient(180deg, rgba(200,169,106,.18), rgba(255,255,255,.03));
     }
-    .msg.user { align-self: flex-end; }
-    .msg.ai { align-self: flex-start; }
+    .stack { display: grid; gap: 4px; min-width: 0; max-width: min(560px, 82%); }
+    .row.user .stack { justify-items: end; }
     .bubble {
-      border-radius: 14px;
-      padding: 12px 14px;
-      line-height: 1.65;
-      font-size: 15px;
-      word-break: keep-all;
-      overflow-wrap: anywhere;
+      border-radius: var(--r-bub); padding: 10px 13px; line-height: 1.6;
+      font-size: 14px; word-break: keep-all; overflow-wrap: anywhere;
     }
     .user .bubble {
-      background: linear-gradient(180deg, #ecdaae, #d2ad5c 56%, #b68a3f);
-      color: #14110a;
-      font-weight: 720;
+      background: linear-gradient(180deg,#ecdaae,#d2ad5c 56%,#b68a3f); color: #14110a; font-weight: 640;
     }
-    .ai .bubble {
-      border: 1px solid var(--glass-edge);
-      background: rgba(255, 255, 255, .06);
-      color: #eef1f5;
-    }
-    .ai .bubble p {
-      margin: 0 0 10px;
-    }
-    .ai .bubble p:last-child {
-      margin-bottom: 0;
-    }
-    .ai .bubble ul {
-      margin: 8px 0 0;
-      padding-left: 20px;
-    }
-    .ai .bubble li {
-      margin: 5px 0;
-    }
-    .meta {
-      color: var(--text-dim);
-      font-size: 12px;
-      padding: 0 2px;
-    }
-    .user .meta { text-align: right; }
-    /* 입력창을 대화영역 '위'에 배치(답변은 아래로 주르륵 쌓임). 아래 대화창과 간격 확보. */
+    .ai .bubble { border: 1px solid var(--line); background: rgba(255,255,255,.05); color: #eef1f5; }
+    .ai .bubble p { margin: 0 0 8px; } .ai .bubble p:last-child { margin-bottom: 0; }
+    .ai .bubble ul { margin: 6px 0 0; padding-left: 18px; } .ai .bubble li { margin: 4px 0; }
+    .time { font-size: 11px; color: var(--text-dim); padding: 0 3px; }
+
     .chat-form {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 10px;
-      padding: 4px 0 12px;
+      display: grid; grid-template-columns: 1fr auto; gap: 9px;
+      padding: 11px 12px; border-top: 1px solid var(--line-2); background: rgba(10,12,16,.5);
     }
     .chat-input {
-      width: 100%;
-      min-height: 46px;
-      border: 1px solid var(--glass-edge);
-      border-radius: 12px;
-      padding: 0 14px;
-      background: rgba(8, 10, 14, .6);
-      color: var(--text);
-      font: inherit;
-      outline: none;
+      width: 100%; min-height: 44px; border: 1px solid var(--line); border-radius: var(--r-card);
+      padding: 0 14px; background: rgba(8,10,14,.6); color: var(--text); font: inherit; outline: none;
       transition: border-color var(--dur), box-shadow var(--dur);
     }
-    .chat-input::placeholder { color: rgba(242,243,245,.42); }
-    .chat-input:focus {
-      border-color: rgba(200, 169, 106, .72);
-      box-shadow: 0 0 0 3px rgba(200, 169, 106, .16);
-    }
+    .chat-input::placeholder { color: rgba(242,243,245,.4); }
+    .chat-input:focus { border-color: rgba(200,169,106,.7); box-shadow: 0 0 0 3px rgba(200,169,106,.14); }
     .send {
-      min-width: 86px;
-      min-height: 46px;
+      display: inline-grid; place-items: center; width: 48px; min-height: 44px;
+      border: 1px solid rgba(200,169,106,.7); border-radius: var(--r-card); cursor: pointer;
+      color: #14110a; background: linear-gradient(180deg,#ecdaae,#d2ad5c 54%,#b68a3f);
+      transition: transform var(--dur) var(--ease-spring), border-color var(--dur);
     }
-    .send:disabled, .chat-input:disabled {
-      opacity: .6;
-      cursor: progress;
+    .send:hover { transform: translateY(-1px); border-color: #f0e1ba; }
+    .send:active { transform: scale(.95); }
+    .send:disabled, .chat-input:disabled { opacity: .6; cursor: progress; }
+    .send svg { width: 18px; height: 18px; }
+
+    @media (max-width: 760px) {
+      .consult { grid-template-columns: 1fr; }
+      .side { position: static; padding: 10px; }
+      .qmenu { grid-auto-flow: column; grid-auto-columns: max-content; overflow-x: auto; gap: 7px; padding-bottom: 2px; }
+      .qbtn { white-space: nowrap; }
+      .chat-log { min-height: 300px; max-height: 64vh; }
     }
-    @media (max-width: 640px) {
-      .topbar { padding: 10px 12px; }
-      .brand-text { max-width: 150px; }
-      .btn { padding: 0 14px; font-size: 12px; }
-      main { padding: 12px 10px 30px; }
-      .seg-jump { padding: 10px 10px; }
-      .seg { font-size: 12px; padding: 0 8px; }
-      .guide-region { padding: 0; }
-      iframe { min-height: 300px; }  /* 높이는 postMessage로 콘텐츠에 맞춤 */
-      .divider { padding: 2px 12px 4px; }
-      .chat-region { padding: 0 10px 12px; }
-      .chat-log { max-height: min(780px, 72vh); }  /* 모바일: 화면 높이 초과 방지 */
-      .chat-head { align-items: flex-start; flex-direction: column; gap: 6px; }
-      .chat-title { font-size: 16px; }
-      .chat-form { grid-template-columns: 1fr; }
-      .send { width: 100%; }
-      .bubble { font-size: 14px; }
+    @media (max-width: 520px) {
+      .brand-text { max-width: 96px; }
+      .tab { padding: 0 9px; font-size: 12px; }
+      .tab .tlabel { display: none; }
+      .hero { padding-top: 22px; }
     }
     @media (prefers-reduced-transparency: reduce) {
-      .topbar, .btn, .fallback-card, .console {
-        -webkit-backdrop-filter: none;
-        backdrop-filter: none;
-        background: var(--bg-2);
-      }
-      .btn.primary { background: linear-gradient(180deg, #ecdaae, #d2ad5c 54%, #b68a3f); }
+      .nav, .side, .chat { -webkit-backdrop-filter: none; backdrop-filter: none; background: var(--bg-2); }
       .chat-log { background: #0b0e13; }
     }
   </style>
 </head>
 <body>
-  <header class="topbar">
+  <header class="nav">
     <a class="brand" href="/" aria-label="188 프라임에셋 허브로 이동">
       <span class="mark">188</span>
-      <span class="brand-text">188본부 시스템안내서</span>
+      <span class="brand-text">188 · PRIME ASSET SYSTEM</span>
     </a>
-    <nav class="actions" aria-label="페이지 동작">
-      <a class="btn" href="/">허브</a>
-      <a class="btn primary" id="openExternal" target="_blank" rel="noopener">새 창</a>
+    <nav class="tabs" role="tablist" aria-label="시스템 탭">
+      <button class="tab" id="tab-guide" role="tab" aria-controls="panel-guide" aria-selected="false" onclick="switchTab('guide')">
+        <span class="ti">📄</span><span class="tlabel">시스템 안내서</span>
+      </button>
+      <button class="tab" id="tab-consult" role="tab" aria-controls="panel-consult" aria-selected="true" onclick="switchTab('consult')">
+        <span class="ti">💬</span><span class="tlabel">위촉상담 AI</span>
+      </button>
+      <button class="tab" id="tab-admin" role="tab" aria-controls="panel-guide" aria-selected="false" onclick="switchTab('admin')">
+        <span class="ti">👤</span><span class="tlabel">관리자</span>
+      </button>
     </nav>
   </header>
 
-  <main>
-    <section class="console" aria-label="188본부 시스템안내서와 위촉진행 AI 상담">
-      <nav class="seg-jump" aria-label="구역 이동">
-        <a class="seg" href="#guide">📋 시스템안내서</a>
-        <a class="seg" href="#consult">💬 위촉상담 AI</a>
-      </nav>
+  <section class="hero">
+    <h1>188본부 온보딩 시스템</h1>
+    <p>새로운 시작을 위한 모든 정보를 간편하게 확인하세요.</p>
+  </section>
 
-      <div class="guide-region" id="guide" aria-label="시스템안내서">
-        <iframe id="systemFrame" title="188본부 시스템안내서" loading="eager"></iframe>
+  <main>
+    <!-- 시스템 안내서 (+ 관리자) : 본체 iframe — 입점코드 서버검증 게이트 + 안내서 + 관리자 -->
+    <section class="panel" id="panel-guide" role="tabpanel" aria-labelledby="tab-guide">
+      <div class="frame-wrap">
+        <iframe id="systemFrame" title="188본부 시스템 안내서" loading="eager"></iframe>
         <div class="fallback" id="fallback" aria-hidden="true">
           <div class="fallback-card">
-            <h1>188본부 시스템안내서</h1>
-            <p>브라우저에서 프레임 표시가 지연되면 새 창으로 바로 열 수 있습니다.</p>
-            <a class="btn primary" id="fallbackOpen" target="_blank" rel="noopener">새 창으로 열기</a>
+            <h2>188본부 시스템 안내서</h2>
+            <p>프레임 표시가 지연되면 새 창으로 바로 열 수 있습니다.</p>
+            <a class="qbtn" id="fallbackOpen" target="_blank" rel="noopener" style="justify-content:center;">새 창으로 열기</a>
           </div>
         </div>
       </div>
+    </section>
 
-      <div class="divider" role="separator" aria-hidden="true">
-        <span class="divider-label">💬 위촉상담 AI</span>
-      </div>
+    <!-- 위촉상담 AI : 좌측 퀵메뉴 + 우측 채팅 -->
+    <section class="panel active" id="panel-consult" role="tabpanel" aria-labelledby="tab-consult">
+      <div class="consult">
+        <aside class="side" aria-label="AI 상담 빠른 질문">
+          <div class="side-title">✨ AI 상담</div>
+          <div class="qmenu" id="qmenu"></div>
+        </aside>
 
-      <div class="chat-region" id="consult" aria-label="위촉진행 AI 챗봇">
-        <div class="chat-head">
-          <h2 class="chat-title">위촉진행 AI입니다. 궁금한 점을 물어보세요</h2>
-          <div class="chat-state" id="chatState"></div>
-        </div>
-        <div class="chat-notice">정확한 내용은 유치인과 꼭 이야기를 나눠야 합니다 ^^ 188본부에 오신 걸 환영합니다~!</div>
-        <form class="chat-form" id="chatForm">
-          <input class="chat-input" id="chatInput" name="question" autocomplete="off" maxlength="600" placeholder="예: 위촉은 어떤 순서로 진행되나요?">
-          <button class="btn primary send" id="sendBtn" type="submit">전송</button>
-        </form>
-        <div class="chat-log" id="chatLog" aria-live="polite">
-          <div class="msg ai">
-            <div class="meta">위촉진행 AI</div>
-            <div class="bubble">위촉 절차, 준비서류, 188본부 안내, 시스템 용도를 물어보세요.</div>
+        <div class="chat">
+          <div class="chat-notice">
+            <span class="ni">ⓘ</span>
+            <span>내부 설계사 전용 · 정확한 내용은 담당자 확인</span>
           </div>
+          <div class="chat-log" id="chatLog" aria-live="polite">
+            <div class="row ai">
+              <div class="avatar">188</div>
+              <div class="stack">
+                <div class="bubble">위촉진행 AI입니다. 왼쪽 메뉴를 누르거나 궁금한 내용을 입력해 주세요.</div>
+                <div class="time" id="firstTime"></div>
+              </div>
+            </div>
+          </div>
+          <form class="chat-form" id="chatForm">
+            <input class="chat-input" id="chatInput" name="question" autocomplete="off" maxlength="600" placeholder="궁금한 내용을 입력하세요">
+            <button class="send" id="sendBtn" type="submit" aria-label="전송">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4 20-7z"/></svg>
+            </button>
+          </form>
         </div>
       </div>
     </section>
@@ -457,173 +298,175 @@
   <script>
     const systemGuideUrl = 'https://script.google.com/macros/s/AKfycbzqX3lETPADpPAG6syoAsEG1cSceMcUUqmeEhYj3ukkbFfHPEnbdvq8W448ttC0vcFefw/exec';
     const chatApiUrl = 'https://script.google.com/macros/s/AKfycbwxsEPxs_uq5H4gH43Ie_FH0mrKAtdkrnzP-30b52GKTBMXVzARfgggs6_klkyadIVl/exec';
+
+    /* ── 좌측 퀵메뉴 프리셋(원클릭 → 챗봇 즉시 질문) ── */
+    const PRESETS = [
+      { icon: '📝', label: '위촉 절차',     q: '위촉은 어떤 순서로 진행되나요?' },
+      { icon: '📄', label: '준비서류',      q: '위촉에 필요한 준비서류는 무엇인가요?' },
+      { icon: '🔁', label: '기존회사 해촉', q: '기존 회사 해촉은 어떻게 하나요?' },
+      { icon: '🛡️', label: '보증보험',      q: '보증보험은 어떻게 가입하나요?' },
+      { icon: '📚', label: '교육자료',      q: '교육자료는 어디서 확인하나요?' }
+    ];
+
+    /* ── 탭 전환 ── */
     const frame = document.getElementById('systemFrame');
+    let frameLoaded = false;
+    function ensureFrame() {
+      if (frame.src) return;
+      frame.src = systemGuideUrl + '?embed=1';
+    }
+    function sendFrameCmd(cmd) {
+      try { frame.contentWindow && frame.contentWindow.postMessage({ __sysGuideCmd: cmd }, '*'); } catch (e) {}
+    }
+    function switchTab(name) {
+      const isConsult = name === 'consult';
+      document.getElementById('panel-consult').classList.toggle('active', isConsult);
+      document.getElementById('panel-guide').classList.toggle('active', !isConsult);
+      document.getElementById('tab-consult').setAttribute('aria-selected', isConsult ? 'true' : 'false');
+      document.getElementById('tab-guide').setAttribute('aria-selected', name === 'guide' ? 'true' : 'false');
+      document.getElementById('tab-admin').setAttribute('aria-selected', name === 'admin' ? 'true' : 'false');
+      if (!isConsult) {
+        ensureFrame();
+        // 프레임 로드 후 명령 전달(로드 전이면 load 이벤트에서 재전송)
+        const cmd = name === 'admin' ? 'admin' : 'guide';
+        if (frameLoaded) sendFrameCmd(cmd); else frame.dataset.pendingCmd = cmd;
+      }
+    }
+
     const fallback = document.getElementById('fallback');
-    document.getElementById('openExternal').href = systemGuideUrl;
     document.getElementById('fallbackOpen').href = systemGuideUrl;
-    frame.src = systemGuideUrl;
-    let loaded = false;
     frame.addEventListener('load', () => {
-      loaded = true;
+      frameLoaded = true;
       fallback.classList.remove('show');
       fallback.setAttribute('aria-hidden', 'true');
+      if (frame.dataset.pendingCmd) { sendFrameCmd(frame.dataset.pendingCmd); frame.dataset.pendingCmd = ''; }
     });
     window.setTimeout(() => {
-      if (!loaded) {
-        fallback.classList.add('show');
-        fallback.setAttribute('aria-hidden', 'false');
-      }
+      if (frame.src && !frameLoaded) { fallback.classList.add('show'); fallback.setAttribute('aria-hidden', 'false'); }
     }, 4500);
 
-    // 본체(iframe)가 통지하는 실제 문서 높이에 맞춰 iframe 높이 조정
-    // → 게이트 아래 큰 빈 여백 제거, 입장 후 콘텐츠 높이로 자연스럽게 확장.
+    // 본체가 통지하는 실제 콘텐츠 높이에 맞춰 iframe 높이 조정(게이트 아래 빈 여백 제거)
     window.addEventListener('message', (e) => {
       const d = e.data;
       if (!d || typeof d !== 'object' || d.__sysGuide !== 1) return;
-      if (!/google/i.test(e.origin || '')) return;   // GAS 콘텐츠 origin(googleusercontent/script.google.com)만 신뢰
+      if (!/google/i.test(e.origin || '')) return;
       const h = parseInt(d.height, 10);
-      // +4px 버퍼: 내부 콘텐츠 높이 반올림 오차로 iframe이 자체 세로 스크롤바(이중 스크롤바)를
-      // 띄우는 것을 방지. 4px은 어두운 배경이라 시각적 여백으로 보이지 않음.
-      if (h > 0) frame.style.height = Math.max(h + 4, 200) + 'px';
+      if (h > 0) frame.style.height = Math.max(h + 4, 300) + 'px';
     });
 
+    /* ── 채팅 로직(기존 chat188 API 그대로 재사용) ── */
     const form = document.getElementById('chatForm');
     const input = document.getElementById('chatInput');
     const log = document.getElementById('chatLog');
-    const state = document.getElementById('chatState');
     const sendBtn = document.getElementById('sendBtn');
 
-    function addMessage(role, text, label) {
-      const msg = document.createElement('div');
-      msg.className = 'msg ' + role;
-      const meta = document.createElement('div');
-      meta.className = 'meta';
-      meta.textContent = label;
+    function nowTime() {
+      const d = new Date();
+      const hh = String(d.getHours()).padStart(2, '0');
+      const mm = String(d.getMinutes()).padStart(2, '0');
+      return hh + ':' + mm;
+    }
+    document.getElementById('firstTime').textContent = nowTime();
+
+    function addMessage(role, text) {
+      const row = document.createElement('div');
+      row.className = 'row ' + role;
+      if (role === 'ai') {
+        const av = document.createElement('div');
+        av.className = 'avatar'; av.textContent = '188';
+        row.appendChild(av);
+      }
+      const stack = document.createElement('div');
+      stack.className = 'stack';
       const bubble = document.createElement('div');
       bubble.className = 'bubble';
-      if (role === 'ai') {
-        bubble.innerHTML = formatAnswerHtml(text);
-      } else {
-        bubble.textContent = text;
-      }
-      msg.append(meta, bubble);
-      log.appendChild(msg);
+      if (role === 'ai') bubble.innerHTML = formatAnswerHtml(text); else bubble.textContent = text;
+      const time = document.createElement('div');
+      time.className = 'time'; time.textContent = nowTime();
+      stack.append(bubble, time);
+      row.appendChild(stack);
+      log.appendChild(row);
       log.scrollTop = log.scrollHeight;
-      return msg;
+      return row;
     }
 
     function escapeHtml(text) {
       return String(text || '')
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;')
-        .replace(/'/g, '&#39;');
+        .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
     }
-
     function formatAnswerHtml(text) {
       let clean = String(text || '')
-        .replace(/\*\*(.*?)\*\*/g, '$1')
-        .replace(/__(.*?)__/g, '$1')
-        .replace(/^\s{0,3}#{1,6}\s*/gm, '')
-        .replace(/^\s*[-*]\s+/gm, '• ')
-        .trim();
+        .replace(/\*\*(.*?)\*\*/g, '$1').replace(/__(.*?)__/g, '$1')
+        .replace(/^\s{0,3}#{1,6}\s*/gm, '').replace(/^\s*[-*]\s+/gm, '• ').trim();
       if (!clean) return '답변을 생성하지 못했습니다. 다시 질문해주세요.';
-
-      const lines = clean.split(/\n+/).map(line => line.trim()).filter(Boolean);
-      const html = [];
-      let list = [];
-      const flushList = () => {
-        if (!list.length) return;
-        html.push('<ul>' + list.map(item => '<li>' + escapeHtml(item) + '</li>').join('') + '</ul>');
-        list = [];
-      };
-
+      const lines = clean.split(/\n+/).map(l => l.trim()).filter(Boolean);
+      const html = []; let list = [];
+      const flush = () => { if (!list.length) return; html.push('<ul>' + list.map(i => '<li>' + escapeHtml(i) + '</li>').join('') + '</ul>'); list = []; };
       lines.forEach(line => {
         const item = line.match(/^(?:•|\d+[.)])\s*(.+)$/);
-        if (item) {
-          list.push(item[1]);
-          return;
-        }
-        flushList();
-        html.push('<p>' + escapeHtml(line) + '</p>');
+        if (item) { list.push(item[1]); return; }
+        flush(); html.push('<p>' + escapeHtml(line) + '</p>');
       });
-      flushList();
+      flush();
       return html.join('');
     }
-
-    function setBusy(on) {
-      input.disabled = on;
-      sendBtn.disabled = on;
-      state.textContent = on ? '답변 작성 중' : '';
-    }
-
-    async function askByPost(question) {
-      const res = await fetch(chatApiUrl, {
-        method: 'POST',
-        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-        body: JSON.stringify({ chat188: 1, question })
-      });
-      if (!res.ok) throw new Error('post failed');
-      return res.json();
-    }
+    function setBusy(on) { input.disabled = on; sendBtn.disabled = on; }
 
     function askByJsonp(question) {
       return new Promise((resolve, reject) => {
         const cb = 'chat188Cb_' + Date.now() + '_' + Math.random().toString(36).slice(2);
         const script = document.createElement('script');
-        const timer = window.setTimeout(() => {
-          cleanup();
-          reject(new Error('timeout'));
-        }, 45000);
-        function cleanup() {
-          window.clearTimeout(timer);
-          delete window[cb];
-          script.remove();
-        }
-        window[cb] = data => {
-          cleanup();
-          resolve(data);
-        };
-        script.onerror = () => {
-          cleanup();
-          reject(new Error('jsonp failed'));
-        };
+        const timer = window.setTimeout(() => { cleanup(); reject(new Error('timeout')); }, 45000);
+        function cleanup() { window.clearTimeout(timer); delete window[cb]; script.remove(); }
+        window[cb] = data => { cleanup(); resolve(data); };
+        script.onerror = () => { cleanup(); reject(new Error('jsonp failed')); };
         script.src = chatApiUrl + '?chat188=1&callback=' + encodeURIComponent(cb) + '&q=' + encodeURIComponent(question);
         document.head.appendChild(script);
       });
     }
-
-    async function ask(question) {
-      return askByJsonp(question);
-    }
+    function ask(question) { return askByJsonp(question); }
 
     function isSensitiveQuestion(question) {
       return /(비번|비밀번호|패스워드|password|접근코드|접속코드|관리자|어드민|admin|9262|만들|제작|개발|구현|코드|소스|배포|GAS|Apps Script|API\s*키|프롬프트|내부\s*구조|서버)/i.test(question);
     }
 
-    form.addEventListener('submit', async event => {
-      event.preventDefault();
-      const question = input.value.trim();
-      if (!question) return;
-      addMessage('user', question, '질문');
+    async function sendQuestion(question) {
+      question = String(question || '').trim();
+      if (!question || sendBtn.disabled) return;
+      addMessage('user', question);
       input.value = '';
       if (isSensitiveQuestion(question)) {
-        addMessage('ai', '보안상 안내할 수 없으며, 담당 관리자에게 문의해주세요.', '위촉진행 AI');
+        addMessage('ai', '보안상 안내할 수 없으며, 담당 관리자에게 문의해주세요.');
         input.focus();
         return;
       }
       setBusy(true);
-      const pending = addMessage('ai', '확인 중입니다.', '위촉진행 AI');
+      const pending = addMessage('ai', '확인 중입니다.');
       try {
         const data = await ask(question);
         pending.querySelector('.bubble').innerHTML = formatAnswerHtml(data && data.answer ? data.answer : '답변을 생성하지 못했습니다. 다시 질문해주세요.');
       } catch (err) {
         pending.querySelector('.bubble').innerHTML = formatAnswerHtml('일시적으로 답변을 불러오지 못했습니다. 잠시 후 다시 시도해주세요.');
       } finally {
-        setBusy(false);
-        input.focus();
+        setBusy(false); input.focus(); log.scrollTop = log.scrollHeight;
       }
+    }
+
+    form.addEventListener('submit', e => { e.preventDefault(); sendQuestion(input.value); });
+
+    /* ── 좌측 퀵메뉴 렌더 + 원클릭 질문 주입 ── */
+    const qmenu = document.getElementById('qmenu');
+    PRESETS.forEach((p, i) => {
+      const b = document.createElement('button');
+      b.type = 'button'; b.className = 'qbtn'; b.setAttribute('aria-pressed', 'false');
+      b.innerHTML = '<span class="qi">' + p.icon + '</span><span>' + escapeHtml(p.label) + '</span>';
+      b.addEventListener('click', () => {
+        document.querySelectorAll('.qbtn').forEach(x => x.setAttribute('aria-pressed', 'false'));
+        b.setAttribute('aria-pressed', 'true');
+        sendQuestion(p.q);
+      });
+      qmenu.appendChild(b);
     });
   </script>
   <script src="/assets/hub-menu.js?v=20260630-hubtools" defer></script>
