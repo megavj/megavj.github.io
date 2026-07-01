@@ -110,6 +110,7 @@
     .consult { display: grid; grid-template-columns: 216px minmax(0,1fr); gap: 14px; align-items: start; }
 
     .side {
+      min-width: 0;
       border: 1px solid var(--line); border-radius: var(--r-card);
       background: var(--glass-bg);
       -webkit-backdrop-filter: var(--glass-blur); backdrop-filter: var(--glass-blur);
@@ -207,8 +208,7 @@
     @media (max-width: 760px) {
       .consult { grid-template-columns: 1fr; }
       .side { position: static; padding: 10px; }
-      .qmenu { grid-auto-flow: column; grid-auto-columns: max-content; overflow-x: auto; gap: 7px; padding-bottom: 2px; }
-      .qbtn { white-space: nowrap; }
+      .qmenu { grid-template-columns: repeat(2, minmax(0,1fr)); gap: 7px; }
       .chat-log { min-height: 300px; max-height: 64vh; }
     }
     @media (max-width: 520px) {
