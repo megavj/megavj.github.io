@@ -1,52 +1,25 @@
 (function () {
   const pages = [
-    {
-      title: '188 허브 홈',
-      desc: '김상현 이사 188본부 메인페이지',
-      href: '/'
-    },
-    {
-      title: '프라임에셋 통합페이지',
-      desc: 'AI 시스템 및 프라임에셋 업무 허브',
-      href: '/ai_system/'
-    },
-    {
-      title: '사업부 실적보드',
-      desc: '프라임에셋사업부 2026년 실적 현황',
-      href: '/performance/'
-    },
-    {
-      title: '188본부 시스템안내서',
-      desc: '입점 및 운영 시스템 안내',
-      href: '/system/'
-    },
+    { title: '188 허브', desc: '김상현 이사 188본부 메인페이지', href: '/' },
+    { title: '프라임에셋 통합페이지', desc: 'AI 시스템 및 프라임에셋 업무 허브', href: '/ai_system/' },
+    { title: '프리미엄 보험보상 답변기', desc: '문서 기반 보험보상 실무 답변', href: '/claim/' },
+    { title: '사업부 실적보드', desc: '프리미엄사업부 2026년 실적 현황', href: '/performance/' },
+    { title: '188본부 시스템안내서', desc: '입점 및 운영 시스템 안내', href: '/system/' },
     {
       title: '프리미엄 상품통합분석기',
-      desc: '상품·비교자료와 월간 이슈·시책 통합 분석',
-      href: 'https://script.google.com/macros/s/AKfycbwxsEPxs_uq5H4gH43Ie_FH0mrKAtdkrnzP-30b52GKTBMXVzARfgggs6_klkyadIVl/exec'
+      desc: '상품·비교자료와 월간 이슈·제안 통합 분석',
+      href: 'https://script.google.com/macros/s/AKfycbwxsEPxs_uq5H4gH43Ie_FH0mrKAtdkrnzP-30b52GKTBMXVzARfgggs6_klkyadIVl/exec',
+      external: true
     },
     {
       title: '수당계산기',
-      desc: '수수료·수정률·환산율 기준',
-      href: 'https://script.google.com/macros/s/AKfycbz4ZR5EbyrzaIkOfhUR0Hqe0eTRokTf8Sa6ax9Q0paQlRPtJfmxG7AwC2RXIpUNq1XfYg/exec'
-    },
-    {
-      title: '프리미엄 최신보험뉴스',
-      desc: '보험뉴스와 최신 이슈 확인',
-      href: '/news/'
-    },
-    {
-      title: '프리미엄사업부 공식페이지',
-      desc: '프라임에셋 프리미엄사업부 공식 홈페이지',
-      href: 'https://www.primeasset.info',
+      desc: '수수료·수당·환산율 기준 계산',
+      href: 'https://script.google.com/macros/s/AKfycbz4ZR5EbyrzaIkOfhUR0Hqe0eTRokTf8Sa6ax9Q0paQlRPtJfmxG7AwC2RXIpUNq1XfYg/exec',
       external: true
     },
-    {
-      title: '보험노트 홈페이지',
-      desc: '보험노트 공식 홈페이지',
-      href: 'https://bohumnote.com',
-      external: true
-    },
+    { title: '프리미엄 최신보험뉴스', desc: '보험뉴스와 최신 이슈 확인', href: '/news/' },
+    { title: '프리미엄사업부 공식페이지', desc: '프라임에셋 프리미엄사업부 공식 홈페이지', href: 'https://www.primeasset.info', external: true },
+    { title: '보험노트 홈페이지', desc: '보험노트 공식 홈페이지', href: 'https://bohumnote.com', external: true },
     {
       title: '프리미엄 자료검색기',
       desc: '프리미엄 자료·문서 통합 검색',

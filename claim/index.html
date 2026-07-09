@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>프리미엄 보험보상 답변기 | 188 프라임에셋</title>
+  <meta name="description" content="188본부 프리미엄 보험보상 답변기">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#11151d">
+  <link rel="stylesheet" href="/assets/hub-menu.css">
+  <style>
+    :root {
+      --bg:#11151d;
+      --ink:#f5f1e8;
+      --muted:#c8c0b3;
+      --line:rgba(255,255,255,.14);
+      --gold:#d5b56b;
+      --panel:rgba(12,15,21,.78);
+      font-family:"Pretendard","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+      color-scheme:dark;
+    }
+    * { box-sizing:border-box; }
+    html,body { height:100%; }
+    body { margin:0; color:var(--ink); background:var(--bg); overflow:hidden; }
+    a { color:inherit; text-decoration:none; }
+    .topbar {
+      height:54px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:0 18px;
+      border-bottom:1px solid var(--line);
+      background:var(--panel);
+      backdrop-filter:blur(20px) saturate(1.25);
+    }
+    .brand {
+      display:flex;
+      align-items:center;
+      gap:10px;
+      min-width:0;
+      font-weight:820;
+      letter-spacing:0;
+    }
+    .mark {
+      width:30px;
+      height:30px;
+      display:grid;
+      place-items:center;
+      border:1px solid rgba(213,181,107,.56);
+      border-radius:7px;
+      color:var(--gold);
+      font-size:12px;
+      font-weight:900;
+      background:rgba(213,181,107,.08);
+      flex:0 0 auto;
+    }
+    .brand-text {
+      overflow:hidden;
+      text-overflow:ellipsis;
+      white-space:nowrap;
+    }
+    .actions { display:flex; align-items:center; gap:8px; flex:0 0 auto; }
+    .btn {
+      min-height:36px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:0 12px;
+      border:1px solid var(--line);
+      border-radius:7px;
+      background:rgba(255,255,255,.055);
+      color:#e9edf4;
+      font-size:13px;
+      font-weight:740;
+    }
+    .btn.primary {
+      border-color:rgba(213,181,107,.58);
+      color:#11141a;
+      background:linear-gradient(180deg,#eddcae,#d5b56b 54%,#ad8440);
+    }
+    .frame-wrap { height:calc(100% - 54px); background:#f6f2e9; }
+    iframe { width:100%; height:100%; display:block; border:0; background:#f6f2e9; }
+    @media (max-width:640px) {
+      .topbar { height:58px; padding:0 12px; }
+      .brand-text { max-width:180px; }
+      .btn { padding:0 10px; font-size:12px; }
+      .frame-wrap { height:calc(100% - 58px); }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/" aria-label="188 프라임에셋 허브로 이동">
+      <span class="mark">188</span>
+      <span class="brand-text">프리미엄 보험보상 답변기</span>
+    </a>
+    <nav class="actions" aria-label="페이지 동작">
+      <a class="btn" href="/">허브</a>
+      <a class="btn primary" id="openExternal" target="_blank" rel="noopener">새 창</a>
+    </nav>
+  </header>
+  <main class="frame-wrap">
+    <iframe id="claimFrame" title="프리미엄 보험보상 답변기" loading="eager"></iframe>
+  </main>
+  <script>
+    const claimUrl = 'https://script.google.com/macros/s/AKfycbwxsEPxs_uq5H4gH43Ie_FH0mrKAtdkrnzP-30b52GKTBMXVzARfgggs6_klkyadIVl/exec?claim=1';
+    document.getElementById('claimFrame').src = claimUrl;
+    document.getElementById('openExternal').href = '/claim/';
+  </script>
+  <script src="/assets/hub-menu.js?v=20260709-claim" defer></script>
+</body>
+</html>
