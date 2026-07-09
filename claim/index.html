@@ -15,99 +15,72 @@
       --muted:#c8c0b3;
       --line:rgba(255,255,255,.14);
       --gold:#d5b56b;
-      --panel:rgba(12,15,21,.78);
       font-family:"Pretendard","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
       color-scheme:dark;
     }
     * { box-sizing:border-box; }
-    html,body { height:100%; }
-    body { margin:0; color:var(--ink); background:var(--bg); overflow:hidden; }
-    a { color:inherit; text-decoration:none; }
-    .topbar {
-      height:54px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      padding:0 18px;
-      border-bottom:1px solid var(--line);
-      background:var(--panel);
-      backdrop-filter:blur(20px) saturate(1.25);
+    html,body { min-height:100%; }
+    body {
+      margin:0;
+      color:var(--ink);
+      background:#11151d;
+      display:grid;
+      place-items:center;
+      padding:22px;
     }
-    .brand {
-      display:flex;
-      align-items:center;
-      gap:10px;
-      min-width:0;
-      font-weight:820;
-      letter-spacing:0;
+    .panel {
+      width:min(560px,100%);
+      border:1px solid var(--line);
+      border-radius:8px;
+      padding:28px;
+      background:rgba(12,15,21,.78);
+      box-shadow:0 24px 70px rgba(0,0,0,.28);
     }
     .mark {
-      width:30px;
-      height:30px;
+      width:38px;
+      height:38px;
       display:grid;
       place-items:center;
       border:1px solid rgba(213,181,107,.56);
       border-radius:7px;
       color:var(--gold);
-      font-size:12px;
+      font-size:13px;
       font-weight:900;
       background:rgba(213,181,107,.08);
-      flex:0 0 auto;
+      margin-bottom:18px;
     }
-    .brand-text {
-      overflow:hidden;
-      text-overflow:ellipsis;
-      white-space:nowrap;
-    }
-    .actions { display:flex; align-items:center; gap:8px; flex:0 0 auto; }
+    h1 { margin:0 0 10px; font-size:26px; line-height:1.22; letter-spacing:0; }
+    p { margin:0 0 18px; color:var(--muted); line-height:1.7; word-break:keep-all; }
     .btn {
-      min-height:36px;
+      min-height:44px;
       display:inline-flex;
       align-items:center;
       justify-content:center;
-      padding:0 12px;
-      border:1px solid var(--line);
+      padding:0 16px;
+      border:1px solid rgba(213,181,107,.58);
       border-radius:7px;
-      background:rgba(255,255,255,.055);
-      color:#e9edf4;
-      font-size:13px;
-      font-weight:740;
-    }
-    .btn.primary {
-      border-color:rgba(213,181,107,.58);
       color:#11141a;
       background:linear-gradient(180deg,#eddcae,#d5b56b 54%,#ad8440);
+      font-size:14px;
+      font-weight:840;
+      text-decoration:none;
     }
-    .frame-wrap { height:calc(100% - 54px); background:#f6f2e9; }
-    iframe { width:100%; height:100%; display:block; border:0; background:#f6f2e9; }
-    @media (max-width:640px) {
-      .topbar { height:58px; padding:0 12px; }
-      .brand-text { max-width:180px; }
-      .btn { padding:0 10px; font-size:12px; }
-      .frame-wrap { height:calc(100% - 58px); }
-    }
+    .note { margin-top:16px; font-size:12px; color:#9da6b6; }
   </style>
 </head>
 <body>
-  <header class="topbar">
-    <a class="brand" href="/" aria-label="188 프라임에셋 허브로 이동">
-      <span class="mark">188</span>
-      <span class="brand-text">프리미엄 보험보상 답변기</span>
-    </a>
-    <nav class="actions" aria-label="페이지 동작">
-      <a class="btn" href="/">허브</a>
-      <a class="btn primary" id="openExternal" target="_blank" rel="noopener">새 창</a>
-    </nav>
-  </header>
-  <main class="frame-wrap">
-    <iframe id="claimFrame" title="프리미엄 보험보상 답변기" loading="eager"></iframe>
+  <main class="panel">
+    <div class="mark">188</div>
+    <h1>프리미엄 보험보상 답변기로 이동 중입니다.</h1>
+    <p>브라우저 보안정책 때문에 Google 실행부를 188 페이지 안에 끼워 넣지 않고, 승인된 실행 화면으로 바로 연결합니다.</p>
+    <a class="btn" id="claimLink" href="#">바로 열기</a>
+    <div class="note">자동 이동이 되지 않으면 버튼을 눌러주세요.</div>
   </main>
   <script>
     const claimUrl = 'https://script.google.com/macros/s/AKfycbwxsEPxs_uq5H4gH43Ie_FH0mrKAtdkrnzP-30b52GKTBMXVzARfgggs6_klkyadIVl/exec?claim=1';
-    document.getElementById('claimFrame').src = claimUrl;
-    document.getElementById('openExternal').href = '/claim/';
+    document.getElementById('claimLink').href = claimUrl;
+    window.location.replace(claimUrl);
   </script>
-  <script src="/assets/hub-menu.js?v=20260709-claim" defer></script>
+  <script src="/assets/hub-menu.js?v=20260709-claim-redirect" defer></script>
 </body>
 </html>
