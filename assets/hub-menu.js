@@ -29,8 +29,7 @@
     {
       title: '프리미엄 전산답변기',
       desc: '프리미엄 전산·IT 자동 답변 도구',
-      href: 'https://script.google.com/macros/s/AKfycbwxsEPxs_uq5H4gH43Ie_FH0mrKAtdkrnzP-30b52GKTBMXVzARfgggs6_klkyadIVl/exec?itHelp=1',
-      external: true
+      href: '/itsys/'
     }
   ];
 
