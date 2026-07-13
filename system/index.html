@@ -9,17 +9,21 @@
   <link rel="stylesheet" href="/assets/design-tokens.css">
   <link rel="stylesheet" href="/assets/hub-menu.css?v=20260713-my-button">
   <style>
-    /* === 188본부 온보딩 시스템 — 블랙골드 Quiet Luxury (design-rules.md 준수) ===
-       컴팩트 저밀도 · hairline 테두리 · radius ≤ 8px 샤프 · pill 버튼 · 큰 갇힌 프레임 지양.
-       골드는 CTA/활성/상태에만. 대화창은 솔리드 고대비(rule8 가독성). */
+    /* === SYSTEM QUIET LUXURY 20260714 ===
+       작은 CSS 입체 오브젝트만 사용하고 Canvas/WebGL/외부 이미지/무거운 스크롤 효과는 쓰지 않는다.
+       본문은 고대비·hairline·44px 터치영역을 유지하며 골드는 CTA와 상태에만 제한한다. */
     :root {
       --ink: var(--text);
       --muted: var(--text-dim);
       --line: rgba(255,255,255,.10);       /* hairline */
       --line-2: rgba(255,255,255,.06);
       --silver: #e6e9ef;
+      --navy: #101a29;
+      --navy-soft: rgba(74,105,146,.14);
+      --gold-bright: #ead8ab;
       --r-card: 8px;                        /* 샤프 카드 */
       --r-bub: 8px;
+      --glass-blur: blur(16px) saturate(135%);
       color-scheme: dark;
       font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
     }
@@ -33,10 +37,15 @@
       overflow-x: clip;
       color: var(--text);
       background:
-        radial-gradient(1100px 520px at 50% -10%, rgba(200,169,106,.08), transparent 60%),
-        linear-gradient(180deg, rgba(92,113,145,.06), transparent 340px),
-        var(--bg);
+        radial-gradient(760px 440px at 78% 2%, rgba(59,91,134,.17), transparent 66%),
+        radial-gradient(720px 430px at 15% -4%, rgba(200,169,106,.11), transparent 64%),
+        linear-gradient(180deg, #0c1017 0, var(--bg) 430px);
       -webkit-font-smoothing: antialiased;
+    }
+    body::before {
+      content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+      background-image: linear-gradient(rgba(255,255,255,.018) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.018) 1px, transparent 1px);
+      background-size: 64px 64px; -webkit-mask-image: linear-gradient(to bottom, #000, transparent 64%); mask-image: linear-gradient(to bottom, #000, transparent 64%);
     }
     a { color: inherit; text-decoration: none; }
 
@@ -44,18 +53,19 @@
     .nav {
       position: sticky; top: 0; z-index: 30;
       display: flex; align-items: center; justify-content: space-between; gap: 14px;
-      min-height: 54px; padding: 8px clamp(14px,4vw,30px);
-      padding-right: 66px;   /* 공용 hub-menu 햄버거(fixed, right:16px·42px)와 겹치지 않게 여백 확보 */
+      min-height: 62px; padding: 9px clamp(16px,4vw,34px);
+      padding-right: 126px;  /* 공용 MY 버튼+햄버거 고정영역과 탭 클릭영역이 겹치지 않게 확보 */
       border-bottom: 1px solid var(--line);
-      background: rgba(10,12,16,.66);
+      background: rgba(8,11,16,.78);
       -webkit-backdrop-filter: var(--glass-blur); backdrop-filter: var(--glass-blur);
     }
     .brand { display: flex; align-items: center; gap: 9px; min-width: 0; }
     .mark {
-      width: 28px; height: 28px; display: grid; place-items: center;
+      width: 32px; height: 32px; display: grid; place-items: center;
       border: 1px solid rgba(200,169,106,.5); border-radius: 7px; color: var(--gold);
-      font-size: 11px; font-weight: 900; flex: 0 0 auto;
-      background: linear-gradient(180deg, rgba(200,169,106,.20), rgba(255,255,255,.03));
+      font-size: 10px; font-weight: 900; flex: 0 0 auto; letter-spacing: -.03em;
+      background: linear-gradient(145deg, rgba(234,216,171,.22), rgba(200,169,106,.06));
+      box-shadow: 0 8px 22px rgba(0,0,0,.28), inset 0 1px rgba(255,255,255,.12);
     }
     .brand-text {
       font-size: 12px; font-weight: 800; letter-spacing: .10em; color: var(--silver);
@@ -64,7 +74,7 @@
     .tabs { display: flex; align-items: center; gap: 4px; flex: 0 0 auto; }
     .tab {
       display: inline-flex; align-items: center; gap: 6px;
-      min-height: 38px; padding: 0 13px;
+      min-height: 44px; padding: 0 13px;
       border: 0; background: transparent; color: var(--text-dim);
       font-size: 13px; font-weight: 700; cursor: pointer; white-space: nowrap;
       border-bottom: 2px solid transparent; border-radius: 2px;
@@ -72,34 +82,66 @@
     }
     .tab:hover { color: var(--silver); }
     .tab[aria-selected="true"] { color: #fff; border-bottom-color: var(--gold); }
-    .tab .ti { font-size: 14px; }
+    .tab .ti { min-width: 19px; color: var(--gold); font-size: 9px; font-weight: 900; letter-spacing: .08em; text-align: center; }
     /* 관리자 탭은 액션성(로그인 오버레이 유발) — 좌측에 얇은 구분선으로 분리 */
-    .tab-admin { margin-left: 4px; padding-left: 15px; border-left: 1px solid var(--line); }
+    .tab-admin { display: none; margin-left: 4px; padding-left: 15px; border-left: 1px solid var(--line); }
 
     /* ── 히어로 ── */
-    .hero { max-width: 1080px; margin: 0 auto; padding: 30px clamp(14px,4vw,30px) 12px; }
-    .hero h1 {
-      margin: 0; font-size: clamp(24px,4.4vw,40px); line-height: 1.12;
-      font-weight: 900; letter-spacing: -.02em; color: #fff;
+    .hero {
+      position: relative; isolation: isolate; display: grid; grid-template-columns: minmax(0,1fr) 220px;
+      align-items: center; gap: clamp(28px,6vw,72px); max-width: 1080px; min-height: 272px;
+      margin: 0 auto; padding: 46px clamp(16px,4vw,34px) 50px;
     }
-    .hero p { margin: 10px 0 0; color: var(--muted); font-size: 14px; max-width: 640px; word-break: keep-all; }
+    .hero::after {
+      content: ""; position: absolute; left: clamp(16px,4vw,34px); right: clamp(16px,4vw,34px); bottom: 21px;
+      height: 1px; background: linear-gradient(90deg, rgba(200,169,106,.65), rgba(255,255,255,.08) 32%, transparent 82%);
+    }
+    .hero-copy { position: relative; z-index: 2; min-width: 0; }
+    .hero-kicker { display: flex; align-items: center; gap: 10px; margin-bottom: 15px; color: var(--gold); font-size: 10px; font-weight: 850; letter-spacing: .22em; }
+    .hero-kicker::before { content: ""; width: 34px; height: 1px; background: var(--gold); }
+    .hero h1 {
+      margin: 0; max-width: 680px; font-size: clamp(30px,5vw,50px); line-height: 1.08;
+      font-weight: 850; letter-spacing: -.045em; color: #fff; text-wrap: balance;
+    }
+    .hero p { margin: 15px 0 0; color: var(--muted); font-size: 15px; line-height: 1.7; max-width: 620px; word-break: keep-all; }
+    .hero-meta { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
+    .hero-meta span { display: inline-flex; align-items: center; min-height: 30px; padding: 0 10px; border: 1px solid rgba(255,255,255,.09); background: rgba(255,255,255,.025); color: rgba(242,243,245,.67); font-size: 10px; font-weight: 700; letter-spacing: .04em; }
+    .mobile-admin { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 0 12px; border: 1px solid rgba(200,169,106,.32); background: rgba(200,169,106,.045); color: var(--gold); font: inherit; font-size: 9px; font-weight: 800; letter-spacing: .08em; cursor: pointer; }
+    .hero-object { position: relative; width: 196px; height: 196px; justify-self: end; perspective: 650px; pointer-events: none; }
+    .orbit { position: absolute; inset: 13px; border: 1px solid rgba(200,169,106,.26); border-radius: 50%; transform: rotateX(67deg) rotateZ(-14deg); box-shadow: 0 0 42px rgba(200,169,106,.05); }
+    .orbit::before,.orbit::after { content: ""; position: absolute; inset: 20px; border: 1px solid rgba(112,145,189,.22); border-radius: 50%; }
+    .orbit::after { inset: 45px; border-color: rgba(255,255,255,.14); }
+    .system-plate {
+      position: absolute; left: 50%; top: 50%; display: grid; place-items: center; width: 102px; height: 126px;
+      transform: translate(-50%,-52%) rotateY(-18deg) rotateX(8deg); transform-style: preserve-3d;
+      border: 1px solid rgba(234,216,171,.58); border-radius: 12px;
+      background: linear-gradient(145deg, rgba(234,216,171,.22), rgba(18,27,41,.95) 44%, rgba(7,10,15,.96));
+      box-shadow: 20px 26px 50px rgba(0,0,0,.52), inset 0 1px rgba(255,255,255,.17), 0 0 58px rgba(200,169,106,.09);
+      color: var(--gold-bright); animation: coreFloat 7s ease-in-out infinite;
+    }
+    .system-plate::before { content: ""; position: absolute; inset: 8px; border: 1px solid rgba(255,255,255,.09); border-radius: 7px; }
+    .system-plate::after { content: "SYSTEM"; position: absolute; bottom: 14px; font-size: 7px; font-weight: 850; letter-spacing: .26em; color: rgba(234,216,171,.62); }
+    .system-plate strong { font-size: 30px; font-weight: 800; letter-spacing: -.06em; transform: translateY(-6px); }
+    .system-dot { position: absolute; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 16px rgba(200,169,106,.75); }
+    .system-dot.one { left: 16px; top: 67px; }.system-dot.two { right: 8px; top: 46px; background: #8ba8ce; box-shadow: 0 0 15px rgba(139,168,206,.65); }.system-dot.three { right: 36px; bottom: 9px; }
+    @keyframes coreFloat { 0%,100% { transform: translate(-50%,-52%) rotateY(-18deg) rotateX(8deg); } 50% { transform: translate(-50%,-57%) rotateY(-13deg) rotateX(5deg); } }
 
     /* ── 입점코드 입력 바 (히어로 아래 · 항상 노출 · AI상담 위) ──
        서버 게이트(getGuide)는 본체 iframe에서 검증. 이 바는 코드를 iframe으로 넘겨
        한 곳에서만 게이트가 뜨게(이중 게이트 방지) 하고, 성공/실패는 postMessage로 반영. */
-    .gatebar-wrap { max-width: 1080px; margin: 0 auto; padding: 2px clamp(14px,4vw,30px) 8px; }
+    .gatebar-wrap { position: relative; z-index: 3; max-width: 1080px; margin: -25px auto 0; padding: 0 clamp(16px,4vw,34px) 13px; }
     .gatebar {
       display: grid; grid-template-columns: auto minmax(0,1fr) auto; gap: 10px; align-items: center;
       border: 1px solid var(--line); border-radius: var(--r-card);
-      background: var(--glass-bg);
-      -webkit-backdrop-filter: var(--glass-blur); backdrop-filter: var(--glass-blur);
-      padding: 10px 12px;
+      background: linear-gradient(135deg, rgba(22,28,38,.98), rgba(10,13,18,.98));
+      box-shadow: 0 18px 44px rgba(0,0,0,.28), inset 0 1px rgba(255,255,255,.04);
+      padding: 11px 12px;
     }
     .gatebar-label {
       display: flex; align-items: center; gap: 7px; white-space: nowrap;
       font-size: 12px; font-weight: 800; letter-spacing: .02em; color: var(--gold);
     }
-    .gatebar-label .gi { font-size: 14px; }
+    .gatebar-label .gi { display: grid; place-items: center; min-width: 26px; height: 26px; border: 1px solid rgba(200,169,106,.34); color: var(--gold); font-size: 8px; font-weight: 900; letter-spacing: .08em; }
     .gatebar-input {
       min-width: 0; width: 100%; min-height: 44px;
       border: 1px solid var(--line); border-radius: var(--r-card);
@@ -125,7 +167,7 @@
     .gatebar-err { margin: 8px 2px 0; color: #fb7185; font-size: 12px; word-break: keep-all; }
     .gatebar-err:empty { display: none; }
 
-    main { max-width: 1080px; margin: 0 auto; padding: 6px clamp(14px,4vw,30px) 30px; }
+    main { max-width: 1080px; margin: 0 auto; padding: 7px clamp(16px,4vw,34px) 44px; }
     .panel { display: none; animation: rise .34s var(--ease-spring) both; }
     .panel.active { display: block; }
     @keyframes rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
@@ -147,7 +189,7 @@
     }
     .frame-hint .fh-i {
       width: 34px; height: 34px; display: grid; place-items: center; margin-bottom: 4px;
-      border: 1px solid rgba(200,169,106,.5); border-radius: 9px; color: var(--gold); font-size: 15px;
+      border: 1px solid rgba(200,169,106,.5); border-radius: 9px; color: var(--gold); font-size: 7px; font-weight: 900; letter-spacing: .04em;
       background: linear-gradient(180deg, rgba(200,169,106,.16), rgba(255,255,255,.03));
     }
     .frame-hint.hidden { display: none; }
@@ -158,25 +200,24 @@
     .side {
       min-width: 0;
       border: 1px solid var(--line); border-radius: var(--r-card);
-      background: var(--glass-bg);
-      -webkit-backdrop-filter: var(--glass-blur); backdrop-filter: var(--glass-blur);
+      background: rgba(15,19,26,.97);
       padding: 12px; position: sticky; top: 66px;
     }
     .side-title {
       display: flex; align-items: center; gap: 7px;
-      font-size: 12px; font-weight: 800; letter-spacing: .02em; color: var(--gold);
+      font-size: 10px; font-weight: 850; letter-spacing: .16em; color: var(--gold);
       padding: 2px 4px 10px; border-bottom: 1px solid var(--line-2); margin-bottom: 10px;
     }
     .qmenu { display: grid; gap: 6px; }
     .qbtn {
       display: flex; align-items: center; gap: 9px; width: 100%;
-      min-height: 42px; padding: 0 12px; text-align: left;
+      min-height: 44px; padding: 0 12px; text-align: left;
       border: 1px solid var(--line); border-radius: var(--r-card);
       background: rgba(255,255,255,.03); color: var(--silver);
       font-size: 13px; font-weight: 700; cursor: pointer;
       transition: transform var(--dur) var(--ease-spring), border-color var(--dur), background var(--dur), color var(--dur);
     }
-    .qbtn .qi { font-size: 15px; flex: 0 0 auto; width: 18px; text-align: center; }
+    .qbtn .qi { display: grid; place-items: center; flex: 0 0 auto; width: 24px; height: 24px; border: 1px solid rgba(255,255,255,.11); color: var(--gold); font-size: 8px; font-weight: 850; letter-spacing: .05em; }
     .qbtn:hover { transform: translateY(-1px); border-color: rgba(200,169,106,.5); color: #fff; }
     .qbtn:active { transform: scale(.98); }
     .qbtn[aria-pressed="true"] {
@@ -187,14 +228,13 @@
     .chat {
       display: flex; flex-direction: column; min-width: 0;
       border: 1px solid var(--line); border-radius: var(--r-card);
-      background: var(--glass-bg);
-      -webkit-backdrop-filter: var(--glass-blur); backdrop-filter: var(--glass-blur);
+      background: rgba(15,19,26,.97);
       overflow: hidden;
     }
     .chat-notice {
       display: flex; align-items: center; gap: 8px;
       padding: 9px 14px; border-bottom: 1px solid var(--line-2);
-      background: linear-gradient(180deg, rgba(200,169,106,.10), rgba(200,169,106,.03));
+      background: linear-gradient(90deg, rgba(200,169,106,.10), rgba(17,22,30,.92) 58%);
       color: #ecdcb4; font-size: 12px; font-weight: 600; word-break: keep-all;
     }
     .chat-notice .ni {
@@ -204,7 +244,7 @@
     .chat-log {
       min-height: 340px; max-height: min(62vh, 620px); overflow: auto;
       padding: 16px; display: flex; flex-direction: column; gap: 14px;
-      scroll-behavior: smooth; background: rgba(8,10,14,.6);
+      scroll-behavior: smooth; background: #0a0d12;
     }
     .row { display: flex; gap: 9px; align-items: flex-end; max-width: 100%; }
     .row.user { flex-direction: row-reverse; align-self: flex-end; }
@@ -250,6 +290,7 @@
     .send:active { transform: scale(.95); }
     .send:disabled, .chat-input:disabled { opacity: .6; cursor: progress; }
     .send svg { width: 18px; height: 18px; }
+    :where(button,input,a):focus-visible { outline: 2px solid rgba(234,216,171,.88); outline-offset: 3px; }
 
     /* ── 관리자 인라인 오버레이(같은 페이지 모달) ──
        관리자 버튼 → 이 오버레이가 뜨고 본체 iframe(?admin=1)이 서버검증 로그인/패널을 인라인 렌더.
@@ -278,7 +319,7 @@
     .admin-modal-head .am-title { display: flex; align-items: center; gap: 8px; }
     .admin-close {
       border: 1px solid var(--line); background: transparent; color: var(--text-dim);
-      border-radius: 999px; padding: 6px 13px; font-size: 12px; font-weight: 700; cursor: pointer;
+      min-height: 44px; border-radius: 999px; padding: 6px 13px; font-size: 12px; font-weight: 700; cursor: pointer;
       transition: color var(--dur), border-color var(--dur);
     }
     .admin-close:hover { color: #fff; border-color: rgba(200,169,106,.5); }
@@ -287,24 +328,46 @@
     }
 
     @media (max-width: 760px) {
+      .hero { grid-template-columns: minmax(0,1fr) 128px; min-height: 236px; gap: 18px; padding-top: 34px; padding-bottom: 48px; }
+      .hero-object { width: 126px; height: 126px; }
+      .system-plate { width: 70px; height: 86px; border-radius: 9px; }
+      .system-plate strong { font-size: 22px; }
+      .system-plate::after { bottom: 9px; font-size: 5px; }
+      .system-dot { width: 5px; height: 5px; }
       .consult { grid-template-columns: 1fr; }
       .side { position: static; padding: 10px; }
       .qmenu { grid-template-columns: repeat(2, minmax(0,1fr)); gap: 7px; }
-      .chat-log { min-height: 300px; max-height: 64vh; }
+      .chat-log { min-height: 248px; height: clamp(248px,42svh,390px); max-height: none; }
     }
     @media (max-width: 520px) {
-      .brand-text { max-width: 96px; }
-      .tab { padding: 0 9px; font-size: 12px; }
-      .tab-admin { padding-left: 11px; }
-      .tab .tlabel { display: none; }
-      .hero { padding-top: 22px; }
+      .nav { padding-left: 12px; padding-right: 126px; gap: 5px; }
+      .brand-text { display: none; }
+      .tabs { gap: 0; }
+      .tab { padding: 0 7px; font-size: 11px; }
+      .tab-admin { display: none; }
+      .hero { grid-template-columns: 1fr; min-height: 0; padding-top: 31px; padding-bottom: 49px; }
+      .hero-object { display: none; }
+      .hero h1 { font-size: clamp(30px,9vw,38px); }
+      .hero p { margin-top: 12px; font-size: 13px; }
+      .hero-meta { margin-top: 19px; }
+      .hero-meta span { min-height: 28px; padding: 0 8px; font-size: 9px; }
+      .mobile-admin { min-height: 44px; }
       .gatebar { grid-template-columns: 1fr; gap: 8px; }
       .gatebar-label { justify-content: flex-start; }
+      .qbtn { padding: 0 9px; font-size: 12px; }
+      .chat-log { height: clamp(238px,39svh,330px); min-height: 238px; padding: 13px; }
+      .chat-form { padding: 9px; }
     }
     @media (prefers-reduced-transparency: reduce) {
       .nav, .side, .chat, .gatebar { -webkit-backdrop-filter: none; backdrop-filter: none; background: var(--bg-2); }
       .chat-log { background: #0b0e13; }
     }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *,*::before,*::after { animation: none !important; transition: none !important; }
+    }
+    @media (hover: none) { .qbtn:hover,.gatebar-btn:hover,.send:hover { transform: none; } }
+    .hub-menu-toggle,.hub-menu-close { min-width: 44px !important; min-height: 44px !important; }
   </style>
 </head>
 <body>
@@ -315,26 +378,38 @@
     </a>
     <nav class="tabs" role="tablist" aria-label="시스템 탭">
       <button class="tab" id="tab-guide" role="tab" aria-controls="panel-guide" aria-selected="false" onclick="switchTab('guide')">
-        <span class="ti">📄</span><span class="tlabel">시스템 안내서</span>
+        <span class="ti" aria-hidden="true">01</span><span class="tlabel">안내서</span>
       </button>
       <button class="tab" id="tab-consult" role="tab" aria-controls="panel-consult" aria-selected="true" onclick="switchTab('consult')">
-        <span class="ti">💬</span><span class="tlabel">위촉상담 AI</span>
+        <span class="ti" aria-hidden="true">02</span><span class="tlabel">위촉 AI</span>
       </button>
-      <button class="tab tab-admin" id="tab-admin" type="button" aria-haspopup="dialog" onclick="openAdmin()">
-        <span class="ti">👤</span><span class="tlabel">관리자</span>
+      <button class="tab tab-admin" id="tab-admin" type="button" aria-haspopup="dialog" aria-label="관리자 열기" onclick="openAdmin()">
+        <span class="ti" aria-hidden="true">AD</span><span class="tlabel">관리자</span>
       </button>
     </nav>
   </header>
 
   <section class="hero">
-    <h1>188본부 온보딩 시스템</h1>
-    <p>새로운 시작을 위한 모든 정보를 간편하게 확인하세요.</p>
+    <div class="hero-copy">
+      <div class="hero-kicker">PRIME ASSET · 188</div>
+      <h1>188본부<br>온보딩 시스템</h1>
+      <p>위촉 절차부터 준비서류와 영업시스템까지, 합류에 필요한 순서만 한 화면에 정리했습니다.</p>
+      <div class="hero-meta" aria-label="핵심 기능">
+        <span>STEP GUIDE</span><span>PRIVATE AI</span><span>DESKTOP · MOBILE</span>
+        <button class="mobile-admin" type="button" aria-haspopup="dialog" onclick="openAdmin()">관리자</button>
+      </div>
+    </div>
+    <div class="hero-object" aria-hidden="true">
+      <div class="orbit"></div>
+      <div class="system-plate"><strong>188</strong></div>
+      <span class="system-dot one"></span><span class="system-dot two"></span><span class="system-dot three"></span>
+    </div>
   </section>
 
   <!-- 입점코드 입력 바 : 히어로 아래 · 항상 노출 · AI상담 위. 서버 게이트로 안내서를 연다. -->
   <section class="gatebar-wrap" aria-label="입점코드 입력">
     <form class="gatebar" id="gateForm" autocomplete="off">
-      <div class="gatebar-label"><span class="gi">🔑</span><span>입점코드 입력</span></div>
+      <div class="gatebar-label"><span class="gi" aria-hidden="true">IN</span><span>입점코드 입력</span></div>
       <input class="gatebar-input" id="gateInput" name="code" type="password" inputmode="numeric"
              maxlength="20" placeholder="188본부 입점코드를 입력하세요" autocomplete="off" aria-label="입점코드">
       <button class="gatebar-btn" id="gateBtn" type="submit">입장</button>
@@ -347,7 +422,7 @@
     <section class="panel" id="panel-guide" role="tabpanel" aria-labelledby="tab-guide">
       <div class="frame-wrap">
         <div class="frame-hint" id="frameHint">
-          <span class="fh-i">🔒</span>
+          <span class="fh-i">LOCK</span>
           <span>위 <b>입점코드</b>를 입력하고 <b>[입장]</b>하면<br>시스템 안내서가 이곳에 열립니다.</span>
         </div>
         <iframe class="systemFrame hidden" id="systemFrame" title="188본부 시스템 안내서" loading="eager"></iframe>
@@ -358,7 +433,7 @@
     <section class="panel active" id="panel-consult" role="tabpanel" aria-labelledby="tab-consult">
       <div class="consult">
         <aside class="side" aria-label="AI 상담 빠른 질문">
-          <div class="side-title">✨ AI 상담</div>
+          <div class="side-title">QUICK GUIDE</div>
           <div class="qmenu" id="qmenu"></div>
         </aside>
 
@@ -377,7 +452,7 @@
             </div>
           </div>
           <form class="chat-form" id="chatForm">
-            <input class="chat-input" id="chatInput" name="question" autocomplete="off" maxlength="600" placeholder="궁금한 내용을 입력하세요">
+            <input class="chat-input" id="chatInput" name="question" autocomplete="off" maxlength="600" placeholder="질문을 입력하세요">
             <button class="send" id="sendBtn" type="submit" aria-label="전송">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4 20-7z"/></svg>
             </button>
@@ -391,7 +466,7 @@
   <div class="admin-overlay" id="adminOverlay" role="dialog" aria-modal="true" aria-label="관리자" hidden>
     <div class="admin-modal">
       <div class="admin-modal-head">
-        <span class="am-title"><span>👤</span><span>관리자</span></span>
+        <span class="am-title"><span>ADMIN</span><span>관리자</span></span>
         <button class="admin-close" type="button" onclick="closeAdmin()">✕ 닫기</button>
       </div>
       <iframe id="adminFrame" title="관리자 모드" loading="eager"></iframe>
@@ -407,12 +482,12 @@
        관리자가 해당 key 고정답변을 채우면 그 버튼은 AI호출 없이 고정답변을 즉시 출력,
        비어있으면 q 를 chat188 AI로 질의(기존 sendQuestion 경로). */
     const PRESETS = [
-      { key: '위촉절차',   icon: '📝', label: '위촉 절차',      q: '위촉은 어떤 순서로 진행되나요?' },
-      { key: '준비서류',   icon: '📄', label: '준비서류',       q: '위촉에 필요한 준비서류는 무엇인가요?' },
-      { key: '해촉',       icon: '🔁', label: '해촉(내용증명)', q: '기존 회사 해촉(내용증명)은 어떻게 하나요?' },
-      { key: '보증보험',   icon: '🛡️', label: '보증보험',       q: '보증보험은 어떻게 가입하나요?' },
-      { key: '영업시스템', icon: '📈', label: '영업시스템',     q: '188본부 영업시스템은 어떻게 활용하나요?' },
-      { key: '시스템문의', icon: '🛠️', label: '시스템문의',     q: '시스템 관련 문의는 어디로 하면 되나요?' }
+      { key: '위촉절차',   icon: '01', label: '위촉 절차',  q: '위촉은 어떤 순서로 진행되나요?' },
+      { key: '준비서류',   icon: '02', label: '준비서류',   q: '위촉에 필요한 준비서류는 무엇인가요?' },
+      { key: '해촉',       icon: '03', label: '해촉 안내',  q: '기존 회사 해촉(내용증명)은 어떻게 하나요?' },
+      { key: '보증보험',   icon: '04', label: '보증보험',   q: '보증보험은 어떻게 가입하나요?' },
+      { key: '영업시스템', icon: '05', label: '영업시스템', q: '188본부 영업시스템은 어떻게 활용하나요?' },
+      { key: '시스템문의', icon: '06', label: '시스템문의', q: '시스템 관련 문의는 어디로 하면 되나요?' }
     ];
     /* 관리자 고정답변 맵 { key: 답변텍스트 }. 로드 시 본체에서 JSONP로 받아옴(비면 전부 AI). */
     let QUICK_ANSWERS = {};
@@ -455,7 +530,7 @@
     function onGateOk() {
       gatePassed = true;
       gateBtn.disabled = false;
-      gateBtn.textContent = '입장 완료 ✓';
+      gateBtn.textContent = '입장 완료';
       gateBtn.classList.add('ok');
       gateErr.textContent = '';
       frameHint.classList.add('hidden');
