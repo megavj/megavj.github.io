@@ -19,6 +19,36 @@
   cursor: pointer;
 }
 
+.hub-my-link {
+  position: fixed;
+  top: 12px;
+  right: 66px;
+  z-index: 1200;
+  min-width: 50px;
+  height: 42px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 12px;
+  border: 1px solid rgba(213, 181, 107, .45);
+  border-radius: 7px;
+  background: rgba(13, 16, 22, .86);
+  color: #f5f7fb;
+  box-shadow: 0 18px 45px rgba(0, 0, 0, .34);
+  backdrop-filter: blur(18px) saturate(1.2);
+  font: 800 12px/1 -apple-system, BlinkMacSystemFont, "SF Pro Text", "Pretendard", sans-serif;
+  letter-spacing: .08em;
+  text-decoration: none;
+}
+
+.hub-my-link:hover,
+.hub-my-link:focus-visible,
+.hub-my-link[aria-current="page"] {
+  border-color: rgba(213, 181, 107, .85);
+  background: rgba(213, 181, 107, .16);
+  outline: none;
+}
+
 .hub-menu-toggle span {
   width: 18px;
   height: 2px;
@@ -105,7 +135,7 @@
 }
 
 body.has-hub-menu .topbar {
-  padding-right: 64px;
+  padding-right: 124px;
 }
 
 body.hub-menu-open {
@@ -128,7 +158,15 @@ body.hub-menu-open .hub-menu-panel {
     height: 40px;
   }
 
+  .hub-my-link {
+    top: 8px;
+    right: 58px;
+    min-width: 46px;
+    height: 40px;
+    padding: 0 10px;
+  }
+
   body.has-hub-menu .topbar {
-    padding-right: 54px;
+    padding-right: 110px;
   }
 }

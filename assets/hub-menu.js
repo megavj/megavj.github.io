@@ -55,6 +55,13 @@
 
     document.body.classList.add('has-hub-menu');
     const current = normalizePath(window.location.pathname);
+    const myLink = document.createElement('a');
+    myLink.className = 'hub-my-link';
+    myLink.href = '/my/';
+    myLink.textContent = 'MY';
+    myLink.setAttribute('aria-label', 'MY 페이지 바로가기');
+    if (current === '/my/') myLink.setAttribute('aria-current', 'page');
+
     const toggle = document.createElement('button');
     toggle.className = 'hub-menu-toggle';
     toggle.type = 'button';
@@ -92,7 +99,7 @@
       list.appendChild(link);
     });
 
-    document.body.append(toggle, scrim, panel);
+    document.body.append(myLink, toggle, scrim, panel);
     toggle.addEventListener('click', () => {
       document.body.classList.contains('hub-menu-open') ? closeMenu() : openMenu();
     });
