@@ -89,10 +89,9 @@
       const link = document.createElement('a');
       link.className = 'hub-menu-link';
       link.href = page.href;
-      if (page.external) {
-        link.target = '_blank';
-        link.rel = 'noopener';
-      } else if (normalizePath(page.href) === current) {
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+      if (normalizePath(page.href) === current) {
         link.setAttribute('aria-current', 'page');
       }
       link.innerHTML = '<strong>' + page.title + '</strong><span>' + page.desc + '</span>';
