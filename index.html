@@ -2,743 +2,99 @@
 <html lang="ko">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>김상현 이사 | 프라임에셋 188본부</title>
-  <meta name="description" content="프라임에셋 188본부 김상현 이사의 공식 허브. 설계사 성장환경, 수수료 구조, 영업지원 플랫폼, 프리미엄사업부 시스템을 확인하세요.">
-  <meta property="og:title" content="김상현 이사 | 프라임에셋 188본부">
-  <meta property="og:description" content="프라임에셋 188본부 공식 허브">
-  <meta property="og:image" content="assets/ksh-profile.jpg">
-  <meta name="theme-color" content="#0a0c10">
-  <link rel="stylesheet" href="/assets/design-tokens.css">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <title>프라임에셋 188본부 | 설계사의 성장을 설계합니다</title>
+  <meta name="description" content="설계사의 성장을 설계합니다. 프라임에셋 188본부의 수당 구조, 영업규정, 자료, 교육, 플랫폼과 2026년 상반기 실적을 확인하세요.">
+  <meta property="og:title" content="프라임에셋 188본부 | 설계사의 성장을 설계합니다">
+  <meta property="og:description" content="설계사의 성장을 설계합니다. 오래 벌 수 있는 구조를 투명하게 비교하세요.">
+  <meta property="og:image" content="/assets/ksh-profile.jpg">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#050607">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Marcellus&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+  <link rel="stylesheet" href="/future188-v2/main.css">
   <link rel="stylesheet" href="/assets/hub-menu.css?v=20260713-my-button">
-  <style>
-    /* === 페이지 전용 스타일 (토큰은 design-tokens.css 사용) === */
-    :root {
-      --muted: rgba(242, 243, 245, .74);
-      --dim: rgba(242, 243, 245, .48);
-      --line: rgba(255, 255, 255, .12);
-      color-scheme: dark;
-      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
-    }
-
-    * { box-sizing: border-box; }
-
-    html {
-      scroll-behavior: smooth;
-      background: var(--bg);
-    }
-
-    body {
-      margin: 0;
-      color: var(--text);
-      background:
-        linear-gradient(180deg, rgba(10, 12, 16, .30), var(--bg) 38rem),
-        linear-gradient(90deg, rgba(10, 12, 16, .97) 0%, rgba(10, 12, 16, .84) 44%, rgba(10, 12, 16, .42) 100%),
-        linear-gradient(180deg, rgba(8, 10, 14, .05), rgba(8, 10, 14, .66)),
-        url("assets/ksh-profile.jpg") right 9% top 44px / min(50vw, 720px) auto no-repeat fixed,
-        var(--bg);
-      letter-spacing: 0;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    /* 옅은 골드 그리드 — 본문 가독성 해치지 않게 상단만 */
-    body::after {
-      content: "";
-      position: fixed;
-      inset: 0;
-      z-index: -1;
-      pointer-events: none;
-      background:
-        linear-gradient(90deg, rgba(200, 169, 106, .09) 0 1px, transparent 1px 100%),
-        linear-gradient(180deg, rgba(242, 243, 245, .05) 0 1px, transparent 1px 100%);
-      background-size: 76px 76px;
-      mask-image: linear-gradient(180deg, rgba(0, 0, 0, .6), transparent 76%);
-    }
-
-    a { color: inherit; text-decoration: none; }
-
-    .shell {
-      width: min(1180px, calc(100% - 40px));
-      margin: 0 auto;
-    }
-
-    /* === 유리 네비 (toolbar) === */
-    .topbar {
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      -webkit-backdrop-filter: var(--glass-blur);
-      backdrop-filter: var(--glass-blur);
-      background: rgba(10, 12, 16, .62);
-      border-bottom: 1px solid var(--glass-edge);
-      box-shadow: 0 1px 0 rgba(255, 255, 255, .06) inset;
-    }
-
-    .nav {
-      height: 66px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 18px;
-    }
-
-    .brand {
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      min-width: 0;
-      font-weight: 800;
-    }
-
-    .mark {
-      width: 36px;
-      height: 36px;
-      display: grid;
-      place-items: center;
-      border: 1px solid rgba(200, 169, 106, .55);
-      background: linear-gradient(180deg, rgba(200, 169, 106, .20), rgba(255, 255, 255, .04));
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, .22), 0 12px 28px rgba(0, 0, 0, .26);
-      color: var(--gold);
-      border-radius: 11px;
-      flex: 0 0 auto;
-    }
-
-    .brand span:last-child {
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-    .navlinks {
-      display: flex;
-      gap: 8px;
-      align-items: center;
-    }
-
-    /* === 캡슐 버튼 + 빛 번짐 === */
-    .navlinks a,
-    .btn {
-      min-height: 44px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      padding: 0 18px;
-      border: 1px solid var(--glass-edge);
-      border-radius: var(--radius-pill);
-      background: linear-gradient(180deg, rgba(255, 255, 255, .10), rgba(255, 255, 255, .03));
-      -webkit-backdrop-filter: var(--glass-blur);
-      backdrop-filter: var(--glass-blur);
-      color: var(--text);
-      font-size: 14px;
-      font-weight: 700;
-      transition: transform var(--dur) var(--ease-spring), border-color var(--dur), background var(--dur), color var(--dur);
-    }
-
-    .navlinks a:hover,
-    .btn:hover {
-      transform: translateY(-2px);
-      border-color: var(--gold);
-      color: #fff;
-    }
-
-    .navlinks a:active,
-    .btn:active { transform: scale(.96); }
-
-    .btn.primary {
-      border-color: rgba(200, 169, 106, .7);
-      color: #14110a;
-      background: linear-gradient(180deg, #ecdaae, #d2ad5c 54%, #b68a3f);
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, .56), 0 14px 34px rgba(200, 169, 106, .22);
-    }
-
-    .btn.primary:hover { border-color: #f0e1ba; }
-
-    /* === HERO === */
-    .hero {
-      min-height: min(840px, calc(88svh - 40px));
-      display: grid;
-      align-items: center;
-      padding: 60px 0 46px;
-    }
-
-    .eyebrow {
-      color: var(--gold);
-      font-size: 13px;
-      font-weight: 800;
-      text-transform: uppercase;
-      margin: 0 0 20px;
-    }
-
-    h1 {
-      max-width: 820px;
-      margin: 0;
-      font-size: clamp(44px, 6vw, 86px);
-      line-height: .98;
-      font-weight: 900;
-    }
-
-    .lead {
-      max-width: 680px;
-      margin: 26px 0 0;
-      color: #e2e7ef;
-      font-size: clamp(17px, 2vw, 21px);
-      line-height: 1.72;
-      font-weight: 500;
-    }
-
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 36px;
-    }
-
-    .proof-row {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 12px;
-      margin-top: 36px;
-      max-width: 760px;
-    }
-
-    .hero-note {
-      margin-top: 30px;
-      max-width: 760px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      color: #e4eaf2;
-      font-size: 13px;
-      font-weight: 700;
-    }
-
-    .hero-note span {
-      min-height: 38px;
-      display: inline-flex;
-      align-items: center;
-      border: 1px solid var(--glass-edge);
-      background: var(--glass-bg);
-      border-radius: var(--radius-pill);
-      padding: 0 16px;
-      -webkit-backdrop-filter: var(--glass-blur);
-      backdrop-filter: var(--glass-blur);
-    }
-
-    .proof {
-      border-top: 1px solid rgba(200, 169, 106, .42);
-      padding-top: 14px;
-    }
-
-    .proof strong {
-      display: block;
-      font-size: clamp(24px, 3vw, 36px);
-      line-height: 1;
-      color: #fff;
-    }
-
-    .proof span {
-      display: block;
-      margin-top: 8px;
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.45;
-    }
-
-    section {
-      padding: 60px 0;
-      border-top: 1px solid rgba(255, 255, 255, .07);
-    }
-
-    .section-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: end;
-      gap: 24px;
-      margin-bottom: 26px;
-    }
-
-    h2 {
-      margin: 0;
-      font-size: clamp(28px, 3.4vw, 44px);
-      line-height: 1.08;
-    }
-
-    .section-head p {
-      max-width: 500px;
-      margin: 0;
-      color: var(--muted);
-      line-height: 1.62;
-      font-size: 15px;
-    }
-
-    /* === 유리 카드 === */
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 16px;
-    }
-
-    .card {
-      min-height: 184px;
-      padding: 24px;
-      background: var(--glass-bg);
-      -webkit-backdrop-filter: var(--glass-blur);
-      backdrop-filter: var(--glass-blur);
-      border: 1px solid var(--glass-edge);
-      border-radius: var(--radius);
-      box-shadow: var(--glass-shadow);
-      transition: transform var(--dur) var(--ease-spring), box-shadow var(--dur) var(--ease-spring), border-color var(--dur);
-    }
-
-    .card:hover {
-      transform: translateY(-4px);
-      border-color: rgba(200, 169, 106, .42);
-      box-shadow: 0 1px 0 rgba(255, 255, 255, .14) inset, 0 22px 60px rgba(0, 0, 0, .55), 0 0 0 1px var(--gold-soft);
-    }
-
-    .card small {
-      color: var(--gold);
-      font-weight: 800;
-      font-size: 12px;
-      letter-spacing: .04em;
-    }
-
-    .card h3 {
-      margin: 14px 0 10px;
-      font-size: 21px;
-      line-height: 1.24;
-    }
-
-    .card p {
-      margin: 0;
-      color: var(--muted);
-      line-height: 1.65;
-      font-size: 14px;
-    }
-
-    .wide {
-      display: grid;
-      grid-template-columns: minmax(0, .82fr) minmax(0, 1.18fr);
-      gap: 18px;
-      align-items: stretch;
-    }
-
-    .board-shot {
-      min-height: 360px;
-      border: 1px solid var(--glass-edge);
-      border-radius: var(--radius);
-      background:
-        linear-gradient(180deg, rgba(10, 12, 16, .16), rgba(10, 12, 16, .56)),
-        url("assets/performance-board.png") center top / cover no-repeat;
-      box-shadow: var(--glass-shadow);
-      transition: transform var(--dur) var(--ease-spring), box-shadow var(--dur) var(--ease-spring);
-    }
-
-    .board-shot:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 1px 0 rgba(255, 255, 255, .14) inset, 0 22px 60px rgba(0, 0, 0, .55), 0 0 0 1px var(--gold-soft);
-    }
-
-    /* 유리 패널 — 본문 텍스트지만 짧은 카드형이라 허용(스크롤 영역 아님) */
-    .panel {
-      padding: 28px;
-      background: var(--glass-bg);
-      border: 1px solid var(--glass-edge);
-      border-radius: var(--radius);
-      box-shadow: var(--glass-shadow);
-      -webkit-backdrop-filter: var(--glass-blur);
-      backdrop-filter: var(--glass-blur);
-    }
-
-    .panel .lead { color: #e2e7ef; }
-
-    .metric-list {
-      display: grid;
-      gap: 12px;
-      margin-top: 26px;
-    }
-
-    .metric {
-      display: grid;
-      grid-template-columns: 112px 1fr;
-      gap: 16px;
-      padding: 16px 0;
-      border-top: 1px solid rgba(255, 255, 255, .09);
-    }
-
-    .metric strong {
-      color: #fff;
-      font-size: 24px;
-      line-height: 1.1;
-    }
-
-    .metric span {
-      color: var(--muted);
-      font-size: 14px;
-      line-height: 1.56;
-    }
-
-    .links {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 14px;
-    }
-
-    .link-card {
-      min-height: 146px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      padding: 20px;
-      background: var(--glass-bg);
-      -webkit-backdrop-filter: var(--glass-blur);
-      backdrop-filter: var(--glass-blur);
-      border: 1px solid var(--glass-edge);
-      border-radius: var(--radius);
-      box-shadow: var(--glass-shadow);
-      transition: transform var(--dur) var(--ease-spring), box-shadow var(--dur) var(--ease-spring), border-color var(--dur);
-    }
-
-    .link-card:hover {
-      transform: translateY(-4px);
-      border-color: rgba(200, 169, 106, .42);
-      box-shadow: 0 1px 0 rgba(255, 255, 255, .14) inset, 0 22px 60px rgba(0, 0, 0, .55), 0 0 0 1px var(--gold-soft);
-    }
-
-    .link-card strong {
-      font-size: 17px;
-      line-height: 1.3;
-    }
-
-    .link-card span {
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.45;
-    }
-
-    .cta-band {
-      margin-bottom: 64px;
-      padding: 36px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 24px;
-      border: 1px solid rgba(200, 169, 106, .38);
-      border-radius: var(--radius);
-      background:
-        linear-gradient(110deg, rgba(200, 169, 106, .16), rgba(255, 255, 255, .055) 45%, rgba(92, 113, 145, .14)),
-        var(--glass-bg);
-      -webkit-backdrop-filter: var(--glass-blur);
-      backdrop-filter: var(--glass-blur);
-      box-shadow: var(--glass-shadow);
-    }
-
-    .cta-band h2 { font-size: clamp(26px, 3vw, 38px); }
-
-    .cta-band p {
-      margin: 10px 0 0;
-      color: var(--muted);
-      line-height: 1.6;
-    }
-
-    footer {
-      padding: 28px 0 44px;
-      color: var(--dim);
-      border-top: 1px solid rgba(255, 255, 255, .07);
-      font-size: 13px;
-    }
-
-    /* === 등장 애니메이션 (spring) === */
-    .reveal {
-      opacity: 0;
-      transform: translateY(22px);
-    }
-
-    .reveal.in {
-      opacity: 1;
-      transform: none;
-      transition: opacity .5s ease, transform .5s var(--ease-spring);
-    }
-
-    .grid .card,
-    .links .link-card {
-      transition: transform var(--dur) var(--ease-spring), box-shadow var(--dur) var(--ease-spring), border-color var(--dur), opacity .5s ease;
-    }
-
-    @media (max-width: 960px) {
-      body {
-        background:
-          linear-gradient(180deg, rgba(10, 12, 16, .74), var(--bg) 42%),
-          url("assets/ksh-profile.jpg") right top / 82vw auto no-repeat fixed,
-          linear-gradient(135deg, #090b0f, #10141b 52%, #0d1016);
-      }
-
-      .navlinks a:not(.keep) { display: none; }
-      .wide { grid-template-columns: 1fr; }
-      .grid,
-      .links { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .section-head { display: block; }
-      .section-head p { margin-top: 12px; }
-    }
-
-    @media (max-width: 640px) {
-      .shell { width: min(100% - 24px, 1180px); }
-      .nav { height: 60px; }
-      .brand span:last-child { max-width: 184px; }
-      .navlinks { display: none; }
-      .hero { min-height: auto; padding: 64px 0 38px; }
-      h1 { font-size: 40px; line-height: 1.05; }
-      .proof-row,
-      .grid,
-      .links { grid-template-columns: 1fr; }
-      .proof-row { gap: 18px; }
-      .card,
-      .panel,
-      .cta-band { padding: 22px; }
-      .metric { grid-template-columns: 1fr; gap: 6px; }
-      .board-shot { min-height: 260px; }
-      .cta-band { display: block; }
-      .cta-band .hero-actions { margin-top: 22px; }
-      .btn { width: 100%; }
-    }
-
-    /* === 접근성: 모션/투명도 줄이기 자동 대응 === */
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        animation-duration: .01ms !important;
-        animation-iteration-count: 1 !important;
-        scroll-behavior: auto !important;
-        transition-duration: .01ms !important;
-      }
-      .reveal { opacity: 1 !important; transform: none !important; }
-    }
-
-    @media (prefers-reduced-transparency: reduce) {
-      .topbar,
-      .card,
-      .panel,
-      .link-card,
-      .cta-band,
-      .hero-note span,
-      .navlinks a,
-      .btn {
-        -webkit-backdrop-filter: none;
-        backdrop-filter: none;
-        background: var(--bg-2);
-      }
-      .btn.primary { background: linear-gradient(180deg, #ecdaae, #d2ad5c 54%, #b68a3f); }
-    }
-  </style>
+  <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js"}}</script>
 </head>
 <body>
-  <header class="topbar">
-    <nav class="shell nav" aria-label="주요 메뉴">
-      <a class="brand" href="#top" aria-label="프라임에셋 188본부 홈">
-        <span class="mark">188</span>
-        <span>프라임에셋 188본부</span>
-      </a>
-      <div class="navlinks">
-        <a href="#system">시스템</a>
-        <a href="#performance">실적보드</a>
-        <a href="#links">도구</a>
-        <a class="keep" href="https://www.primeasset.info" target="_blank" rel="noopener">프리미엄인포</a>
-      </div>
-    </nav>
+  <div class="preloader" aria-hidden="true"><span>0</span></div>
+  <div class="cursor-dot"></div><div class="cursor-ring"></div>
+  <div class="grain" aria-hidden="true"></div>
+  <header class="nav">
+    <a class="wordmark" href="#hero">프라임에셋 <b>188본부</b></a>
+    <nav aria-label="주요 메뉴"><a href="#system">시스템</a><a href="#performance">실적보드</a><a href="#tools">도구</a><a href="https://www.primeasset.info" target="_blank" rel="noopener">프리미엄인포</a></nav>
   </header>
 
-  <main id="top">
-    <section class="hero">
-      <div class="shell hero-grid">
-        <div>
-          <p class="eyebrow reveal">PrimeAsset 188 Headquarters</p>
-          <h1 class="reveal">김상현 이사<br>프라임에셋<br>188본부</h1>
-          <p class="lead reveal">정착지원금보다 중요한 것은 오래 벌 수 있는 구조입니다. 수수료표, 영업규정, 시책, 자료, 교육, 플랫폼을 숨기지 않고 비교할 수 있게 만드는 설계사 중심 허브입니다.</p>
-          <div class="hero-actions reveal">
-            <a class="btn primary" href="#links">시스템 바로가기</a>
-            <a class="btn" href="#performance">사업부 실적 보기</a>
-          </div>
-          <div class="proof-row reveal" aria-label="핵심 지표">
-            <div class="proof">
-              <strong>18</strong>
-              <span>프리미엄사업부 본부 네트워크</span>
-            </div>
-            <div class="proof">
-              <strong>30</strong>
-              <span>생명보험·손해보험 제휴 운용</span>
-            </div>
-            <div class="proof">
-              <strong>22.3억</strong>
-              <span>2026년 1~6월 사업부 실적 기준</span>
-            </div>
-          </div>
-          <div class="hero-note reveal" aria-label="운영 기준">
-            <span>현장 영업 출신 본부장</span>
-            <span>자료·규정·시스템 중심 운영</span>
-            <span>수당표 기준 비교 미팅</span>
-          </div>
-        </div>
+  <main>
+    <section id="hero" class="hero">
+      <canvas id="hero-canvas" aria-label="골드 파티클 188 애니메이션"></canvas>
+      <div class="nebula"></div>
+      <div class="light-ribbons" aria-hidden="true"></div>
+      <div class="hero-copy shell">
+        <p class="eyebrow reveal">프라임에셋 188본부</p>
+        <h1><span class="line"><i><em>설계사</em>의 성장을</i></span><span class="line"><i><em>설계</em>합니다</i></span></h1>
+        <p class="hero-lead reveal">정착지원금보다 중요한 것은 오래 벌 수 있는 구조입니다.</p>
+        <p class="hero-sub reveal">수수료표, 영업규정, 시책, 자료, 교육, 플랫폼을 숨기지 않고 비교할 수 있게 만드는 설계사 중심 허브</p>
+        <div class="hero-actions reveal"><a class="btn magnetic" href="../system/">시스템 바로가기 <span>↗</span></a><a class="btn ghost magnetic" href="../performance/">실적 보기 <span>↗</span></a></div>
+      </div>
+      <div class="scroll-line"><span></span><small>SCROLL</small></div>
+    </section>
+
+    <section class="metrics section shell" aria-label="핵심 지표">
+      <article class="metric tilt reveal"><strong data-count="18">18</strong><h2>본부 네트워크</h2><p>함께 움직이는 사업부 조직</p></article>
+      <article class="metric tilt reveal"><strong data-count="30">30</strong><h2>생·손보 제휴</h2><p>폭넓게 비교하는 보험사 네트워크</p></article>
+      <article class="metric tilt reveal"><strong data-count="22.3">22.3</strong><h2>억 · 2026 상반기</h2><p>1월부터 6월까지 검증된 실적</p></article>
+    </section>
+
+    <section id="system" class="system section shell">
+      <div class="section-title reveal"><p>188 OPERATING STANDARD</p><h2><span class="title-desktop">설계사가 비교할 수 있어야<br>좋은 조직입니다</span><span class="title-mobile">설계사가 비교할 수<br>있어야 좋은 조직입니다</span></h2><span>말이 아니라 실제 수당표와 운영자료로 비교합니다.</span></div>
+      <div class="system-grid">
+        <article class="system-card tilt reveal"><b>01</b><h3>수당 구조 공개</h3><p>수수료표, 수정률, 환산율, 시책 기준을 분리해 검토하고 무조건 지급 시책은 수당 안내에 포함합니다.</p></article>
+        <article class="system-card tilt reveal"><b>02</b><h3>영업규정 답변 체계</h3><p>승격, 직급, 적용기준, 환수 여부처럼 계산식과 다른 질문은 별도 규정 데이터로 관리합니다.</p></article>
+        <article class="system-card tilt reveal"><b>03</b><h3>온라인 영업환경</h3><p>보험노트, 자료검색기, 프리미엄 상품통합분석기, 수당계산기를 실무 도구로 정리합니다.</p></article>
+        <article class="system-card tilt reveal"><b>04</b><h3>스탠다드 캠퍼스</h3><p>신입 설계사가 같은 기준으로 상담, 비교, 보상, 고객관리를 익히도록 교육 흐름을 설계합니다.</p></article>
+        <article class="system-card tilt reveal"><b>05</b><h3>하이엔드 브랜딩</h3><p>조용한 럭셔리, 정돈된 자료, 숫자 중심 콘텐츠로 설계사의 신뢰 자산을 함께 키웁니다.</p></article>
+        <article class="system-card tilt reveal"><b>06</b><h3>조건 비교 미팅</h3><p>현재 조건과 188본부 구조를 표로 비교합니다. 막연한 설득보다 실제 수당표와 운영자료를 보여드립니다.</p></article>
       </div>
     </section>
 
-    <section id="system">
-      <div class="shell">
-        <div class="section-head">
-          <h2 class="reveal">설계사가 비교할 수 있어야<br>좋은 조직입니다</h2>
-          <p class="reveal">188본부의 기준은 말이 아니라 자료입니다. 수당, 규정, 교육, 상담자료, 보상자료, 영업 플랫폼을 실제 업무 흐름에 맞게 연결합니다.</p>
-        </div>
-        <div class="grid">
-          <article class="card reveal">
-            <small>01 / COMMISSION</small>
-            <h3>수당 구조 공개</h3>
-            <p>수수료표, 수정률, 환산율, 시책 기준을 분리해 검토하고 무조건 지급 시책은 수당 안내에 포함합니다.</p>
-          </article>
-          <article class="card reveal">
-            <small>02 / RULE</small>
-            <h3>영업규정 답변 체계</h3>
-            <p>승격, 직급, 적용기준, 환수 여부처럼 계산식과 다른 질문은 별도 규정 데이터로 관리합니다.</p>
-          </article>
-          <article class="card reveal">
-            <small>03 / PLATFORM</small>
-            <h3>온라인 영업환경</h3>
-            <p>보험노트, 자료검색기, 프리미엄 상품통합분석기, 수당계산기를 실무자가 반복해서 쓰는 도구로 정리합니다.</p>
-          </article>
-          <article class="card reveal">
-            <small>04 / EDUCATION</small>
-            <h3>스탠다드 캠퍼스</h3>
-            <p>신입 설계사가 처음부터 같은 기준으로 상담, 비교, 보상, 고객관리를 익히도록 교육 흐름을 설계합니다.</p>
-          </article>
-          <article class="card reveal">
-            <small>05 / BRAND</small>
-            <h3>하이엔드 브랜딩</h3>
-            <p>조용한 럭셔리, 정돈된 자료, 숫자 중심 콘텐츠로 설계사의 신뢰 자산을 함께 키웁니다.</p>
-          </article>
-          <article class="card reveal">
-            <small>06 / MEETING</small>
-            <h3>조건 비교 미팅</h3>
-            <p>현재 조건과 188본부 구조를 표로 비교합니다. 막연한 설득보다 실제 수당표와 운영자료를 보여드립니다.</p>
-          </article>
-        </div>
+    <section id="performance" class="performance section">
+      <div class="performance-number" aria-hidden="true">22.3억</div>
+      <div class="shell performance-inner">
+        <div class="section-title reveal"><p>2026 · JAN—JUN</p><h2>프리미엄사업부<br>실적보드</h2><span>규모는 주장하지 않고 숫자로 증명합니다.</span></div>
+        <div class="chart reveal"><svg viewBox="0 0 760 270" role="img" aria-label="상반기 성장 그래프"><path class="grid" d="M0 220H760M0 150H760M0 80H760"/><path class="graph" d="M0 230 C100 225 110 195 205 194 S310 160 392 168 S510 100 585 114 S680 53 760 38"/></svg><div class="sub-metrics"><span><b>18개</b> 본부</span><span><b>30개</b> 보험사</span></div></div>
+        <a class="btn magnetic reveal" href="../performance/">실적보드 전체 보기 <span>↗</span></a>
       </div>
     </section>
 
-    <section id="performance">
-      <div class="shell wide">
-        <div class="panel reveal">
-          <p class="eyebrow">Premium Division Board</p>
-          <h2>프리미엄사업부 실적보드</h2>
-          <p class="lead">2026년 1~6월 최신 실적을 이 허브의 대표 콘텐츠로 연결합니다. 사업부 전체 규모와 본부·보험사 네트워크를 한눈에 보여줍니다.</p>
-          <div class="metric-list">
-            <div class="metric">
-              <strong>22.3억</strong>
-              <span>2026년 상반기 사업부 실적 규모. 엑셀 단위는 천원 기준으로 재검수 완료.</span>
-            </div>
-            <div class="metric">
-              <strong>18개</strong>
-              <span>본부별 흐름을 비교하되 특정 본부 순위 강조보다 사업부 전체 규모를 중심으로 표현합니다.</span>
-            </div>
-            <div class="metric">
-              <strong>30개</strong>
-              <span>보험사 네트워크를 기반으로 상품 선택권과 영업 대응 폭을 보여줍니다.</span>
-            </div>
-          </div>
-        </div>
-        <a class="board-shot reveal" href="/performance/" aria-label="프리미엄사업부 실적보드 열기"></a>
+    <section id="tools" class="tools section shell">
+      <div class="section-title reveal"><p>WORK SYSTEM</p><h2>업무 도구 허브</h2><span>설계사가 반복해서 쓰는 실전 도구를 한곳에 연결합니다.</span></div>
+      <div class="bento">
+        <a class="tool large reveal" href="https://www.primeasset.info" target="_blank" rel="noopener"><small>01 · PREMIUM</small><h3>프리미엄인포</h3><span>프리미엄사업부 공식 정보 ↗</span></a>
+        <a class="tool large reveal" href="../performance/" target="_blank"><small>02 · PERFORMANCE</small><h3>사업부 실적보드</h3><span>검증된 사업부 실적 보기 ↗</span></a>
+        <a class="tool large reveal" href="https://bohumnote.com" target="_blank" rel="noopener"><small>03 · INSURANCE NOTE</small><h3>보험노트</h3><span>설계사를 위한 보험 실무 허브 ↗</span></a>
+        <a class="tool reveal" href="https://script.google.com/macros/s/AKfycbx2R0eWsh6J9MyUPZahLHJj1bDiSdh1Ei147OOVJ85fCVZv1R-RQCeYIYgrkLiy7eh_/exec" target="_blank" rel="noopener"><small>04 · SEARCH</small><h3>자료검색기</h3></a>
+        <a class="tool reveal" href="../ai_system/" target="_blank"><small>05</small><h3>프리미엄 통합페이지</h3></a>
+        <a class="tool reveal" href="https://script.google.com/macros/s/AKfycbz4ZR5EbyrzaIkOfhUR0Hqe0eTRokTf8Sa6ax9Q0paQlRPtJfmxG7AwC2RXIpUNq1XfYg/exec" target="_blank" rel="noopener"><small>06</small><h3>수당계산기</h3></a>
+        <a class="tool reveal" href="../claim/" target="_blank"><small>07</small><h3>보험보상 답변기</h3></a>
+        <a class="tool reveal" href="https://script.google.com/macros/s/AKfycbwxsEPxs_uq5H4gH43Ie_FH0mrKAtdkrnzP-30b52GKTBMXVzARfgggs6_klkyadIVl/exec" target="_blank" rel="noopener"><small>08</small><h3>프리미엄 상품통합분석기</h3></a>
+        <a class="tool reveal" href="../system/" target="_blank"><small>09</small><h3>188 시스템 안내</h3></a>
       </div>
     </section>
 
-    <section id="links">
-      <div class="shell">
-        <div class="section-head">
-          <h2 class="reveal">업무 도구 허브</h2>
-          <p class="reveal">처음 공개 버전은 링크형 허브로 가볍게 시작하고, 이후 데이터와 역할이 확정되면 섹션을 정식 페이지로 확장합니다.</p>
-        </div>
-        <div class="links">
-          <a class="link-card reveal" href="https://www.primeasset.info" target="_blank" rel="noopener">
-            <strong>프리미엄인포</strong>
-            <span>기존 공식 페이지</span>
-          </a>
-          <a class="link-card reveal" href="/ai_system/">
-            <strong>프리미엄 통합페이지</strong>
-            <span>188 허브 안에서 로그인 후 실행</span>
-          </a>
-          <a class="link-card reveal" href="https://bohumnote.com" target="_blank" rel="noopener">
-            <strong>보험노트</strong>
-            <span>설계사 프로필·보험정보 플랫폼</span>
-          </a>
-          <a class="link-card reveal" href="https://script.google.com/macros/s/AKfycbz4ZR5EbyrzaIkOfhUR0Hqe0eTRokTf8Sa6ax9Q0paQlRPtJfmxG7AwC2RXIpUNq1XfYg/exec" target="_blank" rel="noopener">
-            <strong>수당계산기</strong>
-            <span>수수료·수정률·환산율 기준</span>
-          </a>
-          <a class="link-card reveal" href="/performance/">
-            <strong>사업부 실적보드</strong>
-            <span>2026년 상반기 기준</span>
-          </a>
-          <a class="link-card reveal" href="https://script.google.com/macros/s/AKfycbx2R0eWsh6J9MyUPZahLHJj1bDiSdh1Ei147OOVJ85fCVZv1R-RQCeYIYgrkLiy7eh_/exec" target="_blank" rel="noopener">
-            <strong>자료검색기</strong>
-            <span>저장소 자료 검색</span>
-          </a>
-          <a class="link-card reveal" href="/claim/">
-            <strong>보험보상 답변기</strong>
-            <span>보상 상담 쟁점과 설명 방향 정리</span>
-          </a>
-          <a class="link-card reveal" href="https://script.google.com/macros/s/AKfycbwxsEPxs_uq5H4gH43Ie_FH0mrKAtdkrnzP-30b52GKTBMXVzARfgggs6_klkyadIVl/exec" target="_blank" rel="noopener">
-            <strong>프리미엄 상품통합분석기</strong>
-            <span>상품·비교자료와 월간 이슈·시책 통합 분석</span>
-          </a>
-          <a class="link-card reveal" href="/system/">
-            <strong>188 시스템 안내</strong>
-            <span>입점·운영 안내</span>
-          </a>
-        </div>
-      </div>
+    <section class="final-cta section">
+      <canvas id="cta-canvas" aria-hidden="true"></canvas>
+      <div class="shell reveal"><p>COMPARE YOUR NEXT STANDARD</p><h2>지금 조건을<br>비교해보세요</h2><a class="meeting magnetic" href="tel:01087149262">김상현 이사와<br>이야기하기 <span>↗</span></a><a class="contact-number" href="tel:01087149262">010-8714-9262</a></div>
     </section>
-
-    <div class="shell">
-      <div class="cta-band reveal">
-        <div>
-          <h2>지금 조건을 비교해보세요</h2>
-          <p>수당표, 시책, 영업규정, 자료지원, 플랫폼까지 실제 운영 기준으로 확인합니다.</p>
-        </div>
-        <div class="hero-actions">
-          <a class="btn primary" href="https://www.primeasset.info" target="_blank" rel="noopener">미팅 문의</a>
-          <a class="btn" href="#system">구조 보기</a>
-        </div>
-      </div>
-    </div>
   </main>
 
-  <footer>
-    <div class="shell">© PrimeAsset 188 Headquarters. 김상현 이사 공식 허브.</div>
-  </footer>
-
-  <script>
-    /* 스크롤 등장 — spring, 모션 줄이기면 즉시 표시 */
-    (function () {
-      var reveals = document.querySelectorAll('.reveal');
-      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      if (reduce || !('IntersectionObserver' in window)) {
-        reveals.forEach(function (el) { el.classList.add('in'); });
-        return;
-      }
-      var io = new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry, i) {
-          if (entry.isIntersecting) {
-            var el = entry.target;
-            var delay = Math.min(parseInt(el.dataset.i || 0, 10) * 60, 360);
-            setTimeout(function () { el.classList.add('in'); }, delay);
-            io.unobserve(el);
-          }
-        });
-      }, { threshold: 0.08, rootMargin: '0px 0px -8% 0px' });
-      reveals.forEach(function (el, i) {
-        // 같은 그룹 내 순차 등장
-        var siblings = el.parentElement ? Array.prototype.indexOf.call(el.parentElement.children, el) : 0;
-        el.dataset.i = siblings;
-        io.observe(el);
-      });
-    })();
-  </script>
+  <footer><div class="shell"><p>프라임에셋 188본부 — 설계사의 성장을 설계합니다</p><span>© PrimeAsset 188 Headquarters. 김상현 이사 공식 허브.</span></div></footer>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js" defer></script>
   <script src="/assets/hub-menu.js?v=20260713-my-button" defer></script>
+  <script type="module" src="/future188-v2/main.js"></script>
 </body>
 </html>
