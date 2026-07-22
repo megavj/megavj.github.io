@@ -15,6 +15,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Marcellus&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
   <link rel="stylesheet" href="main.css">
+  <link rel="stylesheet" href="/assets/hub-menu.css?v=20260713-my-button">
   <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js"}}</script>
 </head>
 <body>
@@ -24,13 +25,13 @@
   <header class="nav">
     <a class="wordmark" href="#hero">프라임에셋 <b>188본부</b></a>
     <nav aria-label="주요 메뉴"><a href="#system">시스템</a><a href="#performance">실적보드</a><a href="#tools">도구</a><a href="https://www.primeasset.info" target="_blank" rel="noopener">프리미엄인포</a></nav>
-    <button class="menu-btn" aria-label="메뉴 열기"><i></i><i></i></button>
   </header>
 
   <main>
     <section id="hero" class="hero">
       <canvas id="hero-canvas" aria-label="골드 파티클 188 애니메이션"></canvas>
       <div class="nebula"></div>
+      <div class="light-ribbons" aria-hidden="true"></div>
       <div class="hero-copy shell">
         <p class="eyebrow reveal">프라임에셋 188본부</p>
         <h1><span class="line"><i><em>설계사</em>의 성장을</i></span><span class="line"><i><em>설계</em>합니다</i></span></h1>
@@ -93,6 +94,7 @@
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js" defer></script>
+  <script src="/assets/hub-menu.js?v=20260713-my-button" defer></script>
   <script type="module" src="main.js"></script>
 </body>
 </html>

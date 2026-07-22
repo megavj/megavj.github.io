@@ -20,3 +20,14 @@
 .contact-number{display:inline-block;margin-top:22px;color:var(--gold-hi);font:16px/1.2 Marcellus;letter-spacing:.12em}
 .contact-number:hover{color:var(--text)}
 @media(max-width:800px){.section-title h2 .title-desktop{display:none}.section-title h2 .title-mobile{display:inline}.contact-number{margin-top:18px;font-size:14px}}
+
+/* Shared hub navigation + restrained living background */
+body.has-hub-menu .nav{padding-right:142px}
+.hub-menu-toggle,.hub-my-link{border-color:rgba(201,162,39,.52);background:rgba(5,6,7,.82)}
+.hub-menu-panel{background:rgba(5,6,7,.97);border-left-color:rgba(201,162,39,.32)}
+.light-ribbons{position:absolute;inset:-25%;z-index:0;pointer-events:none;opacity:.42;background:conic-gradient(from 215deg at 68% 44%,transparent 0 28%,rgba(232,201,106,.055) 34%,transparent 41% 69%,rgba(138,109,31,.045) 75%,transparent 82%);filter:blur(38px);animation:ribbon-drift 15s ease-in-out infinite alternate;mix-blend-mode:screen}
+.hero:before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:radial-gradient(circle at 76% 28%,rgba(232,201,106,.10) 0 1px,transparent 2px),radial-gradient(circle at 62% 62%,rgba(245,242,234,.07) 0 1px,transparent 2px);background-size:190px 190px,270px 270px;animation:star-drift 22s linear infinite;opacity:.72}
+@keyframes ribbon-drift{0%{transform:translate3d(-2%,-1%,0) rotate(-2deg) scale(1)}100%{transform:translate3d(4%,3%,0) rotate(5deg) scale(1.09)}}
+@keyframes star-drift{to{background-position:190px 380px,-270px 540px}}
+@media(max-width:800px){body.has-hub-menu .nav{padding-right:122px}.light-ribbons{opacity:.28;filter:blur(30px);animation-duration:20s}}
+@media(prefers-reduced-motion:reduce){.light-ribbons,.hero:before{animation:none}}
