@@ -31,3 +31,5 @@ body.has-hub-menu .nav{padding-right:142px}
 @keyframes star-drift{to{background-position:190px 380px,-270px 540px}}
 @media(max-width:800px){body.has-hub-menu .nav{padding-right:122px}.light-ribbons{opacity:.28;filter:blur(30px);animation-duration:20s}}
 @media(prefers-reduced-motion:reduce){.light-ribbons,.hero:before{animation:none}}
+.preloader span.spark{animation:preloader-spark 1s ease-out both}
+@keyframes preloader-spark{0%{color:var(--gold-hi);text-shadow:0 0 0 rgba(232,201,106,0);transform:scale(1)}22%{color:#fff7d7;text-shadow:0 0 18px rgba(232,201,106,.95),0 0 58px rgba(201,162,39,.75);transform:scale(1.07)}55%{color:var(--gold-hi);text-shadow:0 0 28px rgba(232,201,106,.55);transform:scale(1.02)}100%{color:var(--gold-hi);text-shadow:0 0 8px rgba(232,201,106,.22);transform:scale(1)}}
