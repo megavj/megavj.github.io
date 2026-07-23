@@ -21,7 +21,7 @@
 </head>
 <body>
   <div class="preloader" aria-hidden="true"><span>0</span></div>
-  <div class="cursor-dot"></div><div class="cursor-ring"></div>
+  <canvas id="spark-cursor" aria-hidden="true"></canvas>
   <div class="grain" aria-hidden="true"></div>
   <header class="nav">
     <a class="wordmark" href="#hero">프라임에셋 <b>188본부</b></a>
@@ -97,7 +97,22 @@
 
     <section class="final-cta section">
       <canvas id="cta-canvas" aria-hidden="true"></canvas>
-      <div class="shell reveal"><p>COMPARE YOUR NEXT STANDARD</p><h2 class="prism-text prism-text-cta"><span class="prism-line" data-text="지금 조건을">지금 조건을</span><br><span class="prism-line" data-text="비교해보세요">비교해보세요</span></h2><a class="meeting magnetic" href="https://open.kakao.com/o/sFMF26y" target="_blank" rel="noopener noreferrer">김상현 이사와<br>이야기하기 <span>↗</span></a><a class="contact-number" href="tel:01087149262">010-8714-9262</a></div>
+      <div class="shell reveal"><p>COMPARE YOUR NEXT STANDARD</p><h2 class="prism-text prism-text-cta"><span class="prism-line" data-text="지금 조건을">지금 조건을</span><br><span class="prism-line" data-text="비교해보세요">비교해보세요</span></h2>
+        <div class="contact-unit" aria-label="김상현 이사 상담">
+          <div class="energy-field" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+          <a class="meeting-orbit" href="https://open.kakao.com/o/sFMF26y" target="_blank" rel="noopener noreferrer">
+            <span class="orbit orbit-outer" aria-hidden="true"></span>
+            <span class="orbit orbit-mid" aria-hidden="true"></span>
+            <span class="orbit orbit-inner" aria-hidden="true"></span>
+            <span class="meeting-surface">
+              <span class="meeting-kicker">PRIVATE MEETING</span>
+              <strong>김상현 이사와<br>이야기하기</strong>
+              <span class="meeting-arrow" aria-hidden="true">↗</span>
+            </span>
+          </a>
+          <a class="contact-number phone" href="tel:01087149262"><span class="phone-caption">DIRECT CONTACT</span><strong>010-8714-9262</strong><span class="phone-line" aria-hidden="true"></span></a>
+        </div>
+      </div>
     </section>
   </main>
 
