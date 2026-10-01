@@ -65,5 +65,8 @@ body.has-hub-menu .nav{padding-right:142px}
 @keyframes star-drift{to{background-position:190px 380px,-270px 540px}}
 @media(max-width:800px){body.has-hub-menu .nav{padding-right:122px}.light-ribbons{opacity:.28;filter:blur(30px);animation-duration:20s}}
 @media(prefers-reduced-motion:reduce){.light-ribbons,.hero:before{animation:none}}
+/* hero 188 v3: WebGL 불가·컨텍스트 손실 시 정적 금빛 188 (.hero:before 의 inset:0·별가루 배경을 상속하지 않게 덮어씀) */
+.webgl-fallback .hero:before{inset:50% 4vw auto auto;transform:translateY(-50%);font:clamp(220px,32vw,540px)/.8 Marcellus,serif;letter-spacing:-.02em;color:transparent;background:linear-gradient(172deg,#fff6d6 0%,#e8c96a 32%,#a87e1d 62%,#f0d88a 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-stroke:1px rgba(255,236,170,.3);text-shadow:none;filter:drop-shadow(0 0 24px rgba(201,162,39,.3));opacity:.42;animation:none}
+@media(max-width:800px){.webgl-fallback .hero:before{inset:30% -22vw auto auto;font-size:64vw;opacity:.3}}
 .preloader span.spark{animation:preloader-spark 1s ease-out both}
 @keyframes preloader-spark{0%{color:var(--gold-hi);text-shadow:0 0 0 rgba(232,201,106,0);transform:scale(1)}22%{color:#fff7d7;text-shadow:0 0 18px rgba(232,201,106,.95),0 0 58px rgba(201,162,39,.75);transform:scale(1.07)}55%{color:var(--gold-hi);text-shadow:0 0 28px rgba(232,201,106,.55);transform:scale(1.02)}100%{color:var(--gold-hi);text-shadow:0 0 8px rgba(232,201,106,.22);transform:scale(1)}}
