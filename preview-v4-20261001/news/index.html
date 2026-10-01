@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta name="robots" content="noindex,nofollow">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>프리미엄 최신보험뉴스 | 188 프라임에셋</title>
+  <meta name="description" content="프리미엄 최신보험뉴스를 188 프라임에셋 허브에서 바로 확인합니다.">
+  <meta name="theme-color" content="#050607">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Marcellus&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+  <link rel="stylesheet" href="/preview-v4-20261001/assets/design-tokens.css?v=20261001-v4">
+  <link rel="stylesheet" href="/preview-v4-20261001/assets/hub-menu.css?v=20261001-v4">
+  <style>
+    /* === 페이지 전용 — 상단바·버튼·색은 design-tokens.css 의 188 Signature v4(.lux-*) === */
+    :root {
+      --ink: var(--lux-ink);
+      --muted: var(--lux-ink-2);
+      --line: var(--lux-line);
+      color-scheme: dark;
+      font-family: var(--lux-font);
+    }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      color: var(--lux-ink);
+      background:
+        radial-gradient(70% 50% at 50% -10%, rgba(232,201,106,.12), transparent 62%),
+        var(--lux-bg);
+      overflow: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    .frame-wrap {
+      height: calc(100% - var(--lux-topbar-h));
+      position: relative;
+      background: var(--lux-bg);
+    }
+    iframe {
+      width: 100%;
+      height: 100%;
+      display: block;
+      border: 0;
+      background: var(--lux-bg);
+    }
+    .fallback {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      pointer-events: none;
+    }
+    .fallback-card {
+      position: relative;
+      width: min(460px, 100%);
+      border: 1px solid rgba(232,201,106,.32);
+      border-radius: var(--lux-r-lg);
+      background:
+        radial-gradient(90% 120% at 50% 0%, rgba(232,201,106,.14), transparent 60%),
+        linear-gradient(180deg, #111318, #0a0b0e);
+      box-shadow: var(--lux-shadow);
+      padding: 30px 26px 28px;
+      text-align: center;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity .25s ease, transform .35s var(--lux-ease);
+      pointer-events: auto;
+    }
+    .fallback-card::before {
+      content: "";
+      position: absolute;
+      top: -1px;
+      left: 24px;
+      right: 24px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(232,201,106,.7), transparent);
+    }
+    .fallback.show .fallback-card {
+      opacity: 1;
+      transform: none;
+    }
+    .fallback .lux-mark { margin: 0 auto 16px; }
+    .fallback h1 {
+      margin: 0;
+      font-size: 21px;
+      letter-spacing: -.03em;
+    }
+    .fallback p {
+      margin: 10px 0 20px;
+      color: var(--muted);
+      line-height: 1.65;
+      font-size: 14px;
+      word-break: keep-all;
+    }
+    @media (max-width: 640px) {
+      .lux-brand__text { max-width: 150px; }
+    }
+  </style>
+</head>
+<body class="lux-page">
+  <header class="topbar lux-topbar">
+    <a class="lux-brand" href="/preview-v4-20261001/" aria-label="188 프라임에셋 허브로 이동">
+      <span class="lux-mark" aria-hidden="true">188</span>
+      <span class="lux-brand__text">프리미엄 최신보험뉴스<small>PREMIUM NEWS</small></span>
+    </a>
+    <nav class="lux-actions" aria-label="페이지 동작">
+      <a class="lux-btn lux-btn--ghost lux-btn--sm" href="/preview-v4-20261001/">허브</a>
+      <a class="lux-btn lux-btn--gold lux-btn--sm" id="openExternal" target="_blank" rel="noopener">새 창 <span class="lux-btn__arrow" aria-hidden="true">↗</span></a>
+    </nav>
+  </header>
+
+  <main class="frame-wrap">
+    <iframe id="newsFrame" title="프리미엄 최신보험뉴스" loading="eager"></iframe>
+    <div class="fallback" id="fallback" aria-hidden="true">
+      <div class="fallback-card">
+        <span class="lux-mark" aria-hidden="true">188</span>
+        <h1>프리미엄 최신보험뉴스</h1>
+        <p>브라우저에서 프레임 표시가 지연되면 새 창으로 바로 열 수 있습니다.</p>
+        <a class="lux-btn lux-btn--gold" id="fallbackOpen" target="_blank" rel="noopener">새 창으로 열기 <span class="lux-btn__arrow" aria-hidden="true">↗</span></a>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const premiumNewsUrl = 'https://script.google.com/macros/s/AKfycbyYyYaZD3zH-DReuzAH_fUdl2Xe4jU_xhgf2snq2hpgR0g-7yx68bD-xAvpaXe0hnk/exec';
+    const frame = document.getElementById('newsFrame');
+    const fallback = document.getElementById('fallback');
+    document.getElementById('openExternal').href = premiumNewsUrl;
+    document.getElementById('fallbackOpen').href = premiumNewsUrl;
+    frame.src = premiumNewsUrl;
+    let loaded = false;
+    frame.addEventListener('load', () => {
+      loaded = true;
+      fallback.classList.remove('show');
+      fallback.setAttribute('aria-hidden', 'true');
+    });
+    window.setTimeout(() => {
+      if (!loaded) {
+        fallback.classList.add('show');
+        fallback.setAttribute('aria-hidden', 'false');
+      }
+    }, 4500);
+  </script>
+  <script src="/preview-v4-20261001/assets/hub-menu.js?v=20261001-v4" defer></script>
+</body>
+</html>
