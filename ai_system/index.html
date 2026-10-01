@@ -6,15 +6,16 @@
   <title>프리미엄 통합페이지로 이동</title>
   <meta name="description" content="프리미엄 통합페이지 독립 실행 화면으로 이동합니다.">
   <meta name="robots" content="noindex">
-  <meta name="theme-color" content="#0d1016">
+  <meta name="theme-color" content="#050607">
   <style>
+    /* 이동 안내 화면 — 색·모양은 /assets/design-tokens.css 의 188 Signature v4 와 같은 값(이동이 늦어지지 않게 직접 적음) */
     :root {
-      --bg:#0d1016;
-      --ink:#f5f7fb;
-      --muted:#aeb7c4;
-      --line:rgba(255,255,255,.14);
-      --gold:#d5b56b;
-      font-family:"Pretendard","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+      --bg:#050607;
+      --ink:#f5f2ea;
+      --muted:rgba(245,242,234,.74);
+      --line:rgba(232,201,106,.32);
+      --gold:#e8c96a;
+      font-family:"Pretendard Variable",Pretendard,"Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
       color-scheme:dark;
     }
     * { box-sizing:border-box; }
@@ -25,49 +26,59 @@
       place-items:center;
       padding:24px;
       color:var(--ink);
-      background:
-        linear-gradient(135deg, rgba(213,181,107,.12), transparent 34%),
-        linear-gradient(225deg, rgba(78,114,168,.18), transparent 38%),
-        var(--bg);
+      background:radial-gradient(70% 50% at 50% -10%, rgba(232,201,106,.14), transparent 62%), var(--bg);
+      -webkit-font-smoothing:antialiased;
     }
     .card {
+      position:relative;
       width:min(460px, 100%);
       border:1px solid var(--line);
-      border-radius:8px;
-      background:rgba(12,15,21,.82);
-      box-shadow:0 24px 80px rgba(0,0,0,.36);
-      padding:24px;
+      border-radius:24px;
+      background:radial-gradient(90% 120% at 50% 0%, rgba(232,201,106,.14), transparent 60%), linear-gradient(180deg,#111318,#0a0b0e);
+      box-shadow:0 30px 80px rgba(0,0,0,.45);
+      padding:32px 26px 28px;
       text-align:center;
-      backdrop-filter:blur(20px) saturate(1.2);
+    }
+    .card::before {
+      content:"";
+      position:absolute;
+      top:-1px;
+      left:24px;
+      right:24px;
+      height:1px;
+      background:linear-gradient(90deg, transparent, rgba(232,201,106,.7), transparent);
     }
     .mark {
-      width:42px;
-      height:42px;
+      width:44px;
+      height:44px;
       display:grid;
       place-items:center;
-      margin:0 auto 14px;
-      border:1px solid rgba(213,181,107,.56);
-      border-radius:8px;
+      margin:0 auto 16px;
+      border:1px solid rgba(232,201,106,.55);
+      border-radius:12px;
       color:var(--gold);
-      font-weight:900;
-      background:rgba(213,181,107,.08);
+      font:400 14px/1 Marcellus,Georgia,serif;
+      background:radial-gradient(120% 120% at 30% 0%, rgba(255,241,196,.24), transparent 60%), #0d0f13;
     }
-    h1 { margin:0; font-size:22px; letter-spacing:0; }
-    p { margin:10px 0 18px; color:var(--muted); line-height:1.6; font-size:14px; word-break:keep-all; }
+    h1 { margin:0; font-size:22px; letter-spacing:-.03em; }
+    p { margin:10px 0 20px; color:var(--muted); line-height:1.65; font-size:14px; word-break:keep-all; }
     a {
-      min-height:42px;
+      min-height:50px;
       display:inline-flex;
       align-items:center;
       justify-content:center;
-      padding:0 16px;
-      border-radius:7px;
-      border:1px solid rgba(213,181,107,.58);
-      color:#11141a;
-      background:linear-gradient(180deg, #eddcae, #d5b56b 54%, #ad8440);
+      gap:8px;
+      padding:0 26px;
+      border-radius:999px;
+      border:1px solid rgba(255,241,196,.75);
+      color:#17120a;
+      background:linear-gradient(180deg,#f8ebc0 0%,#e6c66f 44%,#bf983a 100%);
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.6), 0 12px 30px rgba(201,162,39,.25);
       text-decoration:none;
-      font-size:14px;
+      font-size:15px;
       font-weight:800;
     }
+    a:focus-visible { outline:2px solid var(--gold); outline-offset:3px; }
   </style>
 </head>
 <body>

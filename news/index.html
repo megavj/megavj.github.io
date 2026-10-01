@@ -5,112 +5,46 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>프리미엄 최신보험뉴스 | 188 프라임에셋</title>
   <meta name="description" content="프리미엄 최신보험뉴스를 188 프라임에셋 허브에서 바로 확인합니다.">
-  <meta name="theme-color" content="#0a0c10">
-  <link rel="stylesheet" href="/assets/design-tokens.css">
-  <link rel="stylesheet" href="/assets/hub-menu.css?v=20260713-my-button">
+  <meta name="theme-color" content="#050607">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Marcellus&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+  <link rel="stylesheet" href="/assets/design-tokens.css?v=20261001-v4">
+  <link rel="stylesheet" href="/assets/hub-menu.css?v=20261001-v4">
   <style>
-    /* === 페이지 전용 (토큰은 design-tokens.css) — 블랙골드 Liquid Glass === */
+    /* === 페이지 전용 — 상단바·버튼·색은 design-tokens.css 의 188 Signature v4(.lux-*) === */
     :root {
-      --ink: var(--text);
-      --muted: var(--text-dim);
-      --line: var(--glass-edge);
+      --ink: var(--lux-ink);
+      --muted: var(--lux-ink-2);
+      --line: var(--lux-line);
       color-scheme: dark;
-      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
+      font-family: var(--lux-font);
     }
     * { box-sizing: border-box; }
     html, body { height: 100%; }
     body {
       margin: 0;
-      color: var(--text);
+      color: var(--lux-ink);
       background:
-        linear-gradient(135deg, rgba(200,169,106,.10), transparent 34%),
-        linear-gradient(225deg, rgba(92,113,145,.14), transparent 40%),
-        var(--bg);
+        radial-gradient(70% 50% at 50% -10%, rgba(232,201,106,.12), transparent 62%),
+        var(--lux-bg);
       overflow: hidden;
       -webkit-font-smoothing: antialiased;
     }
     a { color: inherit; text-decoration: none; }
-    .topbar {
-      height: 56px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      padding: 0 18px;
-      border-bottom: 1px solid var(--glass-edge);
-      background: rgba(10, 12, 16, .62);
-      -webkit-backdrop-filter: var(--glass-blur);
-      backdrop-filter: var(--glass-blur);
-      box-shadow: 0 1px 0 rgba(255, 255, 255, .06) inset;
-    }
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      min-width: 0;
-      font-weight: 800;
-    }
-    .mark {
-      width: 32px;
-      height: 32px;
-      display: grid;
-      place-items: center;
-      border: 1px solid rgba(200, 169, 106, .55);
-      border-radius: 10px;
-      color: var(--gold);
-      font-size: 12px;
-      font-weight: 900;
-      background: linear-gradient(180deg, rgba(200, 169, 106, .20), rgba(255, 255, 255, .04));
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, .22), 0 10px 24px rgba(0, 0, 0, .26);
-      flex: 0 0 auto;
-    }
-    .brand-text {
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-    .actions {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      flex: 0 0 auto;
-    }
-    .btn {
-      min-height: 42px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0 18px;
-      border: 1px solid var(--glass-edge);
-      border-radius: var(--radius-pill);
-      background: linear-gradient(180deg, rgba(255, 255, 255, .10), rgba(255, 255, 255, .03));
-      -webkit-backdrop-filter: var(--glass-blur);
-      backdrop-filter: var(--glass-blur);
-      color: var(--text);
-      font-size: 13px;
-      font-weight: 700;
-      transition: transform var(--dur) var(--ease-spring), border-color var(--dur), color var(--dur);
-    }
-    .btn:hover { transform: translateY(-2px); border-color: var(--gold); color: #fff; }
-    .btn:active { transform: scale(.96); }
-    .btn.primary {
-      border-color: rgba(200, 169, 106, .7);
-      color: #14110a;
-      background: linear-gradient(180deg, #ecdaae, #d2ad5c 54%, #b68a3f);
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, .56), 0 12px 28px rgba(200, 169, 106, .20);
-    }
-    .btn.primary:hover { border-color: #f0e1ba; }
     .frame-wrap {
-      height: calc(100% - 56px);
+      height: calc(100% - var(--lux-topbar-h));
       position: relative;
-      background: var(--bg);
+      background: var(--lux-bg);
     }
     iframe {
       width: 100%;
       height: 100%;
       display: block;
       border: 0;
-      background: var(--bg);
+      background: var(--lux-bg);
     }
     .fallback {
       position: absolute;
@@ -121,60 +55,61 @@
       pointer-events: none;
     }
     .fallback-card {
+      position: relative;
       width: min(460px, 100%);
-      border: 1px solid var(--glass-edge);
-      border-radius: var(--radius);
-      background: var(--glass-bg);
-      -webkit-backdrop-filter: var(--glass-blur);
-      backdrop-filter: var(--glass-blur);
-      box-shadow: var(--glass-shadow);
-      padding: 24px;
+      border: 1px solid rgba(232,201,106,.32);
+      border-radius: var(--lux-r-lg);
+      background:
+        radial-gradient(90% 120% at 50% 0%, rgba(232,201,106,.14), transparent 60%),
+        linear-gradient(180deg, #111318, #0a0b0e);
+      box-shadow: var(--lux-shadow);
+      padding: 30px 26px 28px;
       text-align: center;
       opacity: 0;
       transform: translateY(8px);
-      transition: opacity .25s ease, transform .25s var(--ease-spring);
+      transition: opacity .25s ease, transform .35s var(--lux-ease);
       pointer-events: auto;
+    }
+    .fallback-card::before {
+      content: "";
+      position: absolute;
+      top: -1px;
+      left: 24px;
+      right: 24px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(232,201,106,.7), transparent);
     }
     .fallback.show .fallback-card {
       opacity: 1;
       transform: none;
     }
+    .fallback .lux-mark { margin: 0 auto 16px; }
     .fallback h1 {
       margin: 0;
-      font-size: 20px;
+      font-size: 21px;
+      letter-spacing: -.03em;
     }
     .fallback p {
-      margin: 10px 0 18px;
+      margin: 10px 0 20px;
       color: var(--muted);
-      line-height: 1.6;
+      line-height: 1.65;
       font-size: 14px;
       word-break: keep-all;
     }
     @media (max-width: 640px) {
-      .topbar { height: 58px; padding: 0 12px; }
-      .brand-text { max-width: 170px; }
-      .btn { padding: 0 14px; font-size: 12px; }
-      .frame-wrap { height: calc(100% - 58px); }
-    }
-    @media (prefers-reduced-transparency: reduce) {
-      .topbar, .btn, .fallback-card {
-        -webkit-backdrop-filter: none;
-        backdrop-filter: none;
-        background: var(--bg-2);
-      }
-      .btn.primary { background: linear-gradient(180deg, #ecdaae, #d2ad5c 54%, #b68a3f); }
+      .lux-brand__text { max-width: 150px; }
     }
   </style>
 </head>
-<body>
-  <header class="topbar">
-    <a class="brand" href="/" aria-label="188 프라임에셋 허브로 이동">
-      <span class="mark">188</span>
-      <span class="brand-text">프리미엄 최신보험뉴스</span>
+<body class="lux-page">
+  <header class="topbar lux-topbar">
+    <a class="lux-brand" href="/" aria-label="188 프라임에셋 허브로 이동">
+      <span class="lux-mark" aria-hidden="true">188</span>
+      <span class="lux-brand__text">프리미엄 최신보험뉴스<small>PREMIUM NEWS</small></span>
     </a>
-    <nav class="actions" aria-label="페이지 동작">
-      <a class="btn" href="/">허브</a>
-      <a class="btn primary" id="openExternal" target="_blank" rel="noopener">새 창</a>
+    <nav class="lux-actions" aria-label="페이지 동작">
+      <a class="lux-btn lux-btn--ghost lux-btn--sm" href="/">허브</a>
+      <a class="lux-btn lux-btn--gold lux-btn--sm" id="openExternal" target="_blank" rel="noopener">새 창 <span class="lux-btn__arrow" aria-hidden="true">↗</span></a>
     </nav>
   </header>
 
@@ -182,9 +117,10 @@
     <iframe id="newsFrame" title="프리미엄 최신보험뉴스" loading="eager"></iframe>
     <div class="fallback" id="fallback" aria-hidden="true">
       <div class="fallback-card">
+        <span class="lux-mark" aria-hidden="true">188</span>
         <h1>프리미엄 최신보험뉴스</h1>
         <p>브라우저에서 프레임 표시가 지연되면 새 창으로 바로 열 수 있습니다.</p>
-        <a class="btn primary" id="fallbackOpen" target="_blank" rel="noopener">새 창으로 열기</a>
+        <a class="lux-btn lux-btn--gold" id="fallbackOpen" target="_blank" rel="noopener">새 창으로 열기 <span class="lux-btn__arrow" aria-hidden="true">↗</span></a>
       </div>
     </div>
   </main>
@@ -209,6 +145,6 @@
       }
     }, 4500);
   </script>
-  <script src="/assets/hub-menu.js?v=20260713-my-button" defer></script>
+  <script src="/assets/hub-menu.js?v=20261001-v4" defer></script>
 </body>
 </html>

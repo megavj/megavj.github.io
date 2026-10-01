@@ -2,6 +2,8 @@
 // · main.js 가 동적 import 한다. null 을 돌려주거나 예외가 나면 main.js 가 .webgl-fallback(정적 금빛 188)으로 바꾼다.
 // · 연출: 폭발 → 회오리 → 188 형성 → 번쩍·충격파 / 가산혼합 + 블룸 / 두께·금속 반사·기울기 / 커서 불꽃.
 // · 성능: 기기 정보로 단계(TIERS)를 고르고, 실측 프레임이 계속 느리면 더 낮춘다(LEVELS). 탭이 숨거나 hero 가 화면 밖이면 멈춘다.
+// · 배치(v4): slot(빈 자리 요소, 홈은 .hero-mark)을 넘기면 그 상자 안에 188을 맞춘다 → 레이아웃은 CSS 가 정하고 제목 글자와 겹치지 않는다.
+//   slot 이 없으면 예전 고정 배치(PC 오른쪽 · 모바일 위쪽).
 // · QA 강제 옵션: ?hero188=high|mid|mobile|lite|low|static|fallback
 import * as THREE from 'three';
 
@@ -456,7 +458,7 @@ function createBloom(renderer) {
 
 /* ───────────── 본체 ───────────── */
 
-export async function createHero188({ canvas, reduced = false, mobile = false } = {}) {
+export async function createHero188({ canvas, reduced = false, mobile = false, slot = null } = {}) {
   const force = (new URLSearchParams(location.search).get('hero188') || '').toLowerCase();
   if (force === 'fallback') return null;
   if (force === 'static') reduced = true;
@@ -529,7 +531,7 @@ export async function createHero188({ canvas, reduced = false, mobile = false } 
 
   /* 상태 */
   const q = { level: 0, bloom: 0, count: tier.count, pr: 1 };
-  const place = { x: 4.4, y: .2, s: .82, narrow: false, glow: 1 };
+  const place = { x: 4.4, y: .2, s: .82, narrow: false, glow: 1, glowSet: null };
   const tilt = new THREE.Vector2(), tiltGoal = new THREE.Vector2();   // x: 위아래(rotation.x), y: 좌우(rotation.y)
   const ptr = { x: 0, y: 0, on: false };
   const pl = new THREE.Vector2(), plVel = new THREE.Vector2(), ndc = new THREE.Vector2();
@@ -540,10 +542,10 @@ export async function createHero188({ canvas, reduced = false, mobile = false } 
   const info = window.__HERO188__ = { tier: tierName, count: tier.count, drawCount: tier.count, bloom: 0, pixelRatio: 1, level: 0, reduced, hdr, frames: 0 };   // QA 확인용
 
   // 밝기 = 화면 속 188 면적당 빛의 양(입자 수 × 크기² ÷ 배치 크기²)이 단계와 무관하게 일정하도록 맞춘다.
-  // 모바일은 188이 제목 글자 바로 뒤에 깔리므로 PC의 절반 밝기로 은은하게.
+  // 예전 배치의 모바일은 188이 제목 글자 바로 뒤에 깔리므로 PC의 절반 밝기. slot 배치면 slot 의 --h188-glow 값을 쓴다.
   function setGains() {
     const comp = tier.count / q.count, k = q.bloom ? 1 : DIRECT_GAIN, size = BASE_SIZE * tier.size * Math.pow(comp, .25);
-    place.glow = place.narrow ? .5 : 1;
+    place.glow = place.glowSet != null ? place.glowSet : place.narrow ? .5 : 1;
     direct.value = q.bloom ? 0 : 1;
     pU.uSize.value = size;
     pU.uGain.value = DENSITY * place.glow * place.s * place.s / (q.count * size * size) * k;
@@ -560,25 +562,51 @@ export async function createHero188({ canvas, reduced = false, mobile = false } 
     Object.assign(info, { level: q.level, drawCount: q.count, bloom: q.bloom, locked: gov.locked });
   }
 
+  // slot 상자에 188을 맞춘다: 화면 1px 이 z=0 평면에서 몇 단위인지 구해 위치·크기를 정한다.
+  // FIT: 상자 대비 여백 — 기울기·커서 반응으로 살짝 커지거나 돌아가도 상자 밖(제목 쪽)으로 넘치지 않게.
+  const FIT = .9;
+  function fitSlot() {
+    if (!slot || !slot.isConnected) return false;
+    const c = canvas.getBoundingClientRect(), r = slot.getBoundingClientRect();
+    if (r.width < 40 || c.height < 1) return false;
+    const rh = r.height >= 24 ? r.height : r.width / 2;   // 높이를 못 잰 경우(구형 브라우저 등) 2:1 로 본다
+    const unit = 2 * camera.position.z * Math.tan(THREE.MathUtils.degToRad(camera.fov) / 2) / c.height;
+    const bw = P.box[1] - P.box[0], bh = P.box[3] - P.box[2];
+    place.x = (r.left + r.width / 2 - (c.left + c.width / 2)) * unit;
+    place.y = (c.top + c.height / 2 - (r.top + rh / 2)) * unit;
+    place.s = Math.min(r.width * unit / bw, rh * unit / bh) * FIT;
+    const g = parseFloat(getComputedStyle(slot).getPropertyValue('--h188-glow'));
+    place.glowSet = Number.isFinite(g) ? g : null;
+    info.slot = { x: +place.x.toFixed(2), y: +place.y.toFixed(2), s: +place.s.toFixed(3), wPx: Math.round(bw * place.s / unit), hPx: Math.round(bh * place.s / unit) };   // QA: 화면 속 188 크기(px)
+    return true;
+  }
+
+  let sizeW = 0, sizeH = 0, sizePR = 0;
   function resize() {
     if (lost) return;
     const w = Math.max(1, Math.round(canvas.clientWidth || innerWidth)), h = Math.max(1, Math.round(canvas.clientHeight || innerHeight));
     q.pr = Math.max(.5, Math.min(devicePixelRatio || 1, tier.maxPR, Math.sqrt(tier.budget / (w * h))) * LEVELS[q.level].pr);
-    renderer.setPixelRatio(q.pr);
-    renderer.setSize(w, h, false);                  // 캔버스 크기는 CSS(hero 영역)가 정한다
-    renderer.getDrawingBufferSize(buf);
-    camera.aspect = w / h;
-    camera.updateProjectionMatrix();
-    camera.updateMatrixWorld();
+    const sized = w !== sizeW || h !== sizeH || q.pr !== sizePR;
+    if (sized) {                                    // 크기가 같으면 캔버스를 다시 만들지 않는다(배치만 다시 계산)
+      sizeW = w; sizeH = h; sizePR = q.pr;
+      renderer.setPixelRatio(q.pr);
+      renderer.setSize(w, h, false);                // 캔버스 크기는 CSS(hero 영역)가 정한다
+      renderer.getDrawingBufferSize(buf);
+      camera.aspect = w / h;
+      camera.updateProjectionMatrix();
+      camera.updateMatrixWorld();
+      const pix = buf.y / (2 * Math.tan(THREE.MathUtils.degToRad(camera.fov) / 2));
+      pU.uPixel.value = pix; dU.uPixel.value = pix;
+    }
     if (bloom) bloom.setSize(buf.x, buf.y, q.bloom);
-    const pix = buf.y / (2 * Math.tan(THREE.MathUtils.degToRad(camera.fov) / 2));
-    pU.uPixel.value = pix; dU.uPixel.value = pix;
-    const narrow = place.narrow = w <= 800;         // 기존 배치 유지: PC 오른쪽, 모바일 위쪽
-    place.x = narrow ? 1.6 : 4.4; place.y = narrow ? 1.6 : .2; place.s = narrow ? .68 : .82;
+    const narrow = place.narrow = w <= 800;
+    if (!fitSlot()) {                               // slot 이 없으면 예전 배치: PC 오른쪽, 모바일 위쪽
+      place.x = narrow ? 1.6 : 4.4; place.y = narrow ? 1.6 : .2; place.s = narrow ? .68 : .82; place.glowSet = null;
+    }
     setGains();
     rectDirty = true;
     info.pixelRatio = +q.pr.toFixed(2);
-    if (started) { update(0); draw(); }             // 캔버스 크기를 바꾸면 화면이 지워지므로 바로 다시 그린다(깜빡임 방지)
+    if (started && (sized || !running)) { update(0); draw(); }   // 캔버스 크기를 바꾸면 화면이 지워지므로 바로 다시 그린다(깜빡임 방지)
   }
 
   /* 입력: 마우스 기울기 · 커서/터치 위치 · 기기 기울기 */
@@ -794,6 +822,17 @@ export async function createHero188({ canvas, reduced = false, mobile = false } 
   const onResize = () => { cancelAnimationFrame(rz); rz = requestAnimationFrame(resize); };
   if ('ResizeObserver' in window) new ResizeObserver(onResize).observe(canvas);
   addEventListener('resize', onResize, { passive: true });
+  if (slot) {
+    // slot 위치는 옆 문구·아래 지표 줄 높이에 따라 달라진다(글꼴이 늦게 뜨는 경우 등) → hero 안 요소 크기가 바뀌면 다시 맞춘다
+    const host = slot.closest('section') || slot.parentElement;
+    if ('ResizeObserver' in window) {
+      const ro = new ResizeObserver(onResize);
+      ro.observe(slot);
+      if (slot.parentElement) ro.observe(slot.parentElement);
+      if (host) [...host.children].forEach(el => ro.observe(el));
+    }
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(onResize).catch(() => {});
+  }
   canvas.addEventListener('webglcontextlost', e => { e.preventDefault(); lost = true; sync(); document.body.classList.add('webgl-fallback'); });
   canvas.addEventListener('webglcontextrestored', () => {
     lost = false;

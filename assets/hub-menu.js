@@ -1,3 +1,8 @@
+/* 188 공용 메뉴 — MY 버튼 + 전체 메뉴(오른쪽 서랍) v4 (2026-10)
+ * · 모든 페이지 공통. 페이지 목록·주소는 아래 pages 그대로(링크 주소를 바꾸지 말 것).
+ * · 열면 닫기 버튼으로 초점이 가고, 탭 키는 서랍 안에서만 돈다. Esc·바깥 클릭으로 닫으면 메뉴 버튼으로 초점이 돌아온다.
+ * · 서랍 아래에 김상현 이사 1:1 상담(카카오톡)·전화 버튼.
+ */
 (function () {
   const pages = [
     { title: '188 허브', desc: '김상현 이사 188본부 메인페이지', href: '/' },
@@ -32,22 +37,22 @@
       href: '/itsys/'
     }
   ];
+  const contact = {
+    kakao: 'https://open.kakao.com/o/sFMF26y',
+    tel: 'tel:01087149262',
+    telLabel: '010-8714-9262'
+  };
 
   function normalizePath(path) {
     if (!path || path === '/index.html') return '/';
     return path.replace(/\/index\.html$/, '/');
   }
 
-  function closeMenu() {
-    document.body.classList.remove('hub-menu-open');
-    const toggle = document.querySelector('.hub-menu-toggle');
-    if (toggle) toggle.setAttribute('aria-expanded', 'false');
-  }
-
-  function openMenu() {
-    document.body.classList.add('hub-menu-open');
-    const toggle = document.querySelector('.hub-menu-toggle');
-    if (toggle) toggle.setAttribute('aria-expanded', 'true');
+  function el(tag, className, text) {
+    const node = document.createElement(tag);
+    if (className) node.className = className;
+    if (text != null) node.textContent = text;
+    return node;
   }
 
   function init() {
@@ -55,57 +60,103 @@
 
     document.body.classList.add('has-hub-menu');
     const current = normalizePath(window.location.pathname);
-    const myLink = document.createElement('a');
-    myLink.className = 'hub-my-link';
+    const myLink = el('a', 'hub-my-link', 'MY');
     myLink.href = '/my/';
-    myLink.textContent = 'MY';
     myLink.setAttribute('aria-label', 'MY 페이지 바로가기');
     if (current === '/my/') myLink.setAttribute('aria-current', 'page');
 
-    const toggle = document.createElement('button');
-    toggle.className = 'hub-menu-toggle';
+    const toggle = el('button', 'hub-menu-toggle');
     toggle.type = 'button';
     toggle.setAttribute('aria-label', '하위페이지 메뉴 열기');
     toggle.setAttribute('aria-controls', 'hubMenuPanel');
     toggle.setAttribute('aria-expanded', 'false');
     toggle.innerHTML = '<span></span><span></span><span></span>';
 
-    const scrim = document.createElement('div');
-    scrim.className = 'hub-menu-scrim';
+    const scrim = el('div', 'hub-menu-scrim');
     scrim.tabIndex = -1;
 
-    const panel = document.createElement('aside');
-    panel.className = 'hub-menu-panel';
+    const panel = el('aside', 'hub-menu-panel');
     panel.id = 'hubMenuPanel';
     panel.setAttribute('aria-label', '188 하위페이지 메뉴');
-    panel.innerHTML = [
-      '<button class="hub-menu-close" type="button" aria-label="메뉴 닫기">&times;</button>',
-      '<h2>188 페이지</h2>',
-      '<nav class="hub-menu-list" aria-label="188 하위페이지">'
-    ].join('');
+    panel.setAttribute('aria-hidden', 'true');
 
-    const list = panel.querySelector('.hub-menu-list');
+    const close = el('button', 'hub-menu-close');
+    close.type = 'button';
+    close.setAttribute('aria-label', '메뉴 닫기');
+    close.innerHTML = '&times;';
+
+    const head = el('div', 'hub-menu-head');
+    const mark = el('span', 'hub-menu-mark', '188');
+    mark.setAttribute('aria-hidden', 'true');
+    const titles = el('div');
+    titles.append(el('p', 'hub-menu-kicker', 'PRIME ASSET · 188'), el('h2', '', '188 페이지'));
+    head.append(mark, titles);
+
+    const list = el('nav', 'hub-menu-list');
+    list.setAttribute('aria-label', '188 하위페이지');
     pages.forEach((page) => {
-      const link = document.createElement('a');
-      link.className = 'hub-menu-link';
+      const link = el('a', 'hub-menu-link');
       link.href = page.href;
       link.target = '_blank';
       link.rel = 'noopener noreferrer';
-      if (normalizePath(page.href) === current) {
-        link.setAttribute('aria-current', 'page');
-      }
-      link.innerHTML = '<strong>' + page.title + '</strong><span>' + page.desc + '</span>';
+      if (normalizePath(page.href) === current) link.setAttribute('aria-current', 'page');
+      const go = el('span', 'hub-menu-go', page.external ? '↗' : '→');
+      go.setAttribute('aria-hidden', 'true');
+      link.append(el('strong', '', page.title), el('span', '', page.desc), go);
       list.appendChild(link);
     });
 
+    const cta = el('div', 'hub-menu-cta');
+    const kakao = el('a', 'hub-menu-cta__main', '김상현 이사 1:1 상담 ↗');
+    kakao.href = contact.kakao;
+    kakao.target = '_blank';
+    kakao.rel = 'noopener noreferrer';
+    const call = el('a', 'hub-menu-cta__call', contact.telLabel);
+    call.href = contact.tel;
+    call.setAttribute('aria-label', '전화 상담 ' + contact.telLabel);
+    cta.append(kakao, call);
+
+    panel.append(close, head, list, cta);
     document.body.append(myLink, toggle, scrim, panel);
+
+    let lastFocus = null;
+    const focusables = () => Array.prototype.slice.call(panel.querySelectorAll('a[href], button:not([disabled])'));
+
+    function openMenu() {
+      lastFocus = document.activeElement;
+      document.body.classList.add('hub-menu-open');
+      toggle.setAttribute('aria-expanded', 'true');
+      panel.setAttribute('aria-hidden', 'false');
+      window.setTimeout(() => close.focus({ preventScroll: true }), 60);
+    }
+
+    function closeMenu() {
+      if (!document.body.classList.contains('hub-menu-open')) return;
+      document.body.classList.remove('hub-menu-open');
+      toggle.setAttribute('aria-expanded', 'false');
+      panel.setAttribute('aria-hidden', 'true');
+      if (panel.contains(document.activeElement)) (lastFocus && lastFocus.focus ? lastFocus : toggle).focus({ preventScroll: true });
+    }
+
     toggle.addEventListener('click', () => {
       document.body.classList.contains('hub-menu-open') ? closeMenu() : openMenu();
     });
     scrim.addEventListener('click', closeMenu);
-    panel.querySelector('.hub-menu-close').addEventListener('click', closeMenu);
+    close.addEventListener('click', closeMenu);
     document.addEventListener('keydown', (event) => {
-      if (event.key === 'Escape') closeMenu();
+      if (!document.body.classList.contains('hub-menu-open')) return;
+      if (event.key === 'Escape') { closeMenu(); return; }
+      if (event.key !== 'Tab') return;
+      const items = focusables();
+      if (!items.length) return;
+      const first = items[0], last = items[items.length - 1];
+      if (event.shiftKey && (document.activeElement === first || !panel.contains(document.activeElement))) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
     });
   }
 

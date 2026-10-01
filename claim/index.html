@@ -6,66 +6,82 @@
   <title>프리미엄 보험보상 답변기 | 188 프라임에셋</title>
   <meta name="description" content="188본부 프리미엄 보험보상 답변기">
   <meta name="robots" content="noindex">
-  <meta name="theme-color" content="#11151d">
-  <link rel="stylesheet" href="/assets/hub-menu.css?v=20260713-my-button">
+  <meta name="theme-color" content="#050607">
+  <link rel="stylesheet" href="/assets/hub-menu.css?v=20261001-v4">
   <style>
+    /* 이동 안내 화면 — 색·모양은 /assets/design-tokens.css 의 188 Signature v4 와 같은 값(이동이 늦어지지 않게 직접 적음) */
     :root {
-      --bg:#11151d;
-      --ink:#f5f1e8;
-      --muted:#c8c0b3;
-      --line:rgba(255,255,255,.14);
-      --gold:#d5b56b;
-      font-family:"Pretendard","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+      --bg:#050607;
+      --ink:#f5f2ea;
+      --muted:rgba(245,242,234,.74);
+      --line:rgba(232,201,106,.32);
+      --gold:#e8c96a;
+      font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
       color-scheme:dark;
     }
     * { box-sizing:border-box; }
     html,body { min-height:100%; }
     body {
       margin:0;
+      min-height:100vh;
       color:var(--ink);
-      background:#11151d;
+      background:radial-gradient(70% 50% at 50% -10%, rgba(232,201,106,.14), transparent 62%), var(--bg);
       display:grid;
       place-items:center;
       padding:22px;
+      -webkit-font-smoothing:antialiased;
     }
     .panel {
+      position:relative;
       width:min(560px,100%);
       border:1px solid var(--line);
-      border-radius:8px;
-      padding:28px;
-      background:rgba(12,15,21,.78);
-      box-shadow:0 24px 70px rgba(0,0,0,.28);
+      border-radius:24px;
+      padding:32px 28px 28px;
+      text-align:center;
+      background:radial-gradient(90% 120% at 50% 0%, rgba(232,201,106,.14), transparent 60%), linear-gradient(180deg,#111318,#0a0b0e);
+      box-shadow:0 30px 80px rgba(0,0,0,.45);
+    }
+    .panel::before {
+      content:"";
+      position:absolute;
+      top:-1px;
+      left:24px;
+      right:24px;
+      height:1px;
+      background:linear-gradient(90deg, transparent, rgba(232,201,106,.7), transparent);
     }
     .mark {
-      width:38px;
-      height:38px;
+      width:44px;
+      height:44px;
       display:grid;
       place-items:center;
-      border:1px solid rgba(213,181,107,.56);
-      border-radius:7px;
+      margin:0 auto 18px;
+      border:1px solid rgba(232,201,106,.55);
+      border-radius:12px;
       color:var(--gold);
-      font-size:13px;
-      font-weight:900;
-      background:rgba(213,181,107,.08);
-      margin-bottom:18px;
+      font:400 14px/1 Marcellus,Georgia,serif;
+      background:radial-gradient(120% 120% at 30% 0%, rgba(255,241,196,.24), transparent 60%), #0d0f13;
     }
-    h1 { margin:0 0 10px; font-size:26px; line-height:1.22; letter-spacing:0; }
-    p { margin:0 0 18px; color:var(--muted); line-height:1.7; word-break:keep-all; }
+    h1 { margin:0 0 10px; font-size:24px; line-height:1.3; letter-spacing:-.03em; }
+    p { margin:0 0 22px; color:var(--muted); line-height:1.7; word-break:keep-all; }
     .btn {
-      min-height:44px;
+      min-height:50px;
       display:inline-flex;
       align-items:center;
       justify-content:center;
-      padding:0 16px;
-      border:1px solid rgba(213,181,107,.58);
-      border-radius:7px;
-      color:#11141a;
-      background:linear-gradient(180deg,#eddcae,#d5b56b 54%,#ad8440);
-      font-size:14px;
-      font-weight:840;
+      gap:8px;
+      padding:0 26px;
+      border:1px solid rgba(255,241,196,.75);
+      border-radius:999px;
+      color:#17120a;
+      background:linear-gradient(180deg,#f8ebc0 0%,#e6c66f 44%,#bf983a 100%);
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.6), 0 12px 30px rgba(201,162,39,.25);
+      font-size:15px;
+      font-weight:800;
       text-decoration:none;
     }
-    .note { margin-top:16px; font-size:12px; color:#9da6b6; }
+    .btn:focus-visible { outline:2px solid var(--gold); outline-offset:3px; }
+    .note { margin-top:16px; font-size:12px; color:#9aa0aa; }
   </style>
 </head>
 <body>
@@ -73,7 +89,7 @@
     <div class="mark">188</div>
     <h1>프리미엄 보험보상 답변기로 이동 중입니다.</h1>
     <p>브라우저 보안정책 때문에 Google 실행부를 188 페이지 안에 끼워 넣지 않고, 승인된 실행 화면으로 바로 연결합니다.</p>
-    <a class="btn" id="claimLink" href="#">바로 열기</a>
+    <a class="btn" id="claimLink" href="#">바로 열기 <span aria-hidden="true">↗</span></a>
     <div class="note">자동 이동이 되지 않으면 버튼을 눌러주세요.</div>
   </main>
   <script>
@@ -81,6 +97,6 @@
     document.getElementById('claimLink').href = claimUrl;
     window.location.replace(claimUrl);
   </script>
-  <script src="/assets/hub-menu.js?v=20260713-my-button" defer></script>
+  <script src="/assets/hub-menu.js?v=20261001-v4" defer></script>
 </body>
 </html>

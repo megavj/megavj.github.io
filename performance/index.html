@@ -11,27 +11,33 @@
   <meta property="og:image" content="https://188.primeasset.info/assets/ksh-profile.jpg">
   <meta name="theme-color" content="#0a0c10">
   <link rel="icon" href="/assets/ksh-profile.jpg">
-  <link rel="stylesheet" href="/assets/design-tokens.css">
-  <link rel="stylesheet" href="/assets/hub-menu.css?v=20260713-my-button">
-  <link rel="stylesheet" href="/assets/perf-board.css?v=20261001">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Marcellus&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+  <link rel="stylesheet" href="/assets/design-tokens.css?v=20261001-v4">
+  <link rel="stylesheet" href="/assets/hub-menu.css?v=20261001-v4">
+  <link rel="stylesheet" href="/assets/perf-board.css?v=20261001-v4">
   <script>if(window.matchMedia&&!window.matchMedia('(prefers-reduced-motion: reduce)').matches&&'IntersectionObserver' in window)document.documentElement.classList.add('pb-anim');</script>
   <style>
-    /* === 페이지 전용 (토큰은 design-tokens.css, 실적보드 컴포넌트는 perf-board.css) — 블랙골드 Liquid Glass === */
+    /* === 페이지 전용 — 색·글자·버튼·상단바는 design-tokens.css(188 Signature v4), 실적보드 컴포넌트는 perf-board.css === */
     :root {
-      --ink: var(--text);
-      --muted: var(--text-dim);
-      --line: var(--glass-edge);
+      --ink: var(--lux-ink);
+      --muted: var(--lux-mute);
+      --line: var(--lux-line);
       color-scheme: dark;
-      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
+      font-family: var(--lux-font);
     }
     * { box-sizing: border-box; }
-    html { -webkit-text-size-adjust: 100%; scroll-padding-top: 72px; }
+    html { -webkit-text-size-adjust: 100%; scroll-padding-top: 76px; background: var(--lux-bg); }
     body {
       min-height: 100vh;
       margin: 0;
       overflow-x: clip; /* 공용 hub-menu 드로어가 만드는 가로 스크롤 차단 (system 페이지와 동일) */
-      color: var(--text);
-      background: var(--bg);
+      color: var(--lux-ink);
+      background: var(--lux-bg);
+      font-family: var(--lux-font);
       -webkit-font-smoothing: antialiased;
       word-break: keep-all;
     }
@@ -42,12 +48,13 @@
       z-index: -1;
       pointer-events: none;
       background:
-        radial-gradient(70% 45% at 50% -8%, rgba(200, 169, 106, .16), transparent 62%),
-        radial-gradient(45% 40% at 100% 34%, rgba(92, 113, 145, .13), transparent 70%),
-        radial-gradient(40% 35% at 0% 80%, rgba(200, 169, 106, .07), transparent 70%),
-        linear-gradient(180deg, #0a0c10, #07080b 60%, #0a0c10);
+        radial-gradient(70% 45% at 50% -8%, rgba(232, 201, 106, .15), transparent 62%),
+        radial-gradient(45% 40% at 100% 34%, rgba(201, 162, 39, .07), transparent 70%),
+        radial-gradient(40% 35% at 0% 80%, rgba(138, 109, 31, .08), transparent 70%),
+        linear-gradient(180deg, #08090b, var(--lux-bg) 60%, #07080a);
     }
     a { color: inherit; text-decoration: none; }
+    ::selection { background: rgba(232, 201, 106, .3); color: #fff; }
     .pb-skip {
       position: absolute;
       top: -60px;
@@ -61,83 +68,7 @@
     }
     .pb-skip:focus { top: 10px; }
 
-    /* 상단바 (기존 유지 + 스크롤 시 고정) */
-    .topbar {
-      position: sticky;
-      top: 0;
-      z-index: 40;
-      height: 56px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      padding: 0 18px;
-      border-bottom: 1px solid var(--glass-edge);
-      background: rgba(10, 12, 16, .62);
-      -webkit-backdrop-filter: var(--glass-blur);
-      backdrop-filter: var(--glass-blur);
-      box-shadow: 0 1px 0 rgba(255, 255, 255, .06) inset;
-    }
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      min-width: 0;
-      font-weight: 800;
-    }
-    .mark {
-      width: 32px;
-      height: 32px;
-      display: grid;
-      place-items: center;
-      border: 1px solid rgba(200, 169, 106, .55);
-      border-radius: 10px;
-      color: var(--gold);
-      font-size: 12px;
-      font-weight: 900;
-      background: linear-gradient(180deg, rgba(200, 169, 106, .20), rgba(255, 255, 255, .04));
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, .22), 0 10px 24px rgba(0, 0, 0, .26);
-      flex: 0 0 auto;
-    }
-    .brand-text {
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-    .actions {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      flex: 0 0 auto;
-    }
-    .btn {
-      min-height: 42px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0 18px;
-      border: 1px solid var(--glass-edge);
-      border-radius: var(--radius-pill);
-      background: linear-gradient(180deg, rgba(255, 255, 255, .10), rgba(255, 255, 255, .03));
-      -webkit-backdrop-filter: var(--glass-blur);
-      backdrop-filter: var(--glass-blur);
-      color: var(--text);
-      font: inherit;
-      font-size: 13px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: transform var(--dur) var(--ease-spring), border-color var(--dur), color var(--dur);
-    }
-    .btn:hover { transform: translateY(-2px); border-color: var(--gold); color: #fff; }
-    .btn:active { transform: scale(.96); }
-    .btn.primary {
-      border-color: rgba(200, 169, 106, .7);
-      color: #14110a;
-      background: linear-gradient(180deg, #ecdaae, #d2ad5c 54%, #b68a3f);
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, .56), 0 12px 28px rgba(200, 169, 106, .20);
-    }
-    .btn.primary:hover { border-color: #f0e1ba; color: #14110a; }
-    .btn:focus-visible { outline: 2px solid #e8c96a; outline-offset: 2px; }
+    /* 상단바 — 사이트 공통 .lux-topbar(design-tokens.css). 버튼은 .lux-btn */
 
     /* 히어로 — 큰 누적 숫자 + 10억 단위 달성 트랙 */
     .pb-wrap { width: min(1200px, calc(100% - 40px)); margin-inline: auto; }
@@ -216,8 +147,7 @@
       gap: 8px 12px;
       margin: 0;
       color: var(--pb-gold-hi);
-      font-size: 11px;
-      font-weight: 700;
+      font: 400 11px/1.4 var(--lux-serif);
       letter-spacing: .26em;
     }
     .pb-kicker__dot {
@@ -289,12 +219,12 @@
       position: relative;
       min-width: 0;
       padding: clamp(20px, 3vw, 32px);
-      border: 1px solid rgba(255, 255, 255, .09);
-      border-radius: 24px;
+      border: 1px solid var(--lux-line);
+      border-radius: 20px;
       background:
-        linear-gradient(180deg, rgba(255, 255, 255, .05), rgba(255, 255, 255, .015)),
-        rgba(12, 14, 19, .76);
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, .07), 0 30px 80px rgba(0, 0, 0, .35);
+        linear-gradient(180deg, rgba(255, 255, 255, .045), rgba(255, 255, 255, .012)),
+        rgba(11, 13, 17, .82);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, .06), 0 30px 80px rgba(0, 0, 0, .38);
     }
     .pb-card::before {
       content: "";
@@ -348,55 +278,62 @@
       position: relative;
       overflow: hidden;
       padding: clamp(36px, 6vw, 72px) clamp(20px, 5vw, 64px);
-      border: 1px solid rgba(232, 201, 106, .38);
-      border-radius: 28px;
+      border: 1px solid rgba(232, 201, 106, .42);
+      border-radius: 24px;
       text-align: center;
       background:
         radial-gradient(80% 120% at 50% 0%, rgba(232, 201, 106, .2), transparent 60%),
         linear-gradient(180deg, #13110c, #0b0c0f);
       box-shadow: 0 40px 120px rgba(0, 0, 0, .5), 0 0 80px rgba(201, 162, 39, .1);
     }
+    .pb-cta__panel::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 12%;
+      right: 12%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255, 241, 196, .8), transparent);
+    }
+    .pb-cta .pb-eyebrow { font-family: var(--lux-serif); font-weight: 400; }
     .pb-cta h2 {
       margin: 14px 0 12px;
-      font-size: clamp(28px, 4.6vw, 52px);
+      font-size: clamp(30px, 4.6vw, 54px);
       line-height: 1.15;
-      letter-spacing: -.045em;
+      letter-spacing: -.05em;
     }
-    .pb-cta__text { max-width: 520px; margin: 0 auto; color: var(--pb-ink-2); font-size: 15px; line-height: 1.7; }
-    .pb-cta__actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 28px; }
-    .pb-btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      min-height: 52px;
-      padding: 0 26px;
-      border: 1px solid var(--glass-edge);
-      border-radius: 999px;
-      background: linear-gradient(180deg, rgba(255, 255, 255, .1), rgba(255, 255, 255, .03));
-      color: var(--text);
-      font-size: 14px;
-      font-weight: 800;
-      transition: transform var(--dur) var(--ease-spring), border-color var(--dur), box-shadow var(--dur);
+    .pb-cta h2 em {
+      font-style: normal;
+      background: var(--lux-metal);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      -webkit-text-fill-color: transparent;
     }
-    .pb-btn:hover { transform: translateY(-2px); border-color: var(--gold); }
-    .pb-btn:focus-visible { outline: 2px solid #e8c96a; outline-offset: 3px; }
-    .pb-btn--gold {
-      border-color: rgba(232, 201, 106, .8);
-      color: #14110a;
-      background: linear-gradient(180deg, #f3e2b0, #d4af5a 55%, #b68a3f);
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, .55), 0 14px 34px rgba(200, 169, 106, .26);
-    }
-    .pb-btn--gold:hover { border-color: #fff1c4; box-shadow: inset 0 1px 0 rgba(255, 255, 255, .6), 0 18px 44px rgba(200, 169, 106, .38); }
+    .pb-cta__text { max-width: 520px; margin: 0 auto; color: var(--pb-ink-2); font-size: 16px; line-height: 1.75; }
+    .pb-cta__actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 30px; }
+    .pb-cta__actions .lux-btn svg { width: 19px; height: 19px; fill: currentColor; stroke: none; }
+    .pb-cta__tel { font-family: var(--lux-serif); letter-spacing: .06em; }
     .pb-foot {
       margin-top: 28px;
       padding: 22px 0 calc(40px + env(safe-area-inset-bottom));
-      border-top: 1px solid rgba(255, 255, 255, .07);
+      border-top: 1px solid var(--lux-line);
       color: var(--pb-muted);
       font-size: 12px;
       line-height: 1.7;
     }
     .pb-foot p { margin: 0; }
+    .pb-foot__brand {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px 20px;
+      margin-top: 18px !important;
+      padding-top: 18px;
+      border-top: 1px solid rgba(255, 255, 255, .06);
+    }
+    .pb-foot__brand b { color: var(--lux-gold-hi); font-weight: 600; }
     .pb-toast {
       position: fixed;
       left: 50%;
@@ -467,10 +404,9 @@
       .pb-card--mix .pb-donut { grid-template-columns: 220px minmax(0, 1fr); align-items: center; }
     }
     @media (max-width: 640px) {
-      .topbar { height: 58px; padding: 0 12px; }
-      .brand-text { max-width: 156px; }
-      .btn { padding: 0 14px; font-size: 12px; }
+      .lux-brand__text { max-width: 150px; }
       .pb-wrap { width: calc(100% - 28px); }
+      .pb-cta__actions .lux-btn { flex: 1 1 100%; }
       .pb-hero__exact { font-size: 13px; }
       .pb-kpi-sec .pb-kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
       .pb-kpi-sec .pb-kpi { padding: 18px 16px 16px; }
@@ -479,28 +415,21 @@
       .pb-card__stats div { padding: 8px 11px; }
     }
     @media (max-width: 420px) {
-      .actions .btn:not(.primary) { display: none; } /* 좁은 화면: 허브는 188 로고·메뉴로 이동 */
-    }
-    @media (prefers-reduced-transparency: reduce) {
-      .topbar, .btn {
-        -webkit-backdrop-filter: none;
-        backdrop-filter: none;
-        background: var(--bg-2);
-      }
-      .btn.primary { background: linear-gradient(180deg, #ecdaae, #d2ad5c 54%, #b68a3f); }
+      .lux-actions .lux-btn--ghost { display: none; } /* 좁은 화면: 허브는 188 로고·메뉴로 이동 */
+      .lux-brand__text small { display: none; }
     }
   </style>
 </head>
-<body>
+<body class="lux-page">
   <a class="pb-skip" href="#pb-main">본문 바로가기</a>
-  <header class="topbar">
-    <a class="brand" href="/" aria-label="188 프라임에셋 허브로 이동">
-      <span class="mark">188</span>
-      <span class="brand-text">사업부 실적보드</span>
+  <header class="topbar lux-topbar">
+    <a class="lux-brand" href="/" aria-label="188 프라임에셋 허브로 이동">
+      <span class="lux-mark" aria-hidden="true">188</span>
+      <span class="lux-brand__text">사업부 실적보드<small>PREMIUM DIVISION</small></span>
     </a>
-    <nav class="actions" aria-label="페이지 동작">
-      <a class="btn" href="/">허브</a>
-      <button class="btn primary" type="button" id="pbShare">공유</button>
+    <nav class="lux-actions" aria-label="페이지 동작">
+      <a class="lux-btn lux-btn--ghost lux-btn--sm" href="/">허브</a>
+      <button class="lux-btn lux-btn--gold lux-btn--sm" type="button" id="pbShare">공유</button>
     </nav>
   </header>
 
@@ -810,17 +739,19 @@
     <section class="pb-wrap pb-cta" data-pb-reveal aria-labelledby="pb-cta-title">
       <div class="pb-cta__panel">
         <p class="pb-eyebrow">JOIN 188</p>
-        <h2 id="pb-cta-title">숫자로 증명하는 조직,<br>188본부</h2>
+        <h2 id="pb-cta-title">숫자로 증명하는 조직,<br><em>188본부</em></h2>
         <p class="pb-cta__text">수당 구조와 운영자료까지, 같은 기준으로 투명하게 비교해 드립니다.</p>
         <div class="pb-cta__actions">
-          <a class="pb-btn pb-btn--gold" href="https://open.kakao.com/o/sFMF26y" target="_blank" rel="noopener noreferrer">1:1 상담하기 <span aria-hidden="true">↗</span></a>
-          <a class="pb-btn" href="/">188 허브 둘러보기</a>
+          <a class="lux-btn lux-btn--gold" href="https://open.kakao.com/o/sFMF26y" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 4.5c-4.97 0-9 3.13-9 7 0 2.47 1.65 4.64 4.13 5.89L6.5 21l4.06-2.66c.47.06.95.09 1.44.09 4.97 0 9-3.13 9-7s-4.03-6.93-9-6.93z"/></svg>1:1 상담하기 <span class="lux-btn__arrow" aria-hidden="true">↗</span></a>
+          <a class="lux-btn lux-btn--ghost pb-cta__tel" href="tel:01087149262" aria-label="전화 상담 010-8714-9262">010-8714-9262</a>
+          <a class="lux-btn lux-btn--ghost" href="/">188 허브 둘러보기 <span class="lux-btn__arrow" aria-hidden="true">→</span></a>
         </div>
       </div>
     </section>
 
     <footer class="pb-wrap pb-foot">
       <p>기준: 2026년 <span data-pb-stat="period">1~9월</span> 프리미엄사업부 월보험료(단위 천원)와 계약건수 합계입니다. 억 단위는 반올림 표기이며, 원자료 반올림으로 항목별 합계가 총계와 몇 천원 다를 수 있습니다.</p>
+      <p class="pb-foot__brand"><b>프라임에셋 188본부 — 설계사의 성장을 설계합니다</b><span>© PrimeAsset 188 Headquarters. 김상현 이사 공식 허브.</span></p>
     </footer>
   </main>
 
@@ -922,6 +853,6 @@
       });
     })();
   </script>
-  <script src="/assets/hub-menu.js?v=20260713-my-button" defer></script>
+  <script src="/assets/hub-menu.js?v=20261001-v4" defer></script>
 </body>
 </html>
