@@ -16,11 +16,11 @@ const PALETTE = [['#c4922a', .45], ['#e8c96a', .3], ['#f3e2b0', .15], ['#fff5df'
 
 // 기기 성능 단계 — count: 188 파티클, dust: 배경 먼지, maxPR·budget: 해상도 상한(배율·픽셀 수), bloom: 블룸 단계(0 = 블룸 없이 바로 그림)
 const TIERS = {
-  high:   { count: 24000, dust: 900, maxPR: 1.75, budget: 3.4e6, bloom: 5, size: 1 },
-  mid:    { count: 15000, dust: 600, maxPR: 1.5,  budget: 2.2e6, bloom: 4, size: 1.08 },
-  mobile: { count: 8000,  dust: 280, maxPR: 1.5,  budget: 1e6,   bloom: 3, size: 1.1 },
-  lite:   { count: 4500,  dust: 160, maxPR: 1.25, budget: 6e5,   bloom: 0, size: 1.2 },
-  low:    { count: 3000,  dust: 120, maxPR: 1,    budget: 5e5,   bloom: 0, size: 1.3 }
+  high:   { count: 14400, dust: 540, maxPR: 1.75, budget: 3.4e6, bloom: 5, size: 1 },
+  mid:    { count: 9000, dust: 360, maxPR: 1.5,  budget: 2.2e6, bloom: 4, size: 1.08 },
+  mobile: { count: 4800,  dust: 170, maxPR: 1.5,  budget: 1e6,   bloom: 3, size: 1.1 },
+  lite:   { count: 2700,  dust: 100, maxPR: 1.25, budget: 6e5,   bloom: 0, size: 1.2 },
+  low:    { count: 1800,  dust: 72, maxPR: 1,    budget: 5e5,   bloom: 0, size: 1.3 }
 };
 // 실측 프레임이 계속 느리면 한 단계씩 낮춘다(올리지는 않음, 낮춰도 안 빨라지면 원래대로 — govern() 참고).
 const LEVELS = [
