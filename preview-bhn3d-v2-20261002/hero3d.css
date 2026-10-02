@@ -1,0 +1,34 @@
+/* 보험노트 3D 책 — 메인 이미지 자리 스타일 (배경 투명) */
+.bhn-hero3d {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;          /* 메인 이미지 비율. 높이를 직접 주려면 height 로 덮어쓰기 */
+  background: transparent;
+  overflow: visible;
+  -webkit-tap-highlight-color: transparent;
+}
+.bhn-hero3d__poster,
+.bhn-hero3d__poster img,
+.bhn-hero3d__canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.bhn-hero3d__poster img { object-fit: contain; display: block; }
+.bhn-hero3d__poster { transition: opacity .6s ease .15s; }
+.bhn-hero3d__canvas {
+  display: block;
+  opacity: 0;
+  transition: opacity .6s ease;
+  touch-action: pan-y;          /* 휴대폰: 세로 스크롤은 그대로, 좌우 스와이프만 책이 받음 */
+  outline: none;
+}
+.bhn-hero3d__canvas:focus-visible { outline: 2px solid rgba(200, 160, 80, .6); outline-offset: 4px; border-radius: 8px; }
+.bhn-hero3d.is-live .bhn-hero3d__canvas { opacity: 1; }
+.bhn-hero3d.is-live .bhn-hero3d__poster { opacity: 0; pointer-events: none; }
+.bhn-hero3d.is-fallback .bhn-hero3d__canvas { display: none; }
+.bhn-hero3d.is-fallback .bhn-hero3d__poster { opacity: 1; }
+@media (prefers-reduced-motion: reduce) {
+  .bhn-hero3d__poster, .bhn-hero3d__canvas { transition: none; }
+}
