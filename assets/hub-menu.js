@@ -8,7 +8,7 @@
     { title: '188 허브', desc: '김상현 이사 188본부 메인페이지', href: '/' },
     { title: '프라임에셋 통합페이지', desc: 'AI 시스템 및 프라임에셋 업무 허브', href: '/ai_system/' },
     { title: '프리미엄 보험보상 답변기', desc: '문서 기반 보험보상 실무 답변', href: '/claim/' },
-    { title: '사업부 실적보드', desc: '프리미엄사업부 2026년 실적 현황', href: '/performance/' },
+    { title: '사업부 실적보드', desc: '프리미엄사업부 2026년 실적 현황', href: 'https://test.primeasset.info/performance/', external: true }, // 2026-11-02 test 실적보드로 연결(188 /performance/ 페이지는 유지)
     { title: '188본부 시스템안내서', desc: '입점 및 운영 시스템 안내', href: '/system/' },
     {
       title: '프리미엄 상품통합분석기',

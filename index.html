@@ -19,7 +19,6 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
   <link rel="stylesheet" href="/assets/design-tokens.css?v=20261001-v4">
   <link rel="stylesheet" href="/future188-v2/main.css?v=20261001-v4">
-  <link rel="stylesheet" href="/assets/perf-board.css?v=20261001-v4">
   <link rel="stylesheet" href="/assets/hub-menu.css?v=20261001-v4">
   <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js"}}</script>
 </head>
@@ -31,7 +30,7 @@
   <div class="scroll-progress" aria-hidden="true"><i></i></div>
   <header class="nav">
     <a class="wordmark" href="#hero" aria-label="프라임에셋 188본부 처음으로"><span class="lux-mark" aria-hidden="true">188</span><span class="wordmark__text">프라임에셋 <b>188본부</b></span></a>
-    <nav aria-label="주요 메뉴"><a href="#system">시스템</a><a href="#performance">실적보드</a><a href="#tools">도구</a><a href="https://www.primeasset.info" target="_blank" rel="noopener">프리미엄인포</a></nav>
+    <nav aria-label="주요 메뉴"><a href="#system">시스템</a><a href="https://test.primeasset.info/performance/" target="_blank" rel="noopener">실적보드</a><a href="#tools">도구</a><a href="https://www.primeasset.info" target="_blank" rel="noopener">프리미엄인포</a></nav>
     <a class="nav-cta lux-btn lux-btn--gold lux-btn--sm" href="https://open.kakao.com/o/sFMF26y" target="_blank" rel="noopener noreferrer">1:1 상담 <span class="lux-btn__arrow" aria-hidden="true">↗</span></a>
   </header>
 
@@ -55,7 +54,7 @@
             <a class="lux-btn lux-btn--gold hero-cta magnetic" href="https://open.kakao.com/o/sFMF26y" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 4.5c-4.97 0-9 3.13-9 7 0 2.47 1.65 4.64 4.13 5.89L6.5 21l4.06-2.66c.47.06.95.09 1.44.09 4.97 0 9-3.13 9-7s-4.03-6.93-9-6.93z"/></svg>김상현 이사 1:1 상담 <span class="lux-btn__arrow" aria-hidden="true">↗</span></a>
             <a class="lux-btn lux-btn--ghost magnetic" href="../system/">시스템 바로가기 <span class="lux-btn__arrow" aria-hidden="true">→</span></a>
           </div>
-          <a class="hero-link reveal" href="../performance/">사업부 실적 보기 <span aria-hidden="true">→</span></a>
+          <a class="hero-link reveal" href="https://test.primeasset.info/performance/" target="_blank" rel="noopener noreferrer">사업부 실적 보기 <span aria-hidden="true">↗</span></a>
         </div>
         <div class="hero-mark" data-hero188-slot aria-hidden="true"></div>
       </div>
@@ -115,60 +114,9 @@
       </div>
     </section>
 
-    <section id="performance" class="performance section" data-anim-zone>
-      <div class="performance-number" aria-hidden="true"><span data-pb-stat="total_eok1">32.0</span>억</div>
-      <div class="shell performance-inner">
-        <header class="section-head reveal"><p class="eyebrow"><span class="eyebrow__num">02</span>2026 · <b data-pb-stat="period_en">JAN—SEP</b></p><h2>프리미엄사업부<br><em>실적보드</em></h2><p class="section-desc">규모는 주장하지 않고 숫자로 증명합니다.</p></header>
-        <!-- 실적보드: 숫자·차트는 perf188/perf_sync.py 가 data_raw.json 으로 생성, 연출은 /assets/perf-board.js -->
-        <div class="pb pb-home">
-          <article class="pb-home__board" data-pb-reveal aria-labelledby="pb-home-title">
-            <header class="pb-home__head" data-pb-play>
-              <div class="pb-home__caption">
-                <p class="pb-eyebrow">VERIFIED PERFORMANCE</p>
-                <p class="pb-home__label" id="pb-home-title">2026년 <span data-pb-stat="period">1~9월</span> 누적 월보험료</p>
-                <small><span data-pb-stat="total_k">3,196,291</span>천원 · <span data-pb-stat="months_n">9</span>개월 합계</small>
-              </div>
-              <p class="pb-home__total"><b class="pb-goldtext" data-pb-stat="total_eok1" data-pb-count="2200">32.0</b><span>억</span></p>
-            </header>
-            <figure class="pb-combo" data-pb-combo data-pb-play>
-              <!-- pb:combo -->
-              <div class="pb-combo__plot">
-                <div class="pb-combo__axis" aria-hidden="true"><span style="--y:0%">0</span><span style="--y:20%">1억</span><span style="--y:40%">2억</span><span style="--y:60%">3억</span><span style="--y:80%">4억</span><span style="--y:100%">5억</span></div>
-                <div class="pb-combo__area">
-                  <div class="pb-combo__grid" aria-hidden="true"><i style="--y:0%"></i><i style="--y:20%"></i><i style="--y:40%"></i><i style="--y:60%"></i><i style="--y:80%"></i><i style="--y:100%"></i></div>
-                  <svg class="pb-combo__curve" viewBox="0 0 900 1000" preserveAspectRatio="none" aria-hidden="true" focusable="false"><defs><linearGradient id="pbComboWash" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e8c96a" stop-opacity=".2"/><stop offset="1" stop-color="#e8c96a" stop-opacity="0"/></linearGradient></defs><path class="pb-curve-area" fill="url(#pbComboWash)" d="M50.0,316.5C83.3,334.1 116.7,369.2 150.0,369.2C183.3,369.2 216.7,94.7 250.0,94.7C283.3,94.7 316.7,169.5 350.0,209.3C383.3,249.2 416.7,333.6 450.0,333.6C483.3,333.6 516.7,234.5 550.0,234.5C583.3,234.5 616.7,388.9 650.0,388.9C683.3,388.9 716.7,327.7 750.0,327.7C783.3,327.7 816.7,331.2 850.0,333.0L850.0,1000L50.0,1000Z"/><path class="pb-curve-glow" d="M50.0,316.5C83.3,334.1 116.7,369.2 150.0,369.2C183.3,369.2 216.7,94.7 250.0,94.7C283.3,94.7 316.7,169.5 350.0,209.3C383.3,249.2 416.7,333.6 450.0,333.6C483.3,333.6 516.7,234.5 550.0,234.5C583.3,234.5 616.7,388.9 650.0,388.9C683.3,388.9 716.7,327.7 750.0,327.7C783.3,327.7 816.7,331.2 850.0,333.0"/><path class="pb-curve" d="M50.0,316.5C83.3,334.1 116.7,369.2 150.0,369.2C183.3,369.2 216.7,94.7 250.0,94.7C283.3,94.7 316.7,169.5 350.0,209.3C383.3,249.2 416.7,333.6 450.0,333.6C483.3,333.6 516.7,234.5 550.0,234.5C583.3,234.5 616.7,388.9 650.0,388.9C683.3,388.9 716.7,327.7 750.0,327.7C783.3,327.7 816.7,331.2 850.0,333.0"/></svg>
-                  <ol class="pb-combo__cols" style="--n:9">
-                    <li class="pb-col" style="--h:68.35%;--i:0"><span class="pb-col__bar"></span><span class="pb-col__dot"></span><span class="pb-col__label" aria-hidden="true">1월</span><button class="pb-col__hit" type="button" aria-label="1월 월보험료 3.42억(341,763천원), 누적 3.42억, 계약 5,817건, 생보 1.46억, 손보 1.96억" data-m="1월" data-v="3.42억" data-k="341,763천원" data-cum="3.42억" data-cnt="5,817건" data-life="1.46억" data-non="1.96억"></button></li>
-                    <li class="pb-col" style="--h:63.08%;--i:1"><span class="pb-col__bar"></span><span class="pb-col__dot"></span><span class="pb-col__label" aria-hidden="true">2월</span><button class="pb-col__hit" type="button" aria-label="2월 월보험료 3.15억(315,389천원), 누적 6.57억, 계약 5,292건, 생보 1.32억, 손보 1.84억" data-m="2월" data-v="3.15억" data-k="315,389천원" data-cum="6.57억" data-cnt="5,292건" data-life="1.32억" data-non="1.84억"></button></li>
-                    <li class="pb-col is-peak" style="--h:90.53%;--i:2"><span class="pb-col__bar"></span><span class="pb-col__dot"></span><span class="pb-col__label" aria-hidden="true">3월</span><button class="pb-col__hit" type="button" aria-label="3월 월보험료 4.53억(452,629천원), 누적 11.10억, 계약 7,475건, 생보 1.59억, 손보 2.94억" data-m="3월" data-v="4.53억" data-k="452,629천원" data-cum="11.10억" data-cnt="7,475건" data-life="1.59억" data-non="2.94억"></button></li>
-                    <li class="pb-col" style="--h:79.07%;--i:3"><span class="pb-col__bar"></span><span class="pb-col__dot"></span><span class="pb-col__label" aria-hidden="true">4월</span><button class="pb-col__hit" type="button" aria-label="4월 월보험료 3.95억(395,328천원), 누적 15.05억, 계약 6,409건, 생보 1.51억, 손보 2.44억" data-m="4월" data-v="3.95억" data-k="395,328천원" data-cum="15.05억" data-cnt="6,409건" data-life="1.51억" data-non="2.44억"></button></li>
-                    <li class="pb-col" style="--h:66.64%;--i:4"><span class="pb-col__bar"></span><span class="pb-col__dot"></span><span class="pb-col__label" aria-hidden="true">5월</span><button class="pb-col__hit" type="button" aria-label="5월 월보험료 3.33억(333,210천원), 누적 18.38억, 계약 4,796건, 생보 1.53억, 손보 1.80억" data-m="5월" data-v="3.33억" data-k="333,210천원" data-cum="18.38억" data-cnt="4,796건" data-life="1.53억" data-non="1.80억"></button></li>
-                    <li class="pb-col" style="--h:76.55%;--i:5"><span class="pb-col__bar"></span><span class="pb-col__dot"></span><span class="pb-col__label" aria-hidden="true">6월</span><button class="pb-col__hit" type="button" aria-label="6월 월보험료 3.83억(382,752천원), 누적 22.21억, 계약 6,122건, 생보 1.48억, 손보 2.35억" data-m="6월" data-v="3.83억" data-k="382,752천원" data-cum="22.21억" data-cnt="6,122건" data-life="1.48억" data-non="2.35억"></button></li>
-                    <li class="pb-col" style="--h:61.11%;--i:6"><span class="pb-col__bar"></span><span class="pb-col__dot"></span><span class="pb-col__label" aria-hidden="true">7월</span><button class="pb-col__hit" type="button" aria-label="7월 월보험료 3.06억(305,569천원), 누적 25.27억, 계약 4,996건, 생보 1.12억, 손보 1.93억" data-m="7월" data-v="3.06억" data-k="305,569천원" data-cum="25.27억" data-cnt="4,996건" data-life="1.12억" data-non="1.93억"></button></li>
-                    <li class="pb-col" style="--h:67.23%;--i:7"><span class="pb-col__bar"></span><span class="pb-col__dot"></span><span class="pb-col__label" aria-hidden="true">8월</span><button class="pb-col__hit" type="button" aria-label="8월 월보험료 3.36억(336,162천원), 누적 28.63억, 계약 5,372건, 생보 1.18억, 손보 2.18억" data-m="8월" data-v="3.36억" data-k="336,162천원" data-cum="28.63억" data-cnt="5,372건" data-life="1.18억" data-non="2.18억"></button></li>
-                    <li class="pb-col" style="--h:66.70%;--i:8"><span class="pb-col__bar"></span><span class="pb-col__dot"></span><span class="pb-col__label" aria-hidden="true">9월</span><button class="pb-col__hit" type="button" aria-label="9월 월보험료 3.33억(333,489천원), 누적 31.96억, 계약 5,260건, 생보 1.30억, 손보 2.04억" data-m="9월" data-v="3.33억" data-k="333,489천원" data-cum="31.96억" data-cnt="5,260건" data-life="1.30억" data-non="2.04억"></button></li>
-                  </ol>
-                  <p class="pb-combo__peak" style="--x:27.78%;--h:90.53%" aria-hidden="true"><span>최고</span> <b>4.53억</b></p>
-                </div>
-              </div>
-              <!-- /pb:combo -->
-              <figcaption class="pb-sr">2026년 <span data-pb-stat="period">1~9월</span> 월별 월보험료 막대·곡선 차트. 막대마다 버튼으로 월별 수치를 읽을 수 있습니다.</figcaption>
-            </figure>
-            <ul class="pb-kpis" data-pb-play>
-              <li class="pb-kpi"><span class="pb-kpi__label">총 계약건수</span><p class="pb-kpi__value"><b data-pb-stat="count" data-pb-count>51,539</b><small>건</small></p><span class="pb-kpi__sub">월평균 <span data-pb-stat="avg_count">5,727</span>건</span></li>
-              <li class="pb-kpi"><span class="pb-kpi__label">본부</span><p class="pb-kpi__value"><b data-pb-stat="branches" data-pb-count>19</b><small>개</small></p><span class="pb-kpi__sub">사업부 본부 네트워크</span></li>
-              <li class="pb-kpi"><span class="pb-kpi__label">제휴 보험사</span><p class="pb-kpi__value"><b data-pb-stat="carriers" data-pb-count>30</b><small>곳</small></p><span class="pb-kpi__sub">생보 <span data-pb-stat="carriers_life">19</span> · 손보 <span data-pb-stat="carriers_nonlife">11</span></span></li>
-              <li class="pb-kpi"><span class="pb-kpi__label">월평균 월보험료</span><p class="pb-kpi__value"><b data-pb-stat="avg_eok2" data-pb-count>3.55</b><small>억</small></p><span class="pb-kpi__sub"><span data-pb-stat="months_n">9</span>개월 평균</span></li>
-            </ul>
-          </article>
-          <a class="lux-btn lux-btn--ghost pb-home__more magnetic" href="../performance/">실적보드 전체 보기 <span class="lux-btn__arrow" aria-hidden="true">→</span></a>
-        </div>
-      </div>
-    </section>
-
     <section id="tools" class="tools section">
       <div class="shell">
-        <header class="section-head reveal"><p class="eyebrow"><span class="eyebrow__num">03</span>Work System</p><h2>업무 도구 <em>허브</em></h2><p class="section-desc">설계사가 반복해서 쓰는 실전 도구를 한곳에 연결합니다.</p></header>
+        <header class="section-head reveal"><p class="eyebrow"><span class="eyebrow__num">02</span>Work System</p><h2>업무 도구 <em>허브</em></h2><p class="section-desc">설계사가 반복해서 쓰는 실전 도구를 한곳에 연결합니다.</p></header>
         <ul class="tools-legend reveal" data-tools-legend aria-label="도구 종류"></ul>
         <div class="tools-bento" data-tools-grid></div>
         <div class="tools-toast" role="status" aria-live="polite">링크가 복사되었습니다</div>
@@ -179,7 +127,7 @@
       <canvas id="cta-canvas" aria-hidden="true"></canvas>
       <div class="shell final-cta__inner">
         <div class="final-cta__copy reveal">
-          <p class="eyebrow"><span class="eyebrow__num">04</span>Compare Your Next Standard</p>
+          <p class="eyebrow"><span class="eyebrow__num">03</span>Compare Your Next Standard</p>
           <h2 class="prism-text prism-text-cta"><span class="prism-line" data-text="지금 조건을">지금 조건을</span><br><span class="prism-line" data-text="비교해보세요">비교해보세요</span></h2>
           <p class="final-cta__text">현재 조건과 188본부 구조를 표로 비교합니다.<br>막연한 설득보다 실제 수당표와 운영자료를 보여드립니다.</p>
           <ul class="final-cta__list" aria-label="비교해 드리는 기준">
@@ -215,7 +163,7 @@
       </div>
       <nav class="site-footer__links" aria-label="하위 페이지 바로가기">
         <a href="/system/">시스템 안내서</a>
-        <a href="/performance/">사업부 실적보드</a>
+        <a href="https://test.primeasset.info/performance/" target="_blank" rel="noopener">사업부 실적보드 <span aria-hidden="true">↗</span></a>
         <a href="/news/">최신보험뉴스</a>
         <a href="/ai_system/">통합페이지</a>
         <a href="https://www.primeasset.info" target="_blank" rel="noopener">프리미엄인포 <span aria-hidden="true">↗</span></a>
@@ -233,7 +181,6 @@
     <a class="sticky-cta__call" href="tel:01087149262" aria-label="전화 상담 010-8714-9262"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6.6 3.5h3l1.5 4.2-2 1.4a12 12 0 0 0 5.8 5.8l1.4-2 4.2 1.5v3a2 2 0 0 1-2.1 2A16.5 16.5 0 0 1 4.6 5.6a2 2 0 0 1 2-2.1z"/></svg><span>전화</span></a>
   </div>
 
-  <script src="/assets/perf-board.js?v=20261001" defer></script>
   <script src="/assets/hub-menu.js?v=20261001-v4" defer></script>
   <script type="module" src="/future188-v2/main.js?v=20261001-v4"></script>
 </body>
