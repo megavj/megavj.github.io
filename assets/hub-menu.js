@@ -107,7 +107,7 @@
     });
 
     const cta = el('div', 'hub-menu-cta');
-    const kakao = el('a', 'hub-menu-cta__main', '김상현 이사 1:1 상담 ↗');
+    const kakao = el('a', 'hub-menu-cta__main', '카카오톡으로 합류 상담 ↗');
     kakao.href = contact.kakao;
     kakao.target = '_blank';
     kakao.rel = 'noopener noreferrer';
