@@ -39,13 +39,6 @@
       position: relative;
       background: var(--lux-bg);
     }
-    iframe {
-      width: 100%;
-      height: 100%;
-      display: block;
-      border: 0;
-      background: var(--lux-bg);
-    }
     .fallback {
       position: absolute;
       inset: 0;
@@ -109,42 +102,22 @@
     </a>
     <nav class="lux-actions" aria-label="페이지 동작">
       <a class="lux-btn lux-btn--ghost lux-btn--sm" href="/">허브</a>
-      <a class="lux-btn lux-btn--gold lux-btn--sm" id="openExternal" target="_blank" rel="noopener">새 창 <span class="lux-btn__arrow" aria-hidden="true">↗</span></a>
+      <a class="lux-btn lux-btn--gold lux-btn--sm" id="openExternal" href="https://test.primeasset.info/news/" target="_blank" rel="noopener">새 창 <span class="lux-btn__arrow" aria-hidden="true">↗</span></a>
     </nav>
   </header>
 
   <main class="frame-wrap">
-    <iframe id="newsFrame" title="프리미엄 최신보험뉴스" loading="eager"></iframe>
-    <div class="fallback" id="fallback" aria-hidden="true">
+    <div class="fallback show" id="fallback">
       <div class="fallback-card">
         <span class="lux-mark" aria-hidden="true">188</span>
         <h1>프리미엄 최신보험뉴스</h1>
-        <p>브라우저에서 프레임 표시가 지연되면 새 창으로 바로 열 수 있습니다.</p>
-        <a class="lux-btn lux-btn--gold" id="fallbackOpen" target="_blank" rel="noopener">새 창으로 열기 <span class="lux-btn__arrow" aria-hidden="true">↗</span></a>
+        <p>새 주소로 옮겼습니다. 자동으로 이동하지 않으면 새 창으로 열어 주세요.</p>
+        <a class="lux-btn lux-btn--gold" id="fallbackOpen" href="https://test.primeasset.info/news/" target="_blank" rel="noopener">새 창으로 열기 <span class="lux-btn__arrow" aria-hidden="true">↗</span></a>
       </div>
     </div>
   </main>
 
-  <script>
-    const premiumNewsUrl = 'https://script.google.com/macros/s/AKfycbyYyYaZD3zH-DReuzAH_fUdl2Xe4jU_xhgf2snq2hpgR0g-7yx68bD-xAvpaXe0hnk/exec';
-    const frame = document.getElementById('newsFrame');
-    const fallback = document.getElementById('fallback');
-    document.getElementById('openExternal').href = premiumNewsUrl;
-    document.getElementById('fallbackOpen').href = premiumNewsUrl;
-    frame.src = premiumNewsUrl;
-    let loaded = false;
-    frame.addEventListener('load', () => {
-      loaded = true;
-      fallback.classList.remove('show');
-      fallback.setAttribute('aria-hidden', 'true');
-    });
-    window.setTimeout(() => {
-      if (!loaded) {
-        fallback.classList.add('show');
-        fallback.setAttribute('aria-hidden', 'false');
-      }
-    }, 4500);
-  </script>
+  <script>location.replace('https://test.primeasset.info/news/');</script>
   <script src="/assets/hub-menu.js?v=20261001-v4" defer></script>
 </body>
 </html>

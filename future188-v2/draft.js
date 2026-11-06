@@ -36,7 +36,7 @@ function initPrismText(){if(reduced)return;$$('.prism-text').forEach(el=>{let tx
 const TOOLS_CONFIG=[
   {name:'188본부 시스템 안내서',description:'188본부 시스템 종합 안내',type:'copy',url:'https://188.primeasset.info/system/',category:'website'},
   {name:'프라임에셋 188본부 허브홈페이지',description:'188본부 공식 업무 허브',type:'link',url:'https://188.primeasset.info/',category:'website'},
-  {name:'프리미엄 최신보험뉴스',description:'최신 보험뉴스·마케팅 팁',type:'link',url:'https://188.primeasset.info/news/',category:'website'},
+  {name:'프리미엄 최신보험뉴스',description:'최신 보험뉴스·마케팅 팁',type:'link',url:'https://test.primeasset.info/news/',category:'website'},
   {name:'프리미엄사업부 실적보드',description:'사업부 실적 현황',type:'link',url:'https://test.primeasset.info/performance/',category:'website'},
   {name:'AI영업비서 — 프리미엄 실전상담 통합코치',description:'상담·화법·코칭 통합도구',type:'link',url:'https://script.google.com/macros/s/AKfycbyKIz_hvVDlcVscBdGbJ1VCZIHRSz6yrLqRxyAH8WzJfqfQwdVMC-emgg2mPTxVPIk/exec',category:'ai tool'},
   {name:'프리미엄 보험보상 답변기',description:'보험금 청구·보상 답변',type:'link',url:'https://188.primeasset.info/claim/',category:'ai tool'},
