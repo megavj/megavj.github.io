@@ -334,7 +334,7 @@ const TOOLS_CONFIG = [
   { name: 'AI영업비서 — 프리미엄 실전상담 통합코치', description: '상담·화법·코칭 통합도구', type: 'link', url: 'https://test.primeasset.info/members/coach/', category: 'ai tool' },
   { name: '프리미엄 보험보상 답변기', description: '보험금 청구·보상 답변', type: 'link', url: 'https://test.primeasset.info/members/claim/', category: 'ai tool' },
   { name: '프리미엄 상품통합분석기', description: '보험상품·소식지 통합분석', type: 'link', url: 'https://test.primeasset.info/product/', category: 'ai tool' },
-  { name: 'AI영업비서 — NH종수술 답변기', description: 'NH종수술 실무 답변', type: 'locked', url: '', category: 'ai tool' },
+  { name: 'AI영업비서 — N대·종수술 답변기', description: 'N대·종수술 실무 답변', type: 'locked', url: '', category: 'ai tool' },
   { name: '실전 질병정보·화법도우미(Gem)', description: '질병정보·상담화법 안내', type: 'locked', url: '', category: 'ai tool' },
   { name: '실손의료비 답변기', description: '실손의료비 실무 답변', type: 'locked', url: '', category: 'ai tool' },
   { name: '실전 DB영업 화법도우미(Gem)', description: 'DB영업 상담화법 안내', type: 'locked', url: '', category: 'ai tool' },
