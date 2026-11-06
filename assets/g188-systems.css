@@ -40,7 +40,7 @@
 .g188-gr-step__k{font-size:14px;line-height:1.5;color:var(--lux-mute)}
 .g188-gr-step__tool{font-size:15px;font-weight:500;line-height:1.5;color:var(--lux-ink);text-wrap:balance}
 .g188-gr-step__d{margin-top:2px;font-size:14px;line-height:1.55;color:var(--lux-ink-2);text-wrap:pretty}
-@container (max-width:859px){
+@container (max-width:1000px){
   .g188-gr-steps{grid-template-columns:1fr;border-bottom:0}
   .g188-gr-step,.g188-gr-step+.g188-gr-step{display:grid;grid-template-columns:52px minmax(0,1fr);column-gap:var(--lux-s3);padding:var(--lux-s5) 0;border-left:0;border-bottom:1px solid var(--lux-line)}
   .g188-gr-step__no{grid-row:1/span 2;margin:2px 0 0;font-size:24px}
@@ -49,7 +49,7 @@
   .g188-gr-step__d{flex-basis:100%;margin-top:0}
 }
 @supports not (container-type:inline-size){
-  @media (max-width:900px){
+  @media (max-width:1064px){
     .g188-gr-steps{grid-template-columns:1fr;border-bottom:0}
     .g188-gr-step,.g188-gr-step+.g188-gr-step{display:grid;grid-template-columns:52px minmax(0,1fr);column-gap:var(--lux-s3);padding:var(--lux-s5) 0;border-left:0;border-bottom:1px solid var(--lux-line)}
     .g188-gr-step__no{grid-row:1/span 2;margin:2px 0 0;font-size:24px}
@@ -643,7 +643,7 @@ html:has(.g188-gr-dlg[open]){overflow:hidden}
   .g188-ss-tab { padding: var(--lux-s4); }
   .g188-ss-tab__name { font-size: 18px; }
 }
-@container (max-width: 859px) {
+@container (max-width: 1000px) {
   .g188-gr-step, .g188-gr-step + .g188-gr-step { padding: var(--lux-s5); }
   .g188-gr-step__no { margin: 2px 0 0; }
 }
@@ -688,3 +688,45 @@ html:has(.g188-gr-dlg[open]){overflow:hidden}
   .g188-g-sec *, .g188-g-sec *::before, .g188-g-sec *::after,
   .g188-gr-dlg *, .g188-gr-dlg::backdrop { animation: none !important; transition: none !important; }
 }
+
+
+/* TASK42 — 본문/단계의 크기와 번호 간격을 기존 홈 카드에 맞춘다. */
+.g188-gr-doc__tag,
+.g188-ss-flow__hint,
+.g188-ss-caption,
+.g188-ss-cond,
+.g188-ss-tools small,
+.g188-ss-rows small,
+.g188-ss-common small { font-size: 14px; }
+.g188-ss-tab__name { font-size: var(--lux-fs-h3); }
+.g188-ss-tab__no { font-size: 32px; line-height: 1; }
+.g188-ss-eyebrow b,
+.g188-ss-group__t b { flex: none; }
+.g188-gr-step__t,
+.g188-ss-tab__name { text-wrap: pretty; }
+/* 자료 제목·크게 보기 버튼은 좁은 폭에서도 14px를 유지하고 두 줄을 허용한다. */
+.g188-gr-doc__bar { min-height: 48px; height: auto; padding-block: 8px; flex-wrap: wrap; font-size: 14px; line-height: 1.5; }
+.g188-gr-doc__zoom { font-size: 14px; }
+@container (max-width: 1000px) {
+  .g188-gr-step, .g188-gr-step + .g188-gr-step { grid-template-columns: 40px minmax(0, 1fr); column-gap: 12px; }
+  .g188-gr-step__no { font-size: 24px; line-height: 1.2; }
+}
+@supports not (container-type: inline-size) {
+  @media (max-width: 1064px) {
+    .g188-gr-step, .g188-gr-step + .g188-gr-step { grid-template-columns: 40px minmax(0, 1fr); column-gap: 12px; }
+    .g188-gr-step__no { margin: 2px 0 0; font-size: 24px; line-height: 1.2; }
+  }
+}
+@media (max-width: 1064px) {
+  .g188-ss-tab__no { font-size: 24px; line-height: 1.2; }
+}
+@media (max-width: 800px) {
+  .g188-g-sec > h2 { font-size: clamp(31px, 8.6vw, 44px); }
+}
+@media (max-width: 640px) {
+  .g188-ss-tab { grid-template-columns: 36px minmax(0, 1fr) 20px; column-gap: 12px; }
+  .g188-ss-tab__no { font-size: 24px; line-height: 1.2; }
+}
+
+/* 팀쿡 검사 보정(2026-11-06): 단계 번호 두 자리가 줄바뀜 없이 한 줄 */
+.g188-gr-step__no, .g188-ss-tab__no { white-space: nowrap; }

@@ -94,11 +94,17 @@
 
     const list = el('nav', 'hub-menu-list');
     list.setAttribute('aria-label', '188 하위페이지');
-    pages.forEach((page) => {
+    // TASK42: 홈의 휴대폰 메뉴에서도 MY와 구분해 시험 인트라넷으로 이동한다.
+    const menuPages = document.body.classList.contains('p188-home')
+      ? [{ title: '로그인', desc: '시험 인트라넷으로 이동', href: 'https://test.primeasset.info/members/', external: true, sameTab: true }, ...pages]
+      : pages;
+    menuPages.forEach((page) => {
       const link = el('a', 'hub-menu-link');
       link.href = page.href;
-      link.target = '_blank';
-      link.rel = 'noopener noreferrer';
+      if (!page.sameTab) {
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+      }
       if (normalizePath(page.href) === current) link.setAttribute('aria-current', 'page');
       const go = el('span', 'hub-menu-go', page.external ? '↗' : '→');
       go.setAttribute('aria-hidden', 'true');
