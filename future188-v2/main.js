@@ -325,9 +325,9 @@ function initPrismText() {
 }
 
 /* ───────────── 업무 도구 허브 ─────────────
-   16개 도구를 들어올 때마다 무작위 순서로 보여 준다(1·6·11번째는 큰 카드). 주소는 아래 목록 그대로. */
+   15개 도구를 들어올 때마다 무작위 순서로 보여 준다(1·6·11번째는 큰 카드). 주소는 아래 목록 그대로. */
 const TOOLS_CONFIG = [
-  { name: '188본부 시스템 안내서', description: '188본부 시스템 종합 안내', type: 'copy', url: 'https://188.primeasset.info/system/', category: 'website' },
+  { name: '188본부 시스템 안내서', description: '188본부 시스템 종합 안내', type: 'link', url: 'https://188.primeasset.info/system/', category: 'website' },
   { name: '프라임에셋 188본부 허브홈페이지', description: '188본부 공식 업무 허브', type: 'link', url: 'https://188.primeasset.info/', category: 'website' },
   { name: '프리미엄 최신보험뉴스', description: '최신 보험뉴스·마케팅 팁', type: 'link', url: 'https://test.primeasset.info/news/', category: 'website' },
   { name: '사업부 실적보드', description: '사업부 실적 현황', type: 'link', url: 'https://test.primeasset.info/performance/', category: 'website' },
@@ -342,8 +342,8 @@ const TOOLS_CONFIG = [
   { name: '고지의무 판독기', description: '고지사항 판독·안내', type: 'locked', url: '', category: 'ai tool' },
   { name: '프리미엄 자료검색기', description: '보유자료 통합 검색', type: 'link', url: 'https://script.google.com/macros/s/AKfycbx2R0eWsh6J9MyUPZahLHJj1bDiSdh1Ei147OOVJ85fCVZv1R-RQCeYIYgrkLiy7eh_/exec', category: 'web app' },
   { name: '프리미엄 통합페이지', description: '웹앱·사이트·매뉴얼 모음', type: 'link', url: 'https://188.primeasset.info/ai_system/', category: 'web app' },
-  { name: '프리미엄 수당계산기', description: '예상 수수료·수당 계산', type: 'link', url: 'https://script.google.com/macros/s/AKfycbz4ZR5EbyrzaIkOfhUR0Hqe0eTRokTf8Sa6ax9Q0paQlRPtJfmxG7AwC2RXIpUNq1XfYg/exec', category: 'web app' }
 ];
+const TOOL_LINKS = new Set(['188본부 시스템 안내서', '사업부 실적보드', '프리미엄 최신보험뉴스']);
 const SVG_OPEN = '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">';
 const TOOL_KINDS = {
   website: { label: '웹사이트', icon: `${SVG_OPEN}<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.5 3.9 5.5 3.9 9s-1.3 6.5-3.9 9c-2.6-2.5-3.9-5.5-3.9-9S9.4 5.5 12 3z"/></svg>` },
@@ -398,7 +398,9 @@ function initToolsHub() {
     card.style.setProperty('--delay', `${index * 0.06}s`);
     card.dataset.toolName = item.name;
     card.dataset.toolType = item.type;
-    if (item.type === 'link') { card.href = item.url; card.target = '_blank'; card.rel = 'noopener noreferrer'; }
+    // 이사님 지시(2026-11-07): 링크는 아래 3개만, 나머지는 이름·설명만
+    const linked = TOOL_LINKS.has(item.name);
+    if (linked) { card.href = item.url; card.target = '_blank'; card.rel = 'noopener noreferrer'; }
 
     const top = el('div', 'tools-card__top');
     const type = el('span', 'tools-card__type');
@@ -409,32 +411,12 @@ function initToolsHub() {
     const body = el('div', 'tools-card__body');
     body.append(el('h3', '', item.name), el('p', '', item.description));
 
-    const action = el('div', 'tools-card__action');
-    if (item.type === 'locked') {
-      const lock = el('span', 'tools-card__lock');
-      lock.innerHTML = TOOL_KINDS.internal.icon;
-      lock.append('내부 전용');
-      action.append(lock);
-    } else if (item.type === 'copy') {
-      const button = el('button', 'tools-card__copy', '링크 복사');
-      button.type = 'button';
-      button.addEventListener('click', () => copyUrl(item.url));
-      action.append(button);
-    } else {
-      const arrow = el('span', 'tools-card__arrow', '↗');
-      arrow.setAttribute('aria-hidden', 'true');
-      action.append(el('span', '', '새 탭 열기'), arrow);
-      const copy = el('button', 'tools-card__copy', '링크 복사');
-      copy.type = 'button';
-      copy.addEventListener('click', event => { event.preventDefault(); event.stopPropagation(); copyUrl(item.url); });
-      card.append(copy);
-    }
     if (large) {
       const glyph = el('span', 'tools-card__glyph');
       glyph.innerHTML = kind.icon;
       card.append(glyph);
     }
-    card.append(top, body, action);
+    card.append(top, body);
     grid.append(card);
     bindCardLight(card, 10);
   });

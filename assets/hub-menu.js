@@ -16,12 +16,6 @@
       href: 'https://script.google.com/macros/s/AKfycbwxsEPxs_uq5H4gH43Ie_FH0mrKAtdkrnzP-30b52GKTBMXVzARfgggs6_klkyadIVl/exec',
       external: true
     },
-    {
-      title: '수당계산기',
-      desc: '수수료·수당·환산율 기준 계산',
-      href: 'https://script.google.com/macros/s/AKfycbz4ZR5EbyrzaIkOfhUR0Hqe0eTRokTf8Sa6ax9Q0paQlRPtJfmxG7AwC2RXIpUNq1XfYg/exec',
-      external: true
-    },
     { title: '프리미엄 최신보험뉴스', desc: '보험뉴스와 최신 이슈 확인', href: 'https://test.primeasset.info/news/' },
     { title: '프리미엄사업부 공식페이지', desc: '프라임에셋 프리미엄사업부 공식 홈페이지', href: 'https://www.primeasset.info', external: true },
     { title: '보험노트 홈페이지', desc: '보험노트 공식 홈페이지', href: 'https://bohumnote.com', external: true },

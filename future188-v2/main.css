@@ -1504,3 +1504,8 @@ body.has-hub-menu .nav { padding-right: 128px; }
   .p188-home .site-footer__links { grid-template-columns: minmax(0, 1fr); }
   .p188-home .sticky-cta a { padding-inline: 10px; }
 }
+
+/* 2026-11-07 첫 화면 바로가기 2개 나란히 */
+.hero-links { display:flex; flex-wrap:wrap; gap:6px 22px; margin-top:20px; }
+.hero-links .hero-link { margin-top:0; }
+@media (min-width: 801px) and (max-height: 700px) { .hero-links { display:none; } }
