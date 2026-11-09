@@ -346,7 +346,7 @@ const TOOLS_CONFIG = [
   { name: '프리미엄 디비영업저장소 카페', description: '설계사 전용 DB영업 자료 카페', type: 'link', url: 'https://cafe.naver.com/primedbsales', category: 'website' },
   { name: '보험설계사끼리 카페', description: '소식지·실무 자료 나눔 카페', type: 'link', url: 'https://cafe.naver.com/cashtech', category: 'website' },
   { name: '사업부 분기별 성과판', description: '사업부 실적 본부·보험사별 현황', type: 'link', url: 'https://script.google.com/macros/s/AKfycbxjuozPcdGt3mFGq8og6OiL4QKfxYXO_KGWgTZys098lrrSCTRsX-M2mWABY0deaVHp/exec', category: 'web app' },
-  { name: '188본부 시스템 안내서', description: '새로 온 설계사 시작 안내서', type: 'link', url: 'https://script.google.com/macros/s/AKfycbzqX3lETPADpPAG6syoAsEG1cSceMcUUqmeEhYj3ukkbFfHPEnbdvq8W448ttC0vcFefw/exec', category: 'web app' }
+  { name: '188본부 시스템 안내서', description: '새로 온 설계사 시작 안내서', type: 'link', url: 'https://188.primeasset.info/system/', category: 'web app' }
 ];
 const TOOL_LINKS = new Set(['188본부 시스템 안내서', '사업부 분기별 성과판', '최신보험뉴스']);
 const SVG_OPEN = '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">';
@@ -403,8 +403,8 @@ function initToolsHub() {
     card.style.setProperty('--delay', `${index * 0.06}s`);
     card.dataset.toolName = item.name;
     card.dataset.toolType = item.type;
-    // 이사님 지시(2026-11-07): 링크는 아래 3개만, 나머지는 이름·설명만
-    const linked = TOOL_LINKS.has(item.name);
+    // 이사님 지시(2026-11-09): 19개 모두 누르면 열림(11-07 '3개만' 규칙 대체)
+    const linked = item.type === 'link' && !!item.url;
     if (linked) { card.href = item.url; card.target = '_blank'; card.rel = 'noopener noreferrer'; }
 
     const top = el('div', 'tools-card__top');
