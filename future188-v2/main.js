@@ -325,25 +325,30 @@ function initPrismText() {
 }
 
 /* ───────────── 업무 도구 허브 ─────────────
-   15개 도구를 들어올 때마다 무작위 순서로 보여 준다(1·6·11번째는 큰 카드). 주소는 아래 목록 그대로. */
+   19개 도구를 들어올 때마다 무작위 순서로 보여 준다(1·6·11번째는 큰 카드). 주소는 아래 목록 그대로. */
+// 이사님 지시(2026-11-09): 사업부 관리자 메뉴 권한 표(#matrix)의 19개·주소로 교체
 const TOOLS_CONFIG = [
-  { name: '188본부 시스템 안내서', description: '188본부 시스템 종합 안내', type: 'link', url: 'https://188.primeasset.info/system/', category: 'website' },
-  { name: '프라임에셋 188본부 허브홈페이지', description: '188본부 공식 업무 허브', type: 'link', url: 'https://188.primeasset.info/', category: 'website' },
-  { name: '프리미엄 최신보험뉴스', description: '최신 보험뉴스·마케팅 팁', type: 'link', url: 'https://test.primeasset.info/news/', category: 'website' },
-  { name: '사업부 실적보드', description: '사업부 실적 현황', type: 'link', url: 'https://test.primeasset.info/performance/', category: 'website' },
-  { name: 'AI영업비서 — 프리미엄 실전상담 통합코치', description: '상담·화법·코칭 통합도구', type: 'link', url: 'https://test.primeasset.info/members/coach/', category: 'ai tool' },
-  { name: '프리미엄 보험보상 답변기', description: '보험금 청구·보상 답변', type: 'link', url: 'https://test.primeasset.info/members/claim/', category: 'ai tool' },
-  { name: '프리미엄 상품통합분석기', description: '보험상품·소식지 통합분석', type: 'link', url: 'https://test.primeasset.info/product/', category: 'ai tool' },
-  { name: 'AI영업비서 — N대·종수술 답변기', description: 'N대·종수술 실무 답변', type: 'locked', url: '', category: 'ai tool' },
-  { name: '실전 질병정보·화법도우미(Gem)', description: '질병정보·상담화법 안내', type: 'locked', url: '', category: 'ai tool' },
-  { name: '실손의료비 답변기', description: '실손의료비 실무 답변', type: 'locked', url: '', category: 'ai tool' },
-  { name: '실전 DB영업 화법도우미(Gem)', description: 'DB영업 상담화법 안내', type: 'locked', url: '', category: 'ai tool' },
-  { name: '프리미엄 전산답변기', description: '전산·IT 질문 답변', type: 'link', url: 'https://test.primeasset.info/members/it/', category: 'ai tool' },
-  { name: '고지의무 판독기', description: '고지사항 판독·안내', type: 'locked', url: '', category: 'ai tool' },
-  { name: '프리미엄 자료검색기', description: '보유자료 통합 검색', type: 'link', url: 'https://script.google.com/macros/s/AKfycbx2R0eWsh6J9MyUPZahLHJj1bDiSdh1Ei147OOVJ85fCVZv1R-RQCeYIYgrkLiy7eh_/exec', category: 'web app' },
-  { name: '프리미엄 통합페이지', description: '웹앱·사이트·매뉴얼 모음', type: 'link', url: 'https://188.primeasset.info/ai_system/', category: 'web app' },
+  { name: 'AI 질문', description: '업무가 막힐 때 AI에게 묻는 질문창', type: 'link', url: 'https://test.primeasset.info/members/#home', category: 'ai tool' },
+  { name: 'AI영업비서', description: '고객 화법 추천·상담 연습·영업 점검', type: 'link', url: 'https://test.primeasset.info/members/coach/', category: 'ai tool' },
+  { name: '상품통합분석기', description: '보험사별 상품 가입조건·장단점 비교', type: 'link', url: 'https://test.primeasset.info/product/', category: 'ai tool' },
+  { name: '실전 질병정보 화법도우미', description: '질병 정보와 고객 설명 화법', type: 'link', url: 'https://gemini.google.com/gem/101-BxFLO4jPay9sHh_Hi5tLDW-QeGTC1?usp=sharing', category: 'ai tool' },
+  { name: '실전 DB영업 화법도우미', description: '상담 신청 고객 연락 화법 추천', type: 'link', url: 'https://gemini.google.com/gem/1O_fcD2VnwdValqYZE_IIaoCbAglL69M5?usp=sharing', category: 'ai tool' },
+  { name: '다보이는 보험비교 카페', description: '고객이 보험을 비교하고 묻는 카페', type: 'link', url: 'https://cafe.naver.com/launcher01', category: 'website' },
+  { name: '레몬보험 보험비교 카페', description: '고객용 보험비교 카페', type: 'link', url: 'https://cafe.naver.com/drama79com', category: 'website' },
+  { name: '보험보상답변기', description: '보험금 지급 기준·비슷한 사례 답변', type: 'link', url: 'https://test.primeasset.info/members/claim/', category: 'ai tool' },
+  { name: 'N대 종수술 답변기', description: '질병·수술의 보장 분류 답변', type: 'link', url: 'https://notebooklm.google.com/notebook/55b40b2f-1242-4604-ac3a-b6609d376cac/preview', category: 'ai tool' },
+  { name: '전산답변기', description: '보험사 전산 메뉴 위치·처리 순서', type: 'link', url: 'https://test.primeasset.info/members/it/', category: 'ai tool' },
+  { name: '프라임에셋 내부인트라넷 팜스', description: '증명서 발급·보험사 전산 접속', type: 'link', url: 'https://www.pams.kr/fc/mainfc.jsp', category: 'website' },
+  { name: '프리미엄 자료검색기', description: '업무 자료 주제별 통합 검색', type: 'link', url: 'https://script.google.com/macros/s/AKfycbx2R0eWsh6J9MyUPZahLHJj1bDiSdh1Ei147OOVJ85fCVZv1R-RQCeYIYgrkLiy7eh_/exec', category: 'web app' },
+  { name: '최신보험뉴스', description: '보험업계 최신 기사 주제별 모음', type: 'link', url: 'https://test.primeasset.info/news/', category: 'website' },
+  { name: '보험정보공유카페', description: '설계사 전용 보험 자료 카페', type: 'link', url: 'https://cafe.naver.com/prime188', category: 'website' },
+  { name: '프리미엄 상품저장소카페', description: '설계사 전용 상품 자료 카페', type: 'link', url: 'https://cafe.naver.com/insuconcept', category: 'website' },
+  { name: '프리미엄 디비영업저장소 카페', description: '설계사 전용 DB영업 자료 카페', type: 'link', url: 'https://cafe.naver.com/primedbsales', category: 'website' },
+  { name: '보험설계사끼리 카페', description: '소식지·실무 자료 나눔 카페', type: 'link', url: 'https://cafe.naver.com/cashtech', category: 'website' },
+  { name: '사업부 분기별 성과판', description: '사업부 실적 본부·보험사별 현황', type: 'link', url: 'https://script.google.com/macros/s/AKfycbxjuozPcdGt3mFGq8og6OiL4QKfxYXO_KGWgTZys098lrrSCTRsX-M2mWABY0deaVHp/exec', category: 'web app' },
+  { name: '188본부 시스템 안내서', description: '새로 온 설계사 시작 안내서', type: 'link', url: 'https://script.google.com/macros/s/AKfycbzqX3lETPADpPAG6syoAsEG1cSceMcUUqmeEhYj3ukkbFfHPEnbdvq8W448ttC0vcFefw/exec', category: 'web app' }
 ];
-const TOOL_LINKS = new Set(['188본부 시스템 안내서', '사업부 실적보드', '프리미엄 최신보험뉴스']);
+const TOOL_LINKS = new Set(['188본부 시스템 안내서', '사업부 분기별 성과판', '최신보험뉴스']);
 const SVG_OPEN = '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">';
 const TOOL_KINDS = {
   website: { label: '웹사이트', icon: `${SVG_OPEN}<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.5 3.9 5.5 3.9 9s-1.3 6.5-3.9 9c-2.6-2.5-3.9-5.5-3.9-9S9.4 5.5 12 3z"/></svg>` },

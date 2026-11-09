@@ -898,7 +898,7 @@ body.has-hub-menu .nav { padding-right: 128px; }
 @keyframes tools-lock-wiggle { 25% { transform: rotate(-10deg); } 75% { transform: rotate(10deg); } }
 /* 큰 카드 자리(1·6·11번째)를 화면 폭에 맞게 정리 */
 .tools-card.is-large:nth-child(6) { grid-row: span 1; }
-.tools-card.is-large:nth-child(11) { grid-column: span 1; grid-row: span 1; padding: 24px 24px 22px; }
+.tools-card.is-large:nth-child(11) { grid-column: span 2; grid-row: span 1; padding: 24px 24px 22px; } /* 19개 기준 빈칸 없음 */
 .tools-card.is-large:nth-child(11) h3 { max-width: 92%; font-size: clamp(18px, 1.4vw, 22px); }
 .tools-card.is-large:nth-child(11) p { font-size: 13px; }
 .tools-card.is-large:nth-child(11) .tools-card__glyph,
@@ -1309,7 +1309,7 @@ body.has-hub-menu .nav { padding-right: 128px; }
   .tools-card.is-large { min-height: 184px; }
   .tools-card.is-large:nth-child(1) { grid-column: span 2; grid-row: span 2; }
   .tools-card.is-large:nth-child(6) { grid-column: span 2; grid-row: span 1; }
-  .tools-card.is-large:nth-child(11) { grid-column: span 1; grid-row: span 1; }
+  .tools-card.is-large:nth-child(11) { grid-column: span 2; grid-row: span 1; }
 }
 @media (max-width: 900px) {
   .nav nav { display: none; }
