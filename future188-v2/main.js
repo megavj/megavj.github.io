@@ -334,7 +334,7 @@ const TOOLS_CONFIG = [
   { name: '실전 질병정보 화법도우미', description: '질병 정보와 고객 설명 화법', type: 'link', url: 'https://gemini.google.com/gem/101-BxFLO4jPay9sHh_Hi5tLDW-QeGTC1?usp=sharing', category: 'ai tool' },
   { name: '실전 DB영업 화법도우미', description: '상담 신청 고객 연락 화법 추천', type: 'link', url: 'https://gemini.google.com/gem/1O_fcD2VnwdValqYZE_IIaoCbAglL69M5?usp=sharing', category: 'ai tool' },
   { name: '다보이는 보험비교 카페', description: '고객이 보험을 비교하고 묻는 카페', type: 'link', url: 'https://cafe.naver.com/launcher01', category: 'website' },
-  { name: '레몬보험 보험비교 카페', description: '고객용 보험비교 카페', type: 'link', url: 'https://cafe.naver.com/drama79com', category: 'website' },
+  // 이사님 지시(2026-11-12): 레몬보험 보험비교 카페 삭제
   { name: '보험보상답변기', description: '보험금 지급 기준·비슷한 사례 답변', type: 'link', url: 'https://test.primeasset.info/members/claim/', category: 'ai tool' },
   { name: 'N대 종수술 답변기', description: '질병·수술의 보장 분류 답변', type: 'link', url: 'https://notebooklm.google.com/notebook/55b40b2f-1242-4604-ac3a-b6609d376cac/preview', category: 'ai tool' },
   { name: '전산답변기', description: '보험사 전산 메뉴 위치·처리 순서', type: 'link', url: 'https://test.primeasset.info/members/it/', category: 'ai tool' },
