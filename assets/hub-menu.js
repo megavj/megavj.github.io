@@ -1,4 +1,4 @@
-/* 188 공용 메뉴 — MY 버튼 + 전체 메뉴(오른쪽 서랍) v4 (2026-10)
+/* 188 공용 메뉴 — 전체 메뉴(오른쪽 서랍) v4 (2026-10)
  * · 모든 페이지 공통. 페이지 목록·주소는 아래 pages 그대로(링크 주소를 바꾸지 말 것).
  * · 열면 닫기 버튼으로 초점이 가고, 탭 키는 서랍 안에서만 돈다. Esc·바깥 클릭으로 닫으면 메뉴 버튼으로 초점이 돌아온다.
  * · 서랍 아래에 김상현 이사 1:1 상담(카카오톡)·전화 버튼.
@@ -8,7 +8,7 @@
     { title: '188 허브', desc: '김상현 이사 188본부 메인페이지', href: '/' },
     { title: '프라임에셋 통합페이지', desc: 'AI 시스템 및 프라임에셋 업무 허브', href: '/ai_system/' },
     { title: '프리미엄 보험보상 답변기', desc: '문서 기반 보험보상 실무 답변', href: '/claim/' },
-    { title: '사업부 실적보드', desc: '프리미엄사업부 2026년 실적 현황', href: 'https://test.primeasset.info/performance/', external: true }, // 2026-11-02 test 실적보드로 연결(188 /performance/ 페이지는 유지)
+    { title: '사업부 실적보드', desc: '프리미엄사업부 2026년 실적 현황', href: 'https://www.primeasset.info/performance/', external: true }, // 2026-11-02 test 실적보드로 연결(188 /performance/ 페이지는 유지)
     { title: '188본부 시스템안내서', desc: '입점 및 운영 시스템 안내', href: '/system/' },
     {
       title: '프리미엄 상품통합분석기',
@@ -16,7 +16,7 @@
       href: 'https://script.google.com/macros/s/AKfycbwxsEPxs_uq5H4gH43Ie_FH0mrKAtdkrnzP-30b52GKTBMXVzARfgggs6_klkyadIVl/exec',
       external: true
     },
-    { title: '프리미엄 최신보험뉴스', desc: '보험뉴스와 최신 이슈 확인', href: 'https://test.primeasset.info/news/' },
+    { title: '프리미엄 최신보험뉴스', desc: '보험뉴스와 최신 이슈 확인', href: 'https://www.primeasset.info/news/' },
     { title: '프리미엄사업부 공식페이지', desc: '프라임에셋 프리미엄사업부 공식 홈페이지', href: 'https://www.primeasset.info', external: true },
     { title: '보험노트 홈페이지', desc: '보험노트 공식 홈페이지', href: 'https://bohumnote.com', external: true },
     {
@@ -54,10 +54,7 @@
 
     document.body.classList.add('has-hub-menu');
     const current = normalizePath(window.location.pathname);
-    const myLink = el('a', 'hub-my-link', 'MY');
-    myLink.href = '/my/';
-    myLink.setAttribute('aria-label', 'MY 페이지 바로가기');
-    if (current === '/my/') myLink.setAttribute('aria-current', 'page');
+    // 이사님 지시(2026-11-17): 오른쪽 위 MY 버튼 삭제
 
     const toggle = el('button', 'hub-menu-toggle');
     toggle.type = 'button';
@@ -90,7 +87,7 @@
     list.setAttribute('aria-label', '188 하위페이지');
     // TASK42: 홈의 휴대폰 메뉴에서도 MY와 구분해 시험 인트라넷으로 이동한다.
     const menuPages = document.body.classList.contains('p188-home')
-      ? [{ title: '로그인', desc: '시험 인트라넷으로 이동', href: 'https://test.primeasset.info/members/', external: true, sameTab: true }, ...pages]
+      ? [{ title: '로그인', desc: '시험 인트라넷으로 이동', href: 'https://www.primeasset.info/members/', external: true, sameTab: true }, ...pages]
       : pages;
     menuPages.forEach((page) => {
       const link = el('a', 'hub-menu-link');
@@ -117,7 +114,7 @@
     cta.append(kakao, call);
 
     panel.append(close, head, list, cta);
-    document.body.append(myLink, toggle, scrim, panel);
+    document.body.append(toggle, scrim, panel);
 
     let lastFocus = null;
     const focusables = () => Array.prototype.slice.call(panel.querySelectorAll('a[href], button:not([disabled])'));
