@@ -325,9 +325,9 @@ function initPrismText() {
 }
 
 /* ───────────── 업무 도구 허브 ─────────────
-   15개 도구를 들어올 때마다 무작위 순서로 보여 준다(1·6·11번째는 큰 카드). 주소는 아래 목록 그대로. */
+   도구를 들어올 때마다 무작위 순서로 보여 준다(1·6·11번째는 큰 카드). 주소는 아래 목록 그대로. */
 // 이사님 지시(2026-11-09): 사업부 관리자 메뉴 권한 표(#matrix)의 19개·주소로 교체
-// 이사님 지시(2026-11-17): 상품통합분석기·실전 질병정보 화법도우미·실전 DB영업 화법도우미·N대 종수술 답변기 삭제(15개)
+// 이사님 지시(2026-11-17): 상품통합분석기·실전 질병정보 화법도우미·실전 DB영업 화법도우미·N대 종수술 답변기 삭제(남은 도구 14개)
 const TOOLS_CONFIG = [
   { name: 'AI 질문', description: '업무가 막힐 때 AI에게 묻는 질문창', type: 'link', url: 'https://www.primeasset.info/members/#home', category: 'ai tool' },
   { name: 'AI영업비서', description: '고객 화법 추천·상담 연습·영업 점검', type: 'link', url: 'https://www.primeasset.info/members/coach/', category: 'ai tool' },
