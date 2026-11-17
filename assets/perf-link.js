@@ -1,8 +1,8 @@
-/* 188 첫 화면 '사업부 실적'을 사업부 홈페이지(현재 test.primeasset.info) 실적보드 자료(#perf-data)와 연동한다.
+/* 188 첫 화면 '사업부 실적'을 사업부 홈페이지(현재 www.primeasset.info) 실적보드 자료(#perf-data)와 연동한다.
    읽기 실패 시 HTML에 적힌 값을 그대로 둔다. (2026-11-05 이사님 지시) */
 (function () {
   'use strict';
-  var SRC = 'https://test.primeasset.info/performance/';
+  var SRC = 'https://www.primeasset.info/performance/';
   var els = document.querySelectorAll('[data-pb-stat]');
   if (!els.length || !window.fetch || !window.DOMParser) return;
   fetch(SRC, { cache: 'no-cache', credentials: 'omit' })
