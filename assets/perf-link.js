@@ -24,6 +24,7 @@
         period: first + '~' + last + '월',
         period_from_to: first + '월부터 ' + last + '월까지'
       };
+      var ym = /(20\d\d)년/.exec(String(d.period || '')); if (ym) vals.year = ym[1]; /* 2026-11-21 연도도 원본 따라감 */
       if (Number.isInteger(bc) && bc > 0) vals.branches = String(bc);
       var apply = function () {
         els.forEach(function (el) {
