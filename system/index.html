@@ -13,7 +13,7 @@
   <meta property="og:image" content="https://188.primeasset.info/assets/ksh-profile.jpg">
   <meta property="og:site_name" content="프라임에셋 188본부">
   <meta property="og:locale" content="ko_KR">
-  <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Organization", "@id": "https://188.primeasset.info/#org", "name": "프라임에셋 188본부", "alternateName": ["188본부", "Prime Asset 188"], "url": "https://188.primeasset.info/", "logo": "https://188.primeasset.info/assets/ksh-profile.jpg", "description": "프라임에셋 프리미엄사업부 소속 188본부. 보험설계사의 합류·교육·영업 지원과 AI 업무 도구를 안내합니다.", "parentOrganization": {"@type": "Organization", "name": "프라임에셋 프리미엄사업부"}}, {"@type": "WebSite", "@id": "https://188.primeasset.info/#site", "url": "https://188.primeasset.info/", "name": "프라임에셋 188본부", "inLanguage": "ko-KR", "publisher": {"@id": "https://188.primeasset.info/#org"}}, {"@type": "WebPage", "@id": "https://188.primeasset.info/system/", "url": "https://188.primeasset.info/system/", "name": "188본부 온보딩 시스템 | 188 프라임에셋", "description": "188본부 온보딩 시스템 — 시스템 안내서와 위촉상담 AI를 한곳에서 확인하세요.", "isPartOf": {"@id": "https://188.primeasset.info/#site"}, "about": {"@id": "https://188.primeasset.info/#org"}, "inLanguage": "ko-KR", "dateModified": "2026-11-08"}]}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Organization", "@id": "https://188.primeasset.info/#org", "name": "프라임에셋 188본부", "alternateName": ["188본부", "Prime Asset 188"], "url": "https://188.primeasset.info/", "logo": "https://188.primeasset.info/assets/ksh-profile.jpg", "description": "프라임에셋 프리미엄사업부 소속 188본부. 보험설계사의 합류·교육·영업 지원과 AI 업무 도구를 안내합니다.", "parentOrganization": {"@type": "Organization", "name": "프라임에셋 프리미엄사업부"}}, {"@type": "WebSite", "@id": "https://188.primeasset.info/#site", "url": "https://188.primeasset.info/", "name": "프라임에셋 188본부", "inLanguage": "ko-KR", "publisher": {"@id": "https://188.primeasset.info/#org"}}, {"@type": "WebPage", "@id": "https://188.primeasset.info/system/", "url": "https://188.primeasset.info/system/", "name": "188본부 온보딩 시스템 | 188 프라임에셋", "description": "188본부 온보딩 시스템 — 시스템 안내서와 위촉상담 AI를 한곳에서 확인하세요.", "isPartOf": {"@id": "https://188.primeasset.info/#site"}, "about": {"@id": "https://188.primeasset.info/#org"}, "inLanguage": "ko-KR", "dateModified": "2026-11-21"}]}</script>
   <meta name="theme-color" content="#050607">
   <link rel="preconnect" href="https://cdn.jsdelivr.net">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -71,7 +71,7 @@
       position: sticky; top: 0; z-index: 30;
       display: flex; align-items: center; justify-content: space-between; gap: 14px;
       min-height: var(--lux-topbar-h); padding: 0 clamp(16px,4vw,34px);
-      padding-right: 126px;  /* 공용 MY 버튼+햄버거 고정영역과 탭 클릭영역이 겹치지 않게 확보 */
+      padding-right: 126px;  /* 공용 햄버거 고정영역과 탭 클릭영역이 겹치지 않게 확보 */
       border-bottom: 1px solid var(--line);
       background: rgba(5,6,7,.84);
       -webkit-backdrop-filter: var(--glass-blur); backdrop-filter: var(--glass-blur);
@@ -114,7 +114,7 @@
       height: 1px; background: linear-gradient(90deg, var(--lux-gold-hi), rgba(232,201,106,.2) 36%, transparent 82%);
     }
     .hero-copy { position: relative; z-index: 2; min-width: 0; }
-    .hero-kicker { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; color: var(--lux-gold-hi); font: 400 11px/1.4 var(--lux-serif); letter-spacing: .28em; }
+    .hero-kicker { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; color: var(--lux-gold-hi); font-size: 14px; font-weight: 700; line-height: 1.4; letter-spacing: .02em; }
     .hero-kicker::before { content: ""; width: 28px; height: 1px; background: linear-gradient(90deg, transparent, var(--lux-gold-hi)); }
     .hero h1 {
       margin: 0; max-width: 680px; font-size: var(--lux-fs-h1); line-height: 1.08;
@@ -126,12 +126,14 @@
     }
     .hero p { margin: 16px 0 0; color: var(--lux-ink-2); font-size: 16px; line-height: 1.75; max-width: 620px; word-break: keep-all; }
     .hero-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 24px; }
-    .hero-meta span {
+    .hero-meta span, a.hero-chip {
       display: inline-flex; align-items: center; gap: 8px; min-height: 32px; padding: 0 13px;
       border: 1px solid var(--line); border-radius: 999px; background: rgba(232,201,106,.05);
-      color: var(--lux-ink-2); font: 400 10px/1 var(--lux-serif); letter-spacing: .14em;
+      color: var(--lux-ink); font-size: 13px; font-weight: 600; letter-spacing: 0;
+      transition: border-color .25s, background-color .25s;
     }
-    .hero-meta span::before { content: ""; width: 5px; height: 5px; border-radius: 50%; background: var(--lux-gold-hi); box-shadow: 0 0 10px rgba(232,201,106,.8); }
+    a.hero-chip:hover { border-color: var(--lux-gold-hi); background: rgba(232,201,106,.12); }
+    .hero-meta span::before, a.hero-chip::before { content: ""; width: 5px; height: 5px; border-radius: 50%; background: var(--lux-gold-hi); box-shadow: 0 0 10px rgba(232,201,106,.8); }
     .mobile-admin {
       display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 0 15px;
       border: 1px solid rgba(232,201,106,.34); border-radius: 999px; background: rgba(232,201,106,.05);
@@ -164,7 +166,7 @@
     /* ── 입점코드 입력 바 (히어로 아래 · 항상 노출 · AI상담 위) ──
        서버 게이트(getGuide)는 본체 iframe에서 검증. 이 바는 코드를 iframe으로 넘겨
        한 곳에서만 게이트가 뜨게(이중 게이트 방지) 하고, 성공/실패는 postMessage로 반영. */
-    .gatebar-wrap { position: relative; z-index: 3; max-width: 1080px; margin: -22px auto 0; padding: 0 clamp(16px,4vw,34px) 14px; }
+    .gatebar-wrap { position: relative; z-index: 3; max-width: 1080px; margin: 4px auto 0; padding: 0 clamp(16px,4vw,34px) 14px; }
     .gatebar {
       position: relative;
       display: grid; grid-template-columns: auto minmax(0,1fr) auto; gap: 10px; align-items: center;
@@ -186,7 +188,7 @@
       font: inherit; font-weight: 700; letter-spacing: .18em; outline: none;
       transition: border-color .25s, box-shadow .25s;
     }
-    .gatebar-input::placeholder { color: rgba(245,242,234,.42); letter-spacing: normal; font-weight: 400; }
+    .gatebar-input::placeholder { color: rgba(245,242,234,.66); letter-spacing: normal; font-weight: 400; }
     .gatebar-input:focus { border-color: rgba(232,201,106,.7); box-shadow: 0 0 0 3px rgba(232,201,106,.14); }
     .gatebar-btn {
       min-height: 46px; padding: 0 26px; white-space: nowrap; cursor: pointer;
@@ -205,7 +207,8 @@
     .gatebar-err { margin: 8px 6px 0; color: #fb7185; font-size: 13px; word-break: keep-all; }
     .gatebar-err:empty { display: none; }
 
-    main { max-width: 1080px; margin: 0 auto; padding: 8px clamp(16px,4vw,34px) 56px; }
+    main { max-width: 1080px; margin: 0 auto; padding: 8px clamp(16px,4vw,34px) 28px; scroll-margin-top: 70px; }
+    #panel-guide, #start, #docs, #systems, #gateForm, #nocode { scroll-margin-top: 76px; }
     .panel { display: none; animation: rise .34s var(--lux-ease) both; }
     .panel.active { display: block; }
     @keyframes rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
@@ -244,7 +247,7 @@
     }
     .side-title {
       display: flex; align-items: center; gap: 8px;
-      font: 400 10px/1.4 var(--lux-serif); letter-spacing: .24em; color: var(--lux-gold-hi);
+      font-size: 14px; font-weight: 700; line-height: 1.4; color: var(--lux-gold-hi);
       padding: 2px 4px 12px; border-bottom: 1px solid var(--line-2); margin-bottom: 12px;
     }
     .qmenu { display: grid; gap: 6px; }
@@ -308,7 +311,7 @@
     .ai .bubble p { margin: 0 0 8px; } .ai .bubble p:last-child { margin-bottom: 0; }
     .ai .bubble ul { margin: 6px 0 0; padding-left: 18px; } .ai .bubble li { margin: 4px 0; }
     .ai .bubble li::marker { color: var(--lux-gold-hi); }
-    .time { font-size: 11px; color: var(--lux-mute); padding: 0 3px; }
+    .time { font-size: 12px; color: var(--lux-ink-2); padding: 0 3px; }
 
     .chat-form {
       display: grid; grid-template-columns: 1fr auto; gap: 9px;
@@ -319,7 +322,7 @@
       padding: 0 18px; background: rgba(5,6,7,.7); color: var(--lux-ink); font: inherit; outline: none;
       transition: border-color .25s, box-shadow .25s;
     }
-    .chat-input::placeholder { color: rgba(245,242,234,.42); }
+    .chat-input::placeholder { color: rgba(245,242,234,.66); }
     .chat-input:focus { border-color: rgba(232,201,106,.7); box-shadow: 0 0 0 3px rgba(232,201,106,.14); }
     .send {
       display: inline-grid; place-items: center; width: 50px; min-height: 46px;
@@ -369,6 +372,74 @@
       width: 100%; flex: 1; min-height: 440px; border: 0; background: var(--lux-bg-2); display: block;
     }
 
+
+    /* ── 2026-11-21 개편: 처음 오신 분 안내(코드 없이 공개) — 비밀번호·계좌·가격 등 대외비 정보는 넣지 않는다 ── */
+    .onb { max-width: 1080px; margin: 0 auto; padding: 0 clamp(16px,4vw,34px) 10px; }
+    .onb-card {
+      border: 1px solid var(--line); border-radius: var(--r-card); padding: clamp(18px,3vw,28px);
+      background: linear-gradient(180deg, rgba(255,255,255,.035), rgba(255,255,255,.01)), #0b0d11; margin-bottom: 14px;
+    }
+    .onb h2 { margin: 0 0 6px; font-size: clamp(20px,2.4vw,24px); font-weight: 700; letter-spacing: -.03em; color: #fff; }
+    .onb .lead { margin: 0 0 18px; color: var(--lux-ink-2); font-size: 15px; line-height: 1.7; }
+    .steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 10px; counter-reset: st; }
+    .steps li {
+      position: relative; padding: 16px 16px 16px 58px; border: 1px solid var(--line-2); border-radius: var(--r-ctl);
+      background: rgba(255,255,255,.025); counter-increment: st; min-height: 96px;
+    }
+    .steps li::before {
+      content: counter(st); position: absolute; left: 16px; top: 16px; width: 30px; height: 30px; display: grid; place-items: center;
+      border-radius: 50%; background: var(--lux-gold-fill); color: #17120a; font-weight: 800; font-size: 14px;
+    }
+    .steps b { display: block; color: #fff; font-size: 15px; margin-bottom: 4px; }
+    .steps span { display: block; color: var(--lux-ink-2); font-size: 14px; line-height: 1.6; word-break: keep-all; }
+    .onb-grid { display: grid; grid-template-columns: minmax(0,1.1fr) minmax(0,.9fr); gap: 14px; }
+    .onb-grid .onb-card { margin-bottom: 0; }
+    .ck { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+    .ck label {
+      display: flex; gap: 12px; align-items: flex-start; min-height: 48px; padding: 11px 12px; cursor: pointer;
+      border: 1px solid var(--line-2); border-radius: var(--r-ctl); background: rgba(255,255,255,.02);
+    }
+    .ck input { flex: 0 0 auto; width: 22px; height: 22px; margin: 1px 0 0; accent-color: #e8c96a; }
+    .ck b { display: block; color: var(--lux-ink); font-size: 15px; font-weight: 600; }
+    .ck small { display: block; color: var(--lux-ink-2); font-size: 14px; line-height: 1.55; margin-top: 2px; }
+    .ck input:checked + span b { color: #6ee7b7; text-decoration: line-through; text-decoration-color: rgba(110,231,183,.5); }
+    .ck-bar { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin: 0 0 12px; }
+    .ck-prog { color: var(--lux-gold-hi); font-weight: 700; font-size: 15px; }
+    .ck-reset { min-height: 40px; padding: 0 14px; border: 1px solid var(--line); border-radius: 999px; background: transparent; color: var(--lux-ink-2); font: inherit; font-size: 13px; cursor: pointer; }
+    .onb-note { margin: 12px 0 0; color: var(--lux-ink-2); font-size: 14px; line-height: 1.6; }
+    .todo { margin: 0; padding-left: 20px; display: grid; gap: 10px; color: var(--lux-ink); font-size: 15px; line-height: 1.6; }
+    .todo li::marker { color: var(--lux-gold-hi); font-weight: 700; }
+    .todo small { display: block; color: var(--lux-ink-2); font-size: 13px; }
+    .nocode { margin-top: 14px; padding: 16px; border: 1px solid rgba(232,201,106,.34); border-radius: var(--r-ctl); background: rgba(232,201,106,.06); }
+    .nocode b { color: var(--lux-gold-hi); font-size: 15px; }
+    .nocode p { margin: 6px 0 12px; color: var(--lux-ink-2); font-size: 14px; line-height: 1.6; }
+    .btnrow { display: flex; flex-wrap: wrap; gap: 8px; }
+    .btnrow .obtn { flex: 1 1 180px; }
+    .obtn {
+      display: inline-flex; align-items: center; justify-content: center; min-height: 46px; padding: 0 18px; border-radius: 999px;
+      border: 1px solid rgba(255,241,196,.75); background: var(--lux-gold-fill); color: #17120a; font-weight: 800; font-size: 14px;
+    }
+    .obtn.line { background: transparent; border-color: var(--line); color: var(--lux-ink); font-weight: 700; }
+    .sys { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 10px; }
+    .sys a {
+      display: grid; gap: 4px; padding: 14px 16px; min-height: 92px; border: 1px solid var(--line-2); border-radius: var(--r-ctl);
+      background: rgba(255,255,255,.025); transition: border-color .25s, background-color .25s;
+    }
+    .sys a:hover { border-color: rgba(232,201,106,.55); background: rgba(232,201,106,.06); }
+    .sys b { color: #fff; font-size: 15px; }
+    .sys span { color: var(--lux-ink-2); font-size: 13px; line-height: 1.55; }
+    .sys em { justify-self: start; font-style: normal; font-size: 12px; font-weight: 700; padding: 2px 8px; border-radius: 999px; border: 1px solid var(--line); color: var(--lux-gold-hi); }
+    .sys em.open { color: #6ee7b7; border-color: rgba(110,231,183,.4); }
+    .gate-help { margin: 8px 6px 0; color: var(--lux-ink-2); font-size: 13px; line-height: 1.6; }
+    .gate-help a { color: var(--lux-gold-hi); text-decoration: underline; text-underline-offset: 3px; }
+    .examples { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+    .examples button { min-height: 40px; padding: 0 12px; border: 1px solid rgba(232,201,106,.34); border-radius: 999px; background: rgba(232,201,106,.06); color: var(--lux-ink); font: inherit; font-size: 13px; cursor: pointer; }
+    .sys-foot { max-width: 1080px; margin: 0 auto; padding: 8px clamp(16px,4vw,34px) 40px; display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; justify-content: space-between; color: var(--lux-ink-2); font-size: 13px; }
+    .sys-foot a { color: var(--lux-ink); }
+    .foot-admin { min-height: 36px; padding: 0 12px; border: 1px solid var(--line-2); border-radius: 999px; background: transparent; color: var(--lux-mute); font: inherit; font-size: 12px; cursor: pointer; }
+    @media (max-width: 900px) { .steps, .sys { grid-template-columns: repeat(2, minmax(0,1fr)); } .onb-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 520px) { .steps, .sys { grid-template-columns: 1fr; } .steps li { min-height: 0; } }
+
     @media (max-width: 760px) {
       .hero { grid-template-columns: minmax(0,1fr) 128px; min-height: 236px; gap: 18px; padding-top: 38px; padding-bottom: 52px; }
       .hero-object { width: 126px; height: 126px; }
@@ -378,14 +449,17 @@
       .system-dot { width: 5px; height: 5px; }
       .consult { grid-template-columns: 1fr; }
       .side { position: static; padding: 12px; }
-      .qmenu { grid-template-columns: repeat(2, minmax(0,1fr)); gap: 7px; }
+      .qmenu { display: flex; gap: 7px; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; padding-bottom: 2px; }
+      .qmenu::-webkit-scrollbar { display: none; }
+      .qmenu { -webkit-mask-image: linear-gradient(90deg, #000 88%, transparent); mask-image: linear-gradient(90deg, #000 88%, transparent); padding-right: 24px; }
+      .qmenu .qbtn { flex: 0 0 auto; width: auto; }
       .chat-log { min-height: 248px; height: clamp(248px,42svh,390px); max-height: none; }
     }
     @media (max-width: 520px) {
       .nav { padding-left: 12px; padding-right: 116px; gap: 5px; }
       .brand-text { display: none; }
       .tabs { gap: 0; }
-      .tab { padding: 0 8px; font-size: 12px; }
+      .tab { padding: 0 9px; font-size: 14px; }
       .tab::after { left: 8px; right: 8px; }
       .tab-admin { display: none; }
       .hero { grid-template-columns: 1fr; min-height: 0; padding-top: 34px; padding-bottom: 52px; }
@@ -393,7 +467,9 @@
       .hero h1 { font-size: clamp(32px,9.4vw,40px); }
       .hero p { margin-top: 12px; font-size: 14px; }
       .hero-meta { margin-top: 19px; }
-      .hero-meta span { min-height: 28px; padding: 0 10px; font-size: 9px; }
+      .hero-meta { gap: 6px; }
+      .hero-meta span, a.hero-chip { min-height: 40px; padding: 0 11px; font-size: 13px; }
+      .hero-meta a.hero-chip::before { display: none; }
       .mobile-admin { min-height: 44px; }
       .gatebar { grid-template-columns: 1fr; gap: 8px; }
       .gatebar-label { justify-content: flex-start; }
@@ -416,7 +492,7 @@
   <header class="nav">
     <a class="brand" href="/" aria-label="188 프라임에셋 허브로 이동">
       <span class="mark lux-mark" aria-hidden="true">188</span>
-      <span class="brand-text"><b>188</b> · PRIME ASSET SYSTEM</span>
+      <span class="brand-text"><b>188</b> · 온보딩 안내</span>
     </a>
     <nav class="tabs" role="tablist" aria-label="시스템 탭">
       <button class="tab" id="tab-guide" role="tab" aria-controls="panel-guide" aria-selected="false" onclick="switchTab('guide')">
@@ -433,12 +509,11 @@
 
   <section class="hero">
     <div class="hero-copy">
-      <div class="hero-kicker">PRIME ASSET · 188</div>
+      <div class="hero-kicker">프라임에셋 188본부</div>
       <h1>188본부<br><em>온보딩 시스템</em></h1>
-      <p>위촉 절차부터 준비서류와 영업시스템까지, 합류에 필요한 순서만 한 화면에 정리했습니다.</p>
-      <div class="hero-meta" aria-label="핵심 기능">
-        <span>STEP GUIDE</span><span>PRIVATE AI</span><span>DESKTOP · MOBILE</span>
-        <button class="mobile-admin" type="button" aria-haspopup="dialog" onclick="openAdmin()">관리자</button>
+      <p>188본부에 합류하시는 분을 위한 첫 화면입니다. 합류 순서와 준비서류를 먼저 확인하시고, 입점코드를 받으셨다면 아래에서 상세 안내서를 여세요.</p>
+      <div class="hero-meta" aria-label="바로가기">
+        <a class="hero-chip" href="#start">합류 순서</a><a class="hero-chip" href="#docs">준비서류</a><a class="hero-chip" href="#systems">업무 시스템</a><a class="hero-chip" href="#ai" onclick="switchTab('consult')">위촉 AI</a><a class="hero-chip" href="#gateForm" onclick="setTimeout(()=>document.getElementById('gateInput').focus(),300)">🔑 입점코드</a>
       </div>
     </div>
     <div class="hero-object" aria-hidden="true">
@@ -448,15 +523,34 @@
     </div>
   </section>
 
+
+  <!-- 2026-11-21 개편: 처음 오신 분 안내(입점코드 없이 공개). 대외비(채팅방 비밀번호·계좌·DB 가격 등)는 넣지 않는다. -->
+  <section class="onb" aria-label="처음 오신 분 안내">
+    <div class="onb-card" id="start">
+      <h2>처음 오셨나요? 합류는 이렇게 진행됩니다</h2>
+      <p class="lead">아래 순서대로 진행하면 됩니다. 단계마다 담당자가 함께 안내해 드립니다.</p>
+      <ol class="steps">
+        <li><b>비밀유지각서 작성</b><span>가장 먼저 합니다. 작성 링크는 담당자가 보내 드리며, 작성 후 캡처해 김상현 이사에게 보내 주세요. 이 단계가 끝나야 다음으로 넘어갑니다.</span></li>
+        <li><b>서류 준비</b><span>아래 <a href="#docs" style="color:var(--lux-gold-hi)">준비서류 체크리스트</a>를 보며 하나씩 챙겨 주세요. 사진(이미지)으로 내도 됩니다.</span></li>
+        <li><b>시험 접수·응시</b><span>생명보험·손해보험 시험입니다. 응시비는 각 2만원이고, 접수는 담당 관리자가 원수사를 통해 도와드립니다.</span></li>
+        <li><b>위촉(입사) 진행</b><span>합격 후 서류를 내면 심사를 거쳐 협회 등록과 코드 발급이 진행됩니다.</span></li>
+        <li><b>188본부 합류</b><span>공지방 입장(필수), 카페 가입, 188 인트라넷 가입을 합니다. 방법은 입점코드로 여는 안내서에 있습니다.</span></li>
+        <li><b>첫 영업 준비</b><span>188 업무 시스템과 교육 지원을 익히고, 상위관리자와 영업 방향을 정합니다.</span></li>
+      </ol>
+    </div>
+
+  </section>
+
   <!-- 입점코드 입력 바 : 히어로 아래 · 항상 노출 · AI상담 위. 서버 게이트로 안내서를 연다. -->
   <section class="gatebar-wrap" aria-label="입점코드 입력">
     <form class="gatebar" id="gateForm" autocomplete="off">
-      <div class="gatebar-label"><span class="gi" aria-hidden="true">IN</span><span>입점코드 입력</span></div>
+      <div class="gatebar-label"><span class="gi" aria-hidden="true">🔑</span><span>상세 안내서 열기</span></div>
       <input class="gatebar-input" id="gateInput" name="code" type="password" inputmode="numeric"
-             maxlength="20" placeholder="188본부 입점코드를 입력하세요" autocomplete="off" aria-label="입점코드">
+             maxlength="20" placeholder="입점코드 입력" autocomplete="off" aria-label="입점코드">
       <button class="gatebar-btn" id="gateBtn" type="submit">입장</button>
     </form>
     <p class="gatebar-err" id="gateErr" role="alert"></p>
+    <p class="gate-help">공지방·카페·연락처·교육비 지원 등 188본부 내부 안내는 입점코드를 넣어야 보입니다. <a href="#nocode">코드가 없으신가요?</a></p>
   </section>
 
   <main>
@@ -464,7 +558,7 @@
     <section class="panel" id="panel-guide" role="tabpanel" aria-labelledby="tab-guide">
       <div class="frame-wrap">
         <div class="frame-hint" id="frameHint">
-          <span class="fh-i">LOCK</span>
+          <span class="fh-i">🔒</span>
           <span>위 <b>입점코드</b>를 입력하고 <b>[입장]</b>하면<br>시스템 안내서가 이곳에 열립니다.</span>
         </div>
         <iframe class="systemFrame hidden" id="systemFrame" title="188본부 시스템 안내서" loading="eager"></iframe>
@@ -473,28 +567,35 @@
 
     <!-- 위촉상담 AI : 좌측 퀵메뉴 + 우측 채팅 -->
     <section class="panel active" id="panel-consult" role="tabpanel" aria-labelledby="tab-consult">
+      <span id="ai" style="position:relative;top:-80px;display:block"></span>
       <div class="consult">
         <aside class="side" aria-label="AI 상담 빠른 질문">
-          <div class="side-title">QUICK GUIDE</div>
+          <div class="side-title">빠른 질문</div>
           <div class="qmenu" id="qmenu"></div>
         </aside>
 
         <div class="chat">
           <div class="chat-notice">
             <span class="ni">ⓘ</span>
-            <span>내부 설계사 전용 · 정확한 내용은 담당자 확인</span>
+            <span>위촉·합류 안내 AI · 중요한 내용은 담당자에게 한 번 더 확인하세요</span>
           </div>
           <div class="chat-log" id="chatLog" aria-live="polite">
             <div class="row ai">
               <div class="avatar">188</div>
               <div class="stack">
-                <div class="bubble">위촉진행 AI입니다. 왼쪽 메뉴를 누르거나 궁금한 내용을 입력해 주세요.</div>
+                <div class="bubble">안녕하세요, 188본부 위촉 안내 AI입니다. 빠른 질문 버튼을 누르거나 아래 입력칸에 궁금한 점을 적어 주세요.
+                  <div class="examples" id="examples">
+                    <button type="button">시험 접수는 어떻게 하나요?</button>
+                    <button type="button">가족관계증명서는 어떻게 떼나요?</button>
+                    <button type="button">입점코드는 어디서 받나요?</button>
+                  </div>
+                </div>
                 <div class="time" id="firstTime"></div>
               </div>
             </div>
           </div>
           <form class="chat-form" id="chatForm">
-            <input class="chat-input" id="chatInput" name="question" autocomplete="off" maxlength="600" placeholder="질문을 입력하세요">
+            <input class="chat-input" id="chatInput" name="question" autocomplete="off" maxlength="600" placeholder="궁금한 점을 입력하세요">
             <button class="send" id="sendBtn" type="submit" aria-label="전송">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4 20-7z"/></svg>
             </button>
@@ -503,6 +604,69 @@
       </div>
     </section>
   </main>
+
+  <!-- 2026-11-21 개편: 준비서류·첫 주 할 일·업무 시스템 (공개, 대외비 제외) -->
+  <section class="onb" aria-label="준비서류와 업무 시스템">
+    <div class="onb-grid">
+      <div class="onb-card" id="docs">
+        <h2>준비서류 체크리스트</h2>
+        <div class="ck-bar"><span class="ck-prog" id="ckProg" aria-live="polite">0 / 7 준비</span><button class="ck-reset" type="button" id="ckReset">처음부터</button></div>
+        <ul class="ck" id="ckList">
+          <li><label><input type="checkbox" data-k="id"><span><b>신분증 사본</b></span></label></li>
+          <li><label><input type="checkbox" data-k="bank"><span><b>통장 사본</b><small>급여를 받을 본인 계좌</small></span></label></li>
+          <li><label><input type="checkbox" data-k="family"><span><b>가족관계증명서</b><small>3개월 이내 발급 · 상세(주민번호 뒷자리 포함) · 본인 기준</small></span></label></li>
+          <li><label><input type="checkbox" data-k="pass"><span><b>생명보험·손해보험 시험 합격증</b><small>생보·손보 협회에서 각각 출력 · 변액은 생보 코드 발급 후 추가 제출</small></span></label></li>
+          <li><label><input type="checkbox" data-k="edu"><span><b>보험연수원 교육 수료증</b><small>최근 3년 중 1년 이상 교육 이력이면 경력, 1년 미만이면 신입으로 분류</small></span></label></li>
+          <li><label><input type="checkbox" data-k="eclean"><span><b>E클린 정보조회 서류</b><small>경력 설계사만 해당 · 이전 회사 해촉이 끝난 뒤 출력</small></span></label></li>
+          <li><label><input type="checkbox" data-k="photo"><span><b>증명사진</b><small>셀카 사진도 됩니다</small></span></label></li>
+        </ul>
+        <p class="onb-note">체크 표시는 이 휴대폰(컴퓨터)에만 저장되고 어디에도 전송되지 않습니다. 이름·연락처·주소·이메일 같은 기초정보는 이 화면에 적지 말고 담당자에게 직접 전달해 주세요.</p>
+      </div>
+
+      <div class="onb-card" id="week1">
+        <h2>합류 후 첫 주에 할 일</h2>
+        <ol class="todo">
+          <li>188본부 공지방 입장 <small>필수입니다. 입장 방법은 안내서의 '188본부 공지방 안내'에 있습니다.</small></li>
+          <li>닉네임은 '본부번호+실명' <small>예) 188본부 김상현 — 카페·채팅방 모두 이 형식이어야 승인됩니다.</small></li>
+          <li>네이버 비공개카페 초대 요청 <small>상품저장소·디비화법저장소 — 김상현 이사 또는 상위관리자에게 요청</small></li>
+          <li>188 인트라넷 가입 <small>승인되면 AI 코치·보상/전산 답변기 등 업무 도구를 쓸 수 있습니다.</small></li>
+          <li>급여명세서 보는 곳 확인 <small>팜스 &gt; 급여관리 &gt; 급여명세서</small></li>
+        </ol>
+        <div class="nocode" id="nocode">
+          <b>입점코드가 없으신가요?</b>
+          <p>입점코드는 188본부 합류가 확정되면 담당자가 알려 드립니다. 합류 상담이나 코드 문의는 아래로 연락해 주세요.</p>
+          <div class="btnrow">
+            <a class="obtn" href="https://open.kakao.com/o/sFMF26y" target="_blank" rel="noopener noreferrer">카카오톡으로 문의</a>
+            <a class="obtn line" href="tel:01087149262">전화 010-8714-9262</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="onb-card" id="systems" style="margin-top:14px">
+      <h2>188 업무 시스템 한눈에</h2>
+      <p class="lead">합류 후 쓰게 될 도구입니다. '설계사 전용'은 188 인트라넷에 가입하고 승인을 받으면 열립니다.</p>
+      <div class="sys">
+        <a href="https://www.primeasset.info/members/" target="_blank" rel="noopener"><em>먼저 가입</em><b>188 인트라넷</b><span>업무 도구·AI·보험자료를 한곳에서 쓰는 설계사 전용 공간</span></a>
+        <a href="https://www.primeasset.info/members/coach/" target="_blank" rel="noopener"><em>설계사 전용</em><b>실전상담 통합코치</b><span>화법 코치, 상담 연습, 영업능력 진단</span></a>
+        <a href="https://www.primeasset.info/members/claim/" target="_blank" rel="noopener"><em>설계사 전용</em><b>보험보상 답변기</b><span>보상 실무 질문에 문서 근거로 답변</span></a>
+        <a href="https://www.primeasset.info/members/it/" target="_blank" rel="noopener"><em>설계사 전용</em><b>전산 답변기</b><span>보험사 전산 업무 질문 답변</span></a>
+        <a href="https://www.primeasset.info/members/articles/" target="_blank" rel="noopener"><em>설계사 전용</em><b>작성글 모음</b><span>보험 정보 글 초안을 골라 내 글로 활용</span></a>
+        <a href="https://www.primeasset.info/product/" target="_blank" rel="noopener"><em>설계사 전용</em><b>상품 통합 분석기</b><span>보험 상품을 비교·분석</span></a>
+        <a href="https://www.primeasset.info/performance/" target="_blank" rel="noopener"><em class="open">누구나</em><b>사업부 실적보드</b><span>프리미엄사업부 실적 현황</span></a>
+        <a href="https://www.primeasset.info/wiki/" target="_blank" rel="noopener"><em class="open">누구나</em><b>보험위키</b><span>보험 용어·제도 정리</span></a>
+        <a href="https://www.primeasset.info/news/" target="_blank" rel="noopener"><em class="open">누구나</em><b>최신 보험뉴스</b><span>업계 뉴스와 이슈</span></a>
+        <a href="https://bohumnote.com/" target="_blank" rel="noopener"><em class="open">누구나</em><b>보험노트</b><span>고객이 검색으로 찾아오는 보험 정보 홈페이지 · 설계사 입점 활동</span></a>
+        <a href="https://bohumlive.com/" target="_blank" rel="noopener"><em class="open">누구나</em><b>보험라이브(보라)</b><span>설계사끼리 영업·상품·보상 경험을 나누는 익명 커뮤니티</span></a>
+        <a href="https://www.primeasset.info/" target="_blank" rel="noopener"><em class="open">누구나</em><b>프리미엄사업부 홈페이지</b><span>사업부 소개와 합류 안내</span></a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="sys-foot">
+    <span>문의: 김상현 이사 <a href="tel:01087149262">010-8714-9262</a> · <a href="https://open.kakao.com/o/sFMF26y" target="_blank" rel="noopener noreferrer">카카오톡</a></span>
+    <button class="foot-admin" type="button" aria-haspopup="dialog" onclick="openAdmin()">관리자</button>
+  </footer>
 
   <!-- 관리자 인라인 오버레이(같은 페이지 모달) — 새 창·입점코드 경유 없음 -->
   <div class="admin-overlay" id="adminOverlay" role="dialog" aria-modal="true" aria-label="관리자" hidden>
@@ -517,6 +681,8 @@
 
   <script>
     const systemGuideUrl = 'https://script.google.com/macros/s/AKfycbzqX3lETPADpPAG6syoAsEG1cSceMcUUqmeEhYj3ukkbFfHPEnbdvq8W448ttC0vcFefw/exec';
+    /* ★ 보호: 위촉 AI(chat188)는 '상품통합분석기' 구글 앱 안에 들어 있다(스크립트 1BRbg1zN…, 배포 AKfycbwxsEP…).
+       그 앱을 정리·재배포·삭제할 때 chat188 기능과 이 배포 주소를 반드시 유지할 것(2026-11-21 기록). */
     const chatApiUrl = 'https://script.google.com/macros/s/AKfycbwxsEPxs_uq5H4gH43Ie_FH0mrKAtdkrnzP-30b52GKTBMXVzARfgggs6_klkyadIVl/exec';
 
     /* ── 좌측 퀵메뉴 프리셋 6개(원클릭) ──
@@ -578,6 +744,7 @@
       frameHint.classList.add('hidden');
       frame.classList.remove('hidden');
       switchTab('guide');
+      document.getElementById('panel-guide').scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
     function onGateFail() {
       gateBtn.disabled = false;
@@ -586,7 +753,7 @@
       gatePassed = false;
       frame.classList.add('hidden');           // 실패 시 iframe 게이트가 보이지 않도록 숨김 유지
       frameHint.classList.remove('hidden');
-      gateErr.textContent = '입점코드가 맞지 않습니다. 188본부 내부 인원만 확인 가능합니다.';
+      gateErr.textContent = '입점코드가 맞지 않습니다. 숫자를 다시 확인하시거나 아래 "코드가 없으신가요?"로 문의해 주세요.';
     }
 
     /* ── 관리자 인라인 오버레이(같은 페이지) ──
@@ -700,11 +867,18 @@
       return /(비번|비밀번호|패스워드|password|접근코드|접속코드|관리자|어드민|admin|9262|만들|제작|개발|구현|코드|소스|배포|GAS|Apps Script|API\s*키|프롬프트|내부\s*구조|서버)/i.test(question);
     }
 
+    /* 입점코드를 '받는 방법' 질문은 보안 차단 대신 문의처를 안내(코드 값은 절대 알려주지 않음) */
+    function isCodeHowTo(q) {
+      return /입점\s*코드|접속\s*코드|코드/.test(q) && /(없|받|어디|발급|모르|문의|어떻게)/.test(q) && !/(알려|뭐|무엇|몇|번호)/.test(q);
+    }
+    const CODE_HELP = '입점코드는 188본부 합류가 확정되면 담당자가 직접 알려 드립니다.\n• 카카오톡 문의: 화면의 [카카오톡으로 문의] 버튼\n• 전화: 김상현 이사 010-8714-9262';
+
     async function sendQuestion(question) {
       question = String(question || '').trim();
       if (!question || sendBtn.disabled) return;
       addMessage('user', question);
       input.value = '';
+      if (isCodeHowTo(question)) { addMessage('ai', CODE_HELP); input.focus(); return; }
       if (isSensitiveQuestion(question)) {
         addMessage('ai', '보안상 안내할 수 없으며, 담당 관리자에게 문의해주세요.');
         input.focus();
@@ -746,6 +920,24 @@
       });
       qmenu.appendChild(b);
     });
+
+    document.querySelectorAll('#examples button').forEach(b => b.addEventListener('click', () => sendQuestion(b.textContent)));
+
+    /* ── 준비서류 체크리스트: 이 기기(localStorage)에만 저장, 전송 없음 ── */
+    (function checklist() {
+      const KEY = 'onb188-docs-v1';
+      const boxes = [...document.querySelectorAll('#ckList input[type=checkbox]')];
+      const prog = document.getElementById('ckProg');
+      let saved = {};
+      try { saved = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch (e) {}
+      const render = () => { prog.textContent = boxes.filter(b => b.checked).length + ' / ' + boxes.length + ' 준비'; };
+      boxes.forEach(b => {
+        b.checked = !!saved[b.dataset.k];
+        b.addEventListener('change', () => { saved[b.dataset.k] = b.checked; try { localStorage.setItem(KEY, JSON.stringify(saved)); } catch (e) {} render(); });
+      });
+      document.getElementById('ckReset').addEventListener('click', () => { boxes.forEach(b => b.checked = false); saved = {}; try { localStorage.removeItem(KEY); } catch (e) {} render(); });
+      render();
+    })();
 
     /* ── 본체(.gas_188sys)에서 관리자 고정답변 맵을 JSONP로 로드(다른 오리진 → CORS 회피) ──
        실패해도 무해: 맵이 비면 모든 버튼이 AI답변으로 동작. */
