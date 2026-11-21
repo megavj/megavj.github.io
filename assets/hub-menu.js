@@ -86,7 +86,7 @@
 
     const list = el('nav', 'hub-menu-list');
     list.setAttribute('aria-label', '188 하위페이지');
-    // TASK42: 홈의 휴대폰 메뉴에서도 MY와 구분해 시험 인트라넷으로 이동한다.
+    // 홈의 휴대폰 메뉴 맨 위에 188 인트라넷 로그인. (2026-11-21 MY 화면 전체 삭제)
     const menuPages = document.body.classList.contains('p188-home')
       ? [{ title: '로그인', desc: '188 인트라넷 로그인', href: 'https://www.primeasset.info/members/', external: true, sameTab: true }, ...pages]
       : pages;
