@@ -1,19 +1,19 @@
 /* 188 공용 메뉴 — 전체 메뉴(오른쪽 서랍) v4 (2026-10)
- * · 모든 페이지 공통. 페이지 목록·주소는 아래 pages 그대로(링크 주소를 바꾸지 말 것).
+ * · 모든 페이지 공통. 페이지 목록·주소는 아래 pages 그대로. 2026-11-21 이사님 지시로 옛 구글 도구(통합페이지·보상·전산·상품분석)는 새 인트라넷 주소로 통합.
  * · 열면 닫기 버튼으로 초점이 가고, 탭 키는 서랍 안에서만 돈다. Esc·바깥 클릭으로 닫으면 메뉴 버튼으로 초점이 돌아온다.
  * · 서랍 아래에 김상현 이사 1:1 상담(카카오톡)·전화 버튼.
  */
 (function () {
   const pages = [
     { title: '188 허브', desc: '김상현 이사 188본부 메인페이지', href: '/' },
-    { title: '프라임에셋 통합페이지', desc: 'AI 시스템 및 프라임에셋 업무 허브', href: '/ai_system/' },
-    { title: '프리미엄 보험보상 답변기', desc: '문서 기반 보험보상 실무 답변', href: '/claim/' },
+    { title: '188 인트라넷', desc: '업무 도구·AI 질문·보험자료를 한곳에서', href: 'https://www.primeasset.info/members/', external: true },
+    { title: '프리미엄 보험보상 답변기', desc: '문서 기반 보험보상 실무 답변', href: 'https://www.primeasset.info/members/claim/', external: true },
     { title: '사업부 실적보드', desc: '프리미엄사업부 2026년 실적 현황', href: 'https://www.primeasset.info/performance/', external: true }, // 2026-11-02 test 실적보드로 연결(188 /performance/ 페이지는 유지)
     { title: '188본부 시스템안내서', desc: '입점 및 운영 시스템 안내', href: '/system/' },
     {
       title: '프리미엄 상품통합분석기',
       desc: '상품·비교자료와 월간 이슈·제안 통합 분석',
-      href: 'https://script.google.com/macros/s/AKfycbwxsEPxs_uq5H4gH43Ie_FH0mrKAtdkrnzP-30b52GKTBMXVzARfgggs6_klkyadIVl/exec',
+      href: 'https://www.primeasset.info/product/',
       external: true
     },
     { title: '프리미엄 최신보험뉴스', desc: '보험뉴스와 최신 이슈 확인', href: 'https://www.primeasset.info/news/' },
@@ -28,7 +28,8 @@
     {
       title: '프리미엄 전산답변기',
       desc: '프리미엄 전산·IT 자동 답변 도구',
-      href: '/itsys/'
+      href: 'https://www.primeasset.info/members/it/',
+      external: true
     }
   ];
   const contact = {
@@ -87,7 +88,7 @@
     list.setAttribute('aria-label', '188 하위페이지');
     // TASK42: 홈의 휴대폰 메뉴에서도 MY와 구분해 시험 인트라넷으로 이동한다.
     const menuPages = document.body.classList.contains('p188-home')
-      ? [{ title: '로그인', desc: '시험 인트라넷으로 이동', href: 'https://www.primeasset.info/members/', external: true, sameTab: true }, ...pages]
+      ? [{ title: '로그인', desc: '188 인트라넷 로그인', href: 'https://www.primeasset.info/members/', external: true, sameTab: true }, ...pages]
       : pages;
     menuPages.forEach((page) => {
       const link = el('a', 'hub-menu-link');
